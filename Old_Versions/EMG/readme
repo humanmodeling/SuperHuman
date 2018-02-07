@@ -1,0 +1,10 @@
+EMG.ino is the separate code to execute EMG control unit.
+
+There are three LEDs in operation for this program.
+
+1. First LED indicates charging
+2. Second LED indicates one time full charge
+3. Third LED indicates shooting IR after full charge
+
+
+The nature of charging and threshold of EMG can be adjusted as per requirement in the code.
