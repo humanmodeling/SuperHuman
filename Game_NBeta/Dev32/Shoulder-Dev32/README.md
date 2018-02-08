@@ -25,7 +25,7 @@ PIN |         Purpose
  5  |     Impact received
  7  | led to indicate charging
  8  |  led to indicate charge
- 
+
 ## Bluetooth Module Configuration
 
 Name |  Role  | Baud Rate |    Address
@@ -42,4 +42,4 @@ Name |  Role  | Baud Rate |    Address
 
 ### PIN MAP
 
-<img src="https://github.com/totovr/Arduino/blob/master/SH/Images/esp32_pinmap.png" width="600">
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/overview.png" width="600">

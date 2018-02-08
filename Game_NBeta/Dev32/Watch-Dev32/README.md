@@ -47,4 +47,4 @@ Name |  Role  | Baud Rate |    Address
 
 ## PIN Map
 
-![](https://github.com/totovr/Arduino/blob/master/SH/Images/esp32_pinmap.png)
+![](https://github.com/totovr/SuperHuman/blob/master/Images/overview.png)
