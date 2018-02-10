@@ -2,7 +2,6 @@
 
 void ArduinoS_ArduinoM();
 
-char val; // Data received from the serial port
 int ledPin = 7; // Set the pin to digital I/O 7
 
 void setup() {
@@ -19,7 +18,7 @@ void loop() {
 void ArduinoS_ArduinoM() {
         if (Serial.available()) {
                 // If data is available to read,
-                Serial.write('1'); // read it and store it in val
+                Serial.write('1'); // write in the serial port
                 digitalWrite(ledPin, HIGH);
         }
         delay(10); // Wait 10 milliseconds for next reading

@@ -2,7 +2,6 @@
 
 void ArduinoS_ArduinoM();
 
-char val; // Data received from the serial port
 int ledPin = 7; // Set the pin to digital I/O 7
 
 void setup() {
