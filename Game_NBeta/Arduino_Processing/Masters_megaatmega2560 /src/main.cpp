@@ -1,13 +1,17 @@
 #include <Arduino.h>
+#include <SimpleTimer.h>
 
 //Declare the functions
 void ArduinoM1_Processing();
 void ArduinoM2_Processing();
 
+//Objects
+SimpleTimer Player_One;//Don't write "timer" as and object
+SimpleTimer Player_Two;
+
+//Bluetooth variables
 char StateSerial1 = 0;
 char StateSerial2 = 0;
-
-char val; // Data received from the serial port
 int ledPinSOne = 7; // Set the pin to digital I/O 7
 int ledPinSTwo = 8; // Set the pin to digital I/O 8
 
@@ -22,35 +26,44 @@ void setup() {
         Serial2.begin(38400); // Start serial communication at 38400 bps
         //We will use this to send the data to Processing
         Serial.begin(38400);
+        //Timer readings
+        Player_One.setInterval(500, ArduinoM1_Processing);//repeats every 500 msecond
+        Player_Two.setInterval(500, ArduinoM2_Processing);//repeats every 500 msecond
 }
 
 void loop() {
-        ArduinoM1_Processing();
-        ArduinoM2_Processing();
+        Player_One.run();
+        Player_Two.run();
 }
 
 void ArduinoM1_Processing() {
         if (Serial1.available()) {
                 // If data is available to read,
-                StateSerial1 = Serial1.read(); // read it and store it in val
+                StateSerial1 = Serial1.read(); // read it and store it in StateSerial1
                 if(StateSerial1 == '1') {
-                        Serial.write('1');
-                } else {
-                        Serial.write('0');//maybe this is not necessary
+                        Serial.println("Point_One");
+                        digitalWrite(ledPinSOne, HIGH);
+                        delay(500); // Wait 500 milliseconds for next reading
+                        digitalWrite(ledPinSOne, LOW);
                 }
+        } else {
+                digitalWrite(ledPinSOne, LOW);
+                delay(500); // Wait 500 milliseconds for next reading
         }
-        delay(30); // Wait 30 milliseconds for next reading
 }
 
 void ArduinoM2_Processing() {
-        if (Serial1.available()) {
+        if (Serial2.available()) {
                 // If data is available to read,
+                StateSerial2 = Serial2.read(); // read it and store it in StateSerial2
                 if(StateSerial2 == '2') {
-                        StateSerial2 = Serial2.read(); // read it and store it in val
-                        Serial.write('2');
-                } else {
-                        Serial.write('0');//maybe this is not necessary
+                        Serial.println("Point_Two");
+                        digitalWrite(ledPinSOne, HIGH);
+                        delay(500); // Wait 100 milliseconds for next reading
+                        digitalWrite(ledPinSOne, LOW);
                 }
+        } else {
+                digitalWrite(ledPinSTwo, LOW);
+                delay(500); // Wait 100 milliseconds for next reading
         }
-        delay(30); // Wait 30 milliseconds for next reading
 }

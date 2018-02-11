@@ -16,10 +16,9 @@ void loop() {
 }
 
 void ArduinoS_ArduinoM() {
-        if (Serial.available()) {
-                // If data is available to read,
-                Serial.write('2'); // read it and store it in val
-                digitalWrite(ledPin, HIGH);
-        }
-        delay(10); // Wait 10 milliseconds for next reading
+        Serial.write('2');         // read it and store it in val
+        digitalWrite(ledPin, HIGH);
+        delay(1000); // Wait 10 milliseconds for next reading
+        digitalWrite(ledPin, LOW);
+        delay(1000); // Wait 10 milliseconds for next reading
 }
