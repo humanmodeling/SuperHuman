@@ -58,9 +58,9 @@ void ArduinoM2_Processing() {
                 StateSerial2 = Serial2.read(); // read it and store it in StateSerial2
                 if(StateSerial2 == '2') {
                         Serial.println("Point_Two");
-                        digitalWrite(ledPinSOne, HIGH);
+                        digitalWrite(ledPinSTwo, HIGH);
                         delay(500); // Wait 100 milliseconds for next reading
-                        digitalWrite(ledPinSOne, LOW);
+                        digitalWrite(ledPinSTwo, LOW);
                 }
         } else {
                 digitalWrite(ledPinSTwo, LOW);
