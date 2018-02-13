@@ -13,7 +13,11 @@ Our team proposes a paintball game by integrating multiple ideas of human-augmen
 
 ## System
 
+### Overview
 <img src="https://github.com/totovr/SuperHuman/blob/master/Images/overview1.png" width="600">
-<img src="https://github.com/totovr/SuperHuman/blob/master/Images/overview2.png" width="600">
+### Transmitter
 <img src="https://github.com/totovr/SuperHuman/blob/master/Images/overview3.png" width="600">
+### Force-feedback
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/overview2.png" width="600">
+### Special weapon
 <img src="https://github.com/totovr/SuperHuman/blob/master/Images/overview4.png" width="600">
