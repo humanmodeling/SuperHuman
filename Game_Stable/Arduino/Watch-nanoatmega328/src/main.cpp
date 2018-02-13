@@ -41,8 +41,8 @@ int points = 0;
 char Laser_Point;
 
 //declare objects of SimpleTimer library
-//SimpleTimer laser_read_serial;
-//SimpleTimer IR_read_serial;
+//SimpleTimer laser_read_Serial1;
+//SimpleTimer IR_read_Serial1;
 
 //IR Point
 char IR_Point;
@@ -67,8 +67,8 @@ int special_weapon_active = 0;//Variable to know if the IR was shooted
 
 // the setup routine runs once when you press reset:
 void setup() {
-        // initialize serial communication at 38400 bits per second:
-        Serial.begin(38400);
+        // initialize Serial1 communication at 38400 bits per second:
+        Serial1.begin(38400);
         //OLED configuration
         display.begin(SSD1306_SWITCHCAPVCC);
         display.display();
@@ -85,8 +85,8 @@ void setup() {
         pinMode(Laser_WeaponIn, INPUT); //Set pin 2 as input
         //IR Pull Up bottom
         pinMode(IR_WeaponIn, INPUT); //Set pin 7 as input
-        //laser_read_serial.setInterval(1000, Laser_Points);//repeats every 1 second, can be changed
-        //IR_read_serial.setInterval(1000, IR_Points);//repeats every 1 second, can be changed
+        //laser_read_Serial1.setInterval(1000, Laser_Points);//repeats every 1 second, can be changed
+        //IR_read_Serial1.setInterval(1000, IR_Points);//repeats every 1 second, can be changed
 }
 
 // the loop routine runs over and over again forever:
@@ -95,10 +95,10 @@ void loop() {
         oled_timer();
         //Laser Points check if the user was hit by the laser gun
         Laser_Points();
-        //laser_read_serial.run();
+        //laser_read_Serial1.run();
         //IR Points check if the user was hit by the Special Gun
         IR_Points();
-        //IR_read_serial.run();
+        //IR_read_Serial1.run();
         //Check how many shoots did the player
         Laser_Weapon();
         //Check if we charge the super weapon
@@ -123,8 +123,8 @@ void TheGame() {
 }
 //Check the impact points that you received by laser
 void Laser_Points() {
-        if (Serial.available()) { // If data is available to read
-                Laser_Point = Serial.read(); // read it and store it in val
+        if (Serial1.available()) { // If data is available to read
+                Laser_Point = Serial1.read(); // read it and store it in val
                 if (Laser_Point == '1') {
                         points = points + 1;
                         Laser_Point = '0';
@@ -141,8 +141,8 @@ void Laser_Points() {
 }
 //Check the impact points that you received by IR
 void IR_Points() {
-        if (Serial.available()) { // If data is available to read
-                IR_Point = Serial.read(); // read it and store it in val
+        if (Serial1.available()) { // If data is available to read
+                IR_Point = Serial1.read(); // read it and store it in val
                 if (IR_Point == '3') {
                         points = points + 5;
                         oled_LF();
@@ -177,8 +177,8 @@ void SendPluse() {
 }
 //Shoot the special Gun
 void Special_Weapon() {
-        if (Serial.available()) { // If data is available to read
-                Super_Gun = Serial.read(); // read it and store it in val
+        if (Serial1.available()) { // If data is available to read
+                Super_Gun = Serial1.read(); // read it and store it in val
                 if (Super_Gun == '2') {
                         //this led advice that the weapon can be shoot
                         digitalWrite(ledIR_advice, HIGH);
