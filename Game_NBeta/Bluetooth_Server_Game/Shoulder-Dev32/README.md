@@ -42,4 +42,4 @@ Name |  Role  | Baud Rate |    Address
 
 ### PIN MAP
 
-<img src="https://github.com/totovr/Arduino/blob/master/SH/Images/esp32_pinmap.png" width="600">
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/esp32_pinmap.png" width="600">
