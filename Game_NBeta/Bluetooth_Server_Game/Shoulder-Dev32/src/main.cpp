@@ -24,8 +24,8 @@ int emg_counter = 0;
 
 //declare objects of SimpleTimer library
  SimpleTimer EMG_TIMER;//Don't write "timer" as and object
- SimpleTimer laser_read;
- SimpleTimer IR_read;
+ //SimpleTimer laser_read;
+ //SimpleTimer IR_read;
 
 // IR receptor
 int IR_receptorPin = 17;//Pin used to read IR values
@@ -46,17 +46,19 @@ void setup() {
         pinMode(emgfullcharge, OUTPUT);//Turn on when IR gun is fully charged
         irrecv.enableIRIn(); // Start the receiver
         EMG_TIMER.setInterval(1000, repeatEMG);//repeats every 1 second
-        laser_read.setInterval(100, Laser_Sensor);//repeats every 0.1 seconds can be changed
-        IR_read.setInterval(100, IR_Receptor);//repeats every 0.1 seconds can be changed
+        //laser_read.setInterval(100, Laser_Sensor);//repeats every 0.1 seconds can be changed
+        //IR_read.setInterval(100, IR_Receptor);//repeats every 0.1 seconds can be changed
 }
 
 void loop() {
         //Read laser sensors
-        laser_read.run();
+        //laser_read.run();
+        Laser_Sensor();
         //EMG sensor reading
         EMG_TIMER.run();
         //IR reding
-        IR_read.run();
+        //IR_read.run();
+        IR_Receptor();
 }
 
 //Decode
