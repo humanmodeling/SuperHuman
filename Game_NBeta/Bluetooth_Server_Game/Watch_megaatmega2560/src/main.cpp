@@ -67,9 +67,9 @@ int special_weapon_active = 0;//Variable to know if the IR was shooted
 
 void setup() {
         //Master of the Shoulder Bluetooth
-        Serial.begin(38400);
+        Serial1.begin(38400);
         //Slave of the server
-        Serial1.begin(38400); // Start serial communication at 38400 bps
+        Serial2.begin(38400); // Start serial communication at 38400 bps
         //OLED configuration
         display.begin(SSD1306_SWITCHCAPVCC);
         display.display();
@@ -124,11 +124,11 @@ void TheGame() {
 }
 //Check the impact points that you received by laser
 void Laser_Points() {
-        if (Serial.available()) { // If data is available to read
-                Laser_Point = Serial.read(); // read it and store it in val
+        if (Serial1.available()) { // If data is available to read
+                Laser_Point = Serial1.read(); // read it and store it in val
                 if (Laser_Point == '1') {
                         points = points + 1;
-                        Serial1.write('1');
+                        Serial2.write('1');
                         Laser_Point = '0';
                         oled_LF();
                         delay(2000);
@@ -143,11 +143,11 @@ void Laser_Points() {
 }
 //Check the impact points that you received by IR
 void IR_Points() {
-        if (Serial.available()) { // If data is available to read
-                IR_Point = Serial.read(); // read it and store it in val
+        if (Serial1.available()) { // If data is available to read
+                IR_Point = Serial1.read(); // read it and store it in val
                 if (IR_Point == '3') {
                         points = points + 5;
-                        Serial1.write('2');
+                        Serial2.write('2');
                         oled_LF();
                         delay(2000);
                         end = points;
@@ -166,7 +166,7 @@ void Laser_Weapon() {
         if (laser_value != last_laser_value) {
                 if (laser_value == LOW) {
                         shoots = shoots + 1;
-                        Serial1.write('3');
+                        Serial2.write('3');
                         delay(10);
                         oled_LF();
                         SendPluse(); //I call the function pulse
@@ -182,12 +182,12 @@ void SendPluse() {
 }
 //Shoot the special Gun
 void Special_Weapon() {
-        if (Serial.available()) { // If data is available to read
-                Super_Gun = Serial.read(); // read it and store it in val
+        if (Serial1.available()) { // If data is available to read
+                Super_Gun = Serial1.read(); // read it and store it in val
                 if (Super_Gun == '2') {
                         //this led advice that the weapon can be shoot
                         digitalWrite(ledIR_advice, HIGH);
-                        Serial1.write('4');
+                        Serial2.write('4');
                         delay(10);
                         //this varible will save the state that the special weapon is charged
                         special_weapon_active = 2;
@@ -204,7 +204,7 @@ void Special_Weapon_Activated() {
                         //if the weapon is charged it will shoot
                         if (special_weapon_active == 2) {
                                 Special_Weapon_Shoot();
-                                Serial1.write('5');
+                                Serial2.write('5');
                                 special_weapon_active = 0;
                                 Super_Gun = '0';
                         }
