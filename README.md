@@ -8,7 +8,7 @@ Our team proposes a paintball game by integrating multiple ideas of human-augmen
 
 # Reference
 
-/*1. [OECD](https://github.com/totovr/SuperHuman/blob/master/Obesity-Update-2017.pdf)*/
+<!-- 1. [OECD](https://github.com/totovr/SuperHuman/blob/master/Obesity-Update-2017.pdf) -->
 
 
 ### System
