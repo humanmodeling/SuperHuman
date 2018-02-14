@@ -27,13 +27,13 @@ void setup() {
         //We will use this to send the data to Processing
         Serial.begin(38400);
         //Timer readings
-        Player_One.setInterval(500, ArduinoM1_Processing);//repeats every 500 msecond
-        Player_Two.setInterval(500, ArduinoM2_Processing);//repeats every 500 msecond
+        Player_One.setInterval(10, ArduinoM1_Processing);//repeats every 20 msecond
+        Player_Two.setInterval(10, ArduinoM2_Processing);//repeats every 500 msecond
 }
 
 void loop() {
         Player_One.run();
-        Player_Two.run();
+        //Player_Two.run();
 }
 
 void ArduinoM1_Processing() {
@@ -41,14 +41,27 @@ void ArduinoM1_Processing() {
                 // If data is available to read,
                 StateSerial1 = Serial1.read(); // read it and store it in StateSerial1
                 if(StateSerial1 == '1') {
-                        Serial.println("Point_One");
-                        digitalWrite(ledPinSOne, HIGH);
-                        delay(500); // Wait 500 milliseconds for next reading
-                        digitalWrite(ledPinSOne, LOW);
+                        Serial.println("1");
+                        delay(10); // Wait 500 milliseconds for next reading
+                }
+                if(StateSerial1 == '2') {
+                        Serial.println("2");
+                        delay(10); // Wait 500 milliseconds for next reading
+                }
+                if(StateSerial1 == '3') {
+                        Serial.println("3");
+                        delay(10); // Wait 500 milliseconds for next reading
+                }
+                if(StateSerial1 == '4') {
+                        Serial.println("4");
+                        delay(10); // Wait 500 milliseconds for next reading
+                }
+                if(StateSerial1 == '5') {
+                        Serial.println("5");
+                        delay(10); // Wait 500 milliseconds for next reading
                 }
         } else {
                 digitalWrite(ledPinSOne, LOW);
-                delay(500); // Wait 500 milliseconds for next reading
         }
 }
 

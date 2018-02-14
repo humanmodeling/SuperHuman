@@ -37,7 +37,6 @@ Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 //Receptor
 
 //Laser Point
-int points = 0;
 char Laser_Point;
 
 //declare objects of SimpleTimer library
@@ -46,6 +45,9 @@ char Laser_Point;
 
 //IR Point
 char IR_Point;
+
+//Point Variable
+int points = 0;
 
 //Game_Over
 int end = 0;
