@@ -1,13 +1,13 @@
 #include <Arduino.h>
-#include <SimpleTimer.h>
+//#include <SimpleTimer.h>
 
 //Declare the functions
 void ArduinoM1_Processing();
 void ArduinoM2_Processing();
 
 //Objects
-SimpleTimer Player_One;//Don't write "timer" as and object
-SimpleTimer Player_Two;
+//SimpleTimer Player_One;//Don't write "timer" as and object
+//SimpleTimer Player_Two;
 
 //Bluetooth variables
 char StateSerial1 = 0;
@@ -25,15 +25,16 @@ void setup() {
         //We will use this for Master2
         Serial2.begin(38400); // Start serial communication at 38400 bps
         //We will use this to send the data to Processing
-        Serial.begin(38400);
+        Serial.begin(115200);
         //Timer readings
-        Player_One.setInterval(10, ArduinoM1_Processing);//repeats every 20 msecond
-        Player_Two.setInterval(10, ArduinoM2_Processing);//repeats every 500 msecond
+        //Player_One.setInterval(10, ArduinoM1_Processing);//repeats every 20 msecond
+        //Player_Two.setInterval(10, ArduinoM2_Processing);//repeats every 500 msecond
 }
 
 void loop() {
-        Player_One.run();
+        //Player_One.run();
         //Player_Two.run();
+        ArduinoM1_Processing();
 }
 
 void ArduinoM1_Processing() {
@@ -41,23 +42,23 @@ void ArduinoM1_Processing() {
                 // If data is available to read,
                 StateSerial1 = Serial1.read(); // read it and store it in StateSerial1
                 if(StateSerial1 == '1') {
-                        Serial.println("1");
+                        Serial.write(1);
                         delay(10); // Wait 500 milliseconds for next reading
                 }
                 if(StateSerial1 == '2') {
-                        Serial.println("2");
+                        Serial.write(2);
                         delay(10); // Wait 500 milliseconds for next reading
                 }
                 if(StateSerial1 == '3') {
-                        Serial.println("3");
+                        Serial.write(3);
                         delay(10); // Wait 500 milliseconds for next reading
                 }
                 if(StateSerial1 == '4') {
-                        Serial.println("4");
+                        Serial.write(4);
                         delay(10); // Wait 500 milliseconds for next reading
                 }
                 if(StateSerial1 == '5') {
-                        Serial.println("5");
+                        Serial.write(5);
                         delay(10); // Wait 500 milliseconds for next reading
                 }
         } else {
@@ -65,6 +66,7 @@ void ArduinoM1_Processing() {
         }
 }
 
+/*
 void ArduinoM2_Processing() {
         if (Serial2.available()) {
                 // If data is available to read,
@@ -80,3 +82,4 @@ void ArduinoM2_Processing() {
                 delay(500); // Wait 100 milliseconds for next reading
         }
 }
+*/
