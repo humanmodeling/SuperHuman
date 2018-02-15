@@ -1,6 +1,25 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import processing.serial.*; 
+import controlP5.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Serial_Processing extends PApplet {
+
 //Libraries
-import processing.serial.*;
-import controlP5.*;
+
+
 
 //Objects
 Serial myPort;  // Create object from Serial class
@@ -32,8 +51,8 @@ String t;
 PImage logo;
 PFont title;
 
-void setup() {
-  size(1240,720);
+public void setup() {
+  
   frameRate(120);
   //Watch setup
   sw = new StopWatchTimer();
@@ -51,13 +70,13 @@ void setup() {
                   .setTickMarkLength(8)
                   .setTickMarkWeight(3)
                   .snapToTickMarks(true)
-                  .setColorForeground(color(186,255,201,191))
+                  .setColorForeground(color(186, 255, 201,191))
                   .setColorBackground(color(0, 160, 100))
                   //.setColorActive(color(255,255,0))
                   .setDragDirection(Knob.VERTICAL)
         ;
   //Color of the background
-  background(#B28DFF);
+  background(0xffB28DFF);
   //Setup font
   title = loadFont("Dialog-48.vlw");
   textFont(title);
@@ -66,8 +85,8 @@ void setup() {
   myPort = new Serial(this, portName, 115200);
 }
 
-void draw() {
-  background(#B28DFF);
+public void draw() {
+  background(0xffB28DFF);
   //logo of laboratory
   logo = loadImage("Images/logo.png");
   image(logo, 966, 620, 268, 95);
@@ -86,13 +105,13 @@ void draw() {
 
 }
 
-void watch() {
+public void watch() {
   fill(255);
   textSize(48);
   text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
 }
 
-void life_one() {
+public void life_one() {
   text("Kishishita", 85, 200);
   //Generate the ellipse above the name
   noStroke();
@@ -103,7 +122,7 @@ void life_one() {
   ellipse(200, 120, frameCount%50, frameCount%50);
 }
 
-void Serial_life(){
+public void Serial_life(){
         if(myPort.available() > 0)
         { // If data is available,
                 valor = myPort.read(); // read it and store it in val
@@ -116,5 +135,47 @@ void Serial_life(){
                         text("Kishishita", 85, 200);
                         myKnobA.setValue(life);
                 }
+
         }
+}
+class StopWatchTimer {
+  int startTime = 0, stopTime = 0;
+  boolean running = false; 
+  public void start() {
+    startTime = millis();
+    running = true;
+  }
+  public void stop() {
+    stopTime = millis();
+    running = false;
+  }
+  public int getElapsedTime() {
+    int elapsed;
+    if (running) {
+      elapsed = (millis() - startTime);
+    }
+    else {
+      elapsed = (stopTime - startTime);
+    }
+    return elapsed;
+  }
+  public int second() {
+    return (getElapsedTime() / 1000) % 60;
+  }
+  public int minute() {
+    return (getElapsedTime() / (1000*60)) % 60;
+  }
+  public int hour() {
+    return (getElapsedTime() / (1000*60*60)) % 24;
+  }
+}
+  public void settings() {  size(1240,720); }
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "Serial_Processing" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
