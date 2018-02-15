@@ -40,6 +40,7 @@ int valor = 0;
 float a = 0;
 //knob Variables
 int life = 100;
+int background_death = color(0, 160, 100);
 
 //Watch Variables
 int s = second();
@@ -52,12 +53,12 @@ PImage logo;
 PFont title;
 
 public void setup() {
-  
-  frameRate(120);
-  //Watch setup
-  sw = new StopWatchTimer();
-  sw.start();
-  //New cp5 constructor
+        
+        frameRate(120);
+        //Watch setup
+        sw = new StopWatchTimer();
+        sw.start();
+        //New cp5 constructor
         cp5 = new ControlP5(this);
         myKnobA = cp5.addKnob("Life")
                   .setViewStyle(3)
@@ -70,56 +71,63 @@ public void setup() {
                   .setTickMarkLength(8)
                   .setTickMarkWeight(3)
                   .snapToTickMarks(true)
-                  .setColorForeground(color(186, 255, 201,191))
-                  .setColorBackground(color(0, 160, 100))
+                  .setColorForeground(color(186,255,201,191))
+                  .setColorBackground(background_death)
                   //.setColorActive(color(255,255,0))
                   .setDragDirection(Knob.VERTICAL)
         ;
-  //Color of the background
-  background(0xffB28DFF);
-  //Setup font
-  title = loadFont("Dialog-48.vlw");
-  textFont(title);
-  //Open the port
-  String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
-  myPort = new Serial(this, portName, 115200);
+        //Color of the background
+        background(0xffB28DFF);
+        //Setup font
+        title = loadFont("Dialog-48.vlw");
+        textFont(title);
+        //Open the port
+        String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
+        myPort = new Serial(this, portName, 115200);
 }
 
 public void draw() {
-  background(0xffB28DFF);
-  //logo of laboratory
-  logo = loadImage("Images/logo.png");
-  image(logo, 966, 620, 268, 95);
-  //Title of the game
-  fill(255);
-  text("BlazerMuscle", 470, 70);
-  //Name of the team
-  fill(255);
-  text("Team Roger One", 430, 120);
-  //Show the watch
-  watch();
-  //show the player one
-  life_one();
-  //Check if the player was shooted
-  Serial_life();
+        background(0xffB28DFF);
+        //logo of laboratory
+        logo = loadImage("Images/logo.png");
+        image(logo, 966,620,268,95);
+        //Title of the game
+        fill(255);
+        text("BlazerMuscle",470,70);
+        //Name of the team
+        fill(255);
+        text("Team Roger One",430,120);
+        //Show the watch
+        watch();
+        //show the player one
+        life_one();
+        //Check if the player was shooted
+        Serial_life();
 
 }
 
 public void watch() {
-  fill(255);
-  textSize(48);
-  text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
+        fill(255);
+        textSize(48);
+        text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
 }
 
 public void life_one() {
-  text("Kishishita", 85, 200);
-  //Generate the ellipse above the name
-  noStroke();
-  r = 69;
-  g = 252;
-  b = 131;
-  fill(r, g, b);
-  ellipse(200, 120, frameCount%50, frameCount%50);
+        text("Kishishita", 85, 200);
+        //Generate the ellipse above the name
+        if(life > 0) {
+                noStroke();
+                r = 69;
+                g = 252;
+                b = 131;
+                fill(r, g, b);
+                ellipse(200, 120, frameCount%50, frameCount%50);
+        } else {
+                fill(255,35,1);
+                ellipse(200, 120, frameCount%50, frameCount%50);
+                background_death = color(255,35,1);
+                myKnobA.setColorBackground(background_death);
+        }
 }
 
 public void Serial_life(){
@@ -129,13 +137,12 @@ public void Serial_life(){
                 println(valor);
                 if (valor == 100) {
                         life = life - 10;
-                        fill(255, 35, 1);
-                        ellipse(200, 120, frameCount%100, frameCount%100);
-                        fill(255, 35, 1);
-                        text("Kishishita", 85, 200);
+                        fill(255,35,1);
+                        ellipse(200,120, frameCount%100, frameCount%100);
+                        fill(255,35,1);
+                        text("Kishishita",85,200);
                         myKnobA.setValue(life);
                 }
-
         }
 }
 class StopWatchTimer {
