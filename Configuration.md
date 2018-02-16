@@ -19,7 +19,7 @@ Number |        Purpose
   1    |      Laser Point
   2    |       IR Point
   3    |      Laser Shoot
-  4    | Special Gun Activated
+  4    | Special Gun Available
   5    |  Special Gun Shooted
 
 ### Note that the Laser Point and the IR Point are impacts that we received because we were hit
