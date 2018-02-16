@@ -2,9 +2,16 @@ language: python
 python:
     - "2.7"
 
+# Cache PlatformIO packages using Travis CI container-based infrastructure
+sudo: false
+cache:
+    directories:
+        - "~/.platformio"
+        
 install:
     - pip install -U platformio
-    -pio lib install -g/--global
+    - pio update
+    - pio lib install -g/--global
     #- python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
 
 script:
