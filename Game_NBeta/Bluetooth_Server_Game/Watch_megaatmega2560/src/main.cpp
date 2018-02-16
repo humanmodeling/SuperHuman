@@ -7,11 +7,10 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <IRremote.h>
-//#include <SimpleTimer.h>
 
 //Functions
 void TheGame();//Show a message before the game start
-void Laser_Points();//Count the laser impacts
+void Points();
 void Laser_Weapon();//Activate the laser gun
 void IR_Points();//Count the IR impacts
 void SendPluse();//Send the laser pulse
@@ -36,15 +35,9 @@ Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 //Receptor
 
-//Laser Point
-char Laser_Point;
+//Points
 
-//declare objects of SimpleTimer library
-//SimpleTimer laser_read_serial;
-//SimpleTimer IR_read_serial;
-
-//IR Point
-char IR_Point;
+char point_counter = 0;
 
 //Point Variable
 int points = 0;
@@ -96,12 +89,8 @@ void setup() {
 void loop() {
         //Just will set this display for the first 5 seconds
         oled_timer();
-        //Laser Points check if the user was hit by the laser gun
-        Laser_Points();
-        //laser_read_serial.run();
-        //IR Points check if the user was hit by the Special Gun
-        IR_Points();
-        //IR_read_serial.run();
+        //Laser and IR Points
+        Points();
         //Check how many shoots did the player
         Laser_Weapon();
         //Check if we charge the super weapon
@@ -124,43 +113,41 @@ void TheGame() {
                 display.display();
         }
 }
-//Check the impact points that you received by laser
-void Laser_Points() {
-        if (Serial1.available()) { // If data is available to read
-                Laser_Point = Serial1.read(); // read it and store it in val
-                if (Laser_Point == '1') {
-                        points = points + 1;
-                        Serial2.write('1');
-                        Laser_Point = '0';
-                        oled_LF();
-                        delay(2000);
-                        end = points;
-                        if (end >= 20) {
-                                while(1) {
-                                        Game_Over();
-                                }
-                        }
-                }
-        }
-}
-//Check the impact points that you received by IR
-void IR_Points() {
-        if (Serial1.available()) { // If data is available to read
-                IR_Point = Serial1.read(); // read it and store it in val
-                if (IR_Point == '3') {
-                        points = points + 5;
-                        Serial2.write('2');
-                        oled_LF();
-                        delay(2000);
-                        end = points;
-                        IR_Point = '0';
-                        if(end >= 20) {
-                                while(1) {
-                                        Game_Over();
-                                }
-                        }
-                }
-        }
+
+//Check points
+
+void Points() {
+  if (Serial1.available()) { // If data is available to read
+          point_counter = Serial1.read(); // read it and store it in val
+          if (point_counter == '1') {
+                  points = points + 1;
+                  Serial2.write('1');
+                  point_counter = '0';
+                  oled_LF();
+                  delay(2000);
+                  end = points;
+                  if (end >= 20) {
+                          while(1) {
+                                  Game_Over();
+                          }
+                  }
+          }
+          if (point_counter == '3') {
+                  points = points + 5;
+                  Serial2.write('2');
+                  oled_LF();
+                  delay(2000);
+                  end = points;
+                  point_counter = '0';
+                  if(end >= 20) {
+                          while(1) {
+                                  Game_Over();
+                          }
+                  }
+          }
+
+  }
+
 }
 //Activate the laser gun
 void Laser_Weapon() {
