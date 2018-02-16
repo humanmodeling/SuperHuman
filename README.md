@@ -1,5 +1,7 @@
 # Super Human Game
 
+[![Build Status](https://travis-ci.org/totovr/SuperHuman.svg?branch=master)](https://travis-ci.org/totovr/SuperHuman)
+
 ## Abstract
 
 Physical activities are highly significant in maintaining a healthy life. However, with increased dependency on automated systems, our lifestyle is becoming more and more deskbound, making us prone to multiple health-related difficulties such as cardiovascular diseases, diabetes, and cancers. To tackle such issues, we must introduce innovative ideas for integrating technology with exercise techniques that can implement sports, fun, and physical stimulation. 
