@@ -6,8 +6,8 @@ install:
     - python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
 
 script:
-    - platformio ci Game_Stable/Shoulder_Dev32/src --board=uno --board=nanoatmega328 --board=megaatmega2560 --board=esp32dev
-    - platformio ci Game_Stable/Watch_Mega/src --board=uno --board=nanoatmega328 --board=megaatmega2560 --board=esp32dev
+    - platformio ci Game_Stable/Shoulder_Dev32/src --board=esp32dev
+    - platformio ci Game_Stable/Watch_Mega/src --board=megaatmega2560 
     
 notifications:
   email:
