@@ -8,11 +8,14 @@ install:
     # Libraries from PlatformIO Library Registry:
     #
     # https://platformio.org/lib/show/4/IRremote
+    # https://platformio.org/lib/show/13/Adafruit%20GFX%20Library
+    #https://platformio.org/lib/show/135/Adafruit%20SSD1306
     # https://platformio.org/lib/show/419/SimpleTimer
-    - platformio lib -g install 4 419 
+    - platformio lib -g install 4 13  135 419 
     
 script:
     - platformio ci --lib="." --board=esp32dev Game_Stable/Shoulder-Dev32/src
+    - platformio ci --lib="." --board=megaatmega2560 Game_Stable/Watch_Mega/src
     #- platformio ci Game_Stable/Shoulder-Dev32/src --board=esp32dev
     #- platformio ci Game_Stable/Watch_Mega/src --board=megaatmega2560 
     
