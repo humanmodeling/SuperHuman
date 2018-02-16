@@ -2,21 +2,20 @@ language: python
 python:
     - "2.7"
 
-# Cache PlatformIO packages using Travis CI container-based infrastructure
-sudo: false
-cache:
-    directories:
-        - "~/.platformio"
-        
 install:
     - pip install -U platformio
-    - pio update
-    - pio lib install -g/--global
     #- python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+    
+    - wget https://github.com/totovr/SuperHuman/blob/master/libraries/IRremote.zip -O /tmp/IRremote.zip
+    - unzip /tmp/IRremote.zip -d /tmp
+
+    - wget https://github.com/totovr/SuperHuman/blob/master/libraries/SimpleTimer.zip  -O /tmp/SimpleTimer.zip
+    - unzip /tmp/SimpleTimer.zip -d /tmp
 
 script:
-    - platformio ci Game_Stable/Shoulder-Dev32/src --board=esp32dev
-    - platformio ci Game_Stable/Watch_Mega/src --board=megaatmega2560 
+    - platformio ci --lib="." --lib="/tmp/IRremote" --lib="/tmp/SimpleTimer" --board=esp32dev 
+    #- platformio ci Game_Stable/Shoulder-Dev32/src --board=esp32dev
+    #- platformio ci Game_Stable/Watch_Mega/src --board=megaatmega2560 
     
 notifications:
   email:
