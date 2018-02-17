@@ -103,7 +103,14 @@ void life_one() {
                 b = 131;
                 fill(r, g, b);
                 ellipse(200, 120, frameCount%50, frameCount%50);
-        } else {
+        }
+        /*if((life <= 13) && (life > 5)) {
+          //If the user end the game change the color to yellow
+          fill(255,247,77);
+          ellipse(200, 120, frameCount%50, frameCount%50);
+          background_death = color(255,247,77);
+          myKnobA.setColorBackground(background_death);
+        } */else {
                 //If the user end the game change the color to red
                 fill(255,35,1);
                 ellipse(200, 120, frameCount%50, frameCount%50);
@@ -118,7 +125,7 @@ void Serial_life(){
                 valor = myPort.read(); // read it and store it in val
                 println(valor);
                 if (valor == 100) {
-                        life = life - 10;
+                        life = life - 5;
                         fill(255,35,1);
                         ellipse(200,120, frameCount%100, frameCount%100);
                         fill(255,35,1);
