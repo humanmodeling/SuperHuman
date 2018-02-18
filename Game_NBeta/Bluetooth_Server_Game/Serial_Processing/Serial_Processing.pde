@@ -3,25 +3,27 @@ import processing.serial.*;
 import controlP5.*;
 
 //Objects
-Serial myPort;  // Create object from Serial class
+Serial myPort;
 StopWatchTimer sw;
 ControlP5 cp5;
 Knob myKnobA;
-
+Slider Shoots_One_Slider;
 //orbe variables Color
 int r = 186;
 int g = 255;
 int b = 201;
 
 //Serial variables
-int val;     // Data received from the serial port
-int valor = 0;
+//Player one
+int serialvalue_lifeOne = 0;
+int serialvalue_shootsOne = 0;
 
-//Timer variables
-float a = 0;
-//knob Variables
-int life = 100;
+//Player one knob Variables
+int life_PO = 100;
 int background_death = color(0, 160, 100);
+
+//Slider player one variables Shoot
+int sliderValue_ShootOne = 10;
 
 //Watch Variables
 int s = second();
@@ -29,22 +31,31 @@ int m = minute();
 int h = hour();
 String t;
 
-//Objects
+//Timer variables
+float a = 0;
+
+//Objects for text and logo
 PImage logo;
 PFont title;
+PFont life_title;//knob
 
 void setup() {
         size(1240,720);
         frameRate(120);
+        //Setup font
+        title = loadFont("Dialog-48.vlw");
+        life_title = loadFont("Dialog-20.vlw");
+        textFont(title);
         //Watch setup
         sw = new StopWatchTimer();
         sw.start();
-        //New cp5 constructor
+        //New cp5 Knob constructor
         cp5 = new ControlP5(this);
         myKnobA = cp5.addKnob("Life")
+                  .setFont(life_title)
                   .setViewStyle(3)
                   .setRange(0,100)
-                  .setValue(life)
+                  .setValue(life_PO)
                   .setPosition(78,250)
                   .setRadius(120)
                   .hideTickMarks()
@@ -57,11 +68,23 @@ void setup() {
                   //.setColorActive(color(255,255,0))
                   .setDragDirection(Knob.VERTICAL)
         ;
+        //New cp5 Slider constructor
+        Shoots_One_Slider = cp5.addSlider("Shoots")
+                            .setFont(life_title)
+                            .setRange(0,30)
+                            //.setNumberOfTickMarks(10)
+                            //.setColorTickMark(220)
+                            .setValue(sliderValue_ShootOne)
+                            .setPosition(350,250)
+                            //Because is deprecated it only accept hex values
+                            .setColorForeground(#0CB7F2)
+                            .setColorValue(#FFFFFF)
+                            .setColorLabel(#FFFFFF)
+                            .setSize(40,250)
+        ;
+
         //Color of the background
         background(#B28DFF);
-        //Setup font
-        title = loadFont("Dialog-48.vlw");
-        textFont(title);
         //Open the port
         String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
         myPort = new Serial(this, portName, 115200);
@@ -83,8 +106,7 @@ void draw() {
         //show the player one
         life_one();
         //Check if the player was shooted
-        Serial_life();
-
+        Serial_lifePone();
 }
 
 void watch() {
@@ -96,41 +118,59 @@ void watch() {
 void life_one() {
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
-        if(life > 0) {
+        if(life_PO > 50) {
                 noStroke();
                 r = 69;
                 g = 252;
                 b = 131;
                 fill(r, g, b);
-                ellipse(200, 120, frameCount%50, frameCount%50);
+                ellipse(200, 120, frameCount%70, frameCount%70);
         }
-        /*if((life <= 13) && (life > 5)) {
-          //If the user end the game change the color to yellow
-          fill(255,247,77);
-          ellipse(200, 120, frameCount%50, frameCount%50);
-          background_death = color(255,247,77);
-          myKnobA.setColorBackground(background_death);
-        } */else {
+        //Aqui no esta jalando
+        if((life_PO <= 50) && (life_PO > 0)) {
+                //If the user end the game change the color to yellow
+                fill(255,247,77);
+                ellipse(200, 120, frameCount%50, frameCount%50);
+                background_death = color(255,247,77);
+                myKnobA.setColorForeground(#794DFF);
+                myKnobA.setColorBackground(background_death);
+                myKnobA.setColorValueLabel(#05A73F);
+        }
+        if (life_PO <= 0) {
                 //If the user end the game change the color to red
                 fill(255,35,1);
-                ellipse(200, 120, frameCount%50, frameCount%50);
+                ellipse(200, 120, frameCount%20, frameCount%20);
                 background_death = color(255,35,1);
                 myKnobA.setColorBackground(background_death);
+                myKnobA.setColorValue(255);
         }
 }
 
-void Serial_life(){
+void Serial_lifePone(){
         if(myPort.available() > 0)
-        { // If data is available,
-                valor = myPort.read(); // read it and store it in val
-                println(valor);
-                if (valor == 100) {
-                        life = life - 5;
+        {
+                serialvalue_lifeOne = myPort.read(); // read it and store it in val
+                println(serialvalue_lifeOne);
+                if (serialvalue_lifeOne == 1) {
+                        life_PO = life_PO - 5;
                         fill(255,35,1);
                         ellipse(200,120, frameCount%100, frameCount%100);
                         fill(255,35,1);
                         text("Kishishita",85,200);
-                        myKnobA.setValue(life);
+                        myKnobA.setValue(life_PO);
                 }
         }
 }
+
+/*void Serial_Shoots_POne() {
+        if(myPort.available() > 0)
+        {
+                serialvalue_shootsOne = myPort.read(); // read it and store it in val
+                println(serialvalue_shootsOne);
+                if (serialvalue_shootsOne == 2) {
+                        sliderValue_ShootOne = sliderValue_ShootOne + 1;
+                        Shoots_One_Slider.setValue(sliderValue_ShootOne);
+                }
+        }
+
+} */

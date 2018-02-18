@@ -1,25 +1,6 @@
-import processing.core.*; 
-import processing.data.*; 
-import processing.event.*; 
-import processing.opengl.*; 
-
-import processing.serial.*; 
-import controlP5.*; 
-
-import java.util.HashMap; 
-import java.util.ArrayList; 
-import java.io.File; 
-import java.io.BufferedReader; 
-import java.io.PrintWriter; 
-import java.io.InputStream; 
-import java.io.OutputStream; 
-import java.io.IOException; 
-
-public class Serial_Processing extends PApplet {
-
 //Libraries
-
-
+import processing.serial.*;
+import controlP5.*;
 
 //Objects
 Serial myPort;
@@ -27,6 +8,7 @@ StopWatchTimer sw;
 ControlP5 cp5;
 Knob myKnobA;
 Slider Shoots_One_Slider;
+
 //orbe variables Color
 int r = 186;
 int g = 255;
@@ -34,15 +16,14 @@ int b = 201;
 
 //Serial variables
 //Player one
-int serialvalue_lifeOne = 0;
-int serialvalue_shootsOne = 0;
+int Serial = 0;
 
 //Player one knob Variables
 int life_PO = 100;
 int background_death = color(0, 160, 100);
 
 //Slider player one variables Shoot
-int sliderValue_ShootOne = 10;
+int sliderValue_ShootOne = 0;
 
 //Watch Variables
 int s = second();
@@ -58,8 +39,8 @@ PImage logo;
 PFont title;
 PFont life_title;//knob
 
-public void setup() {
-        
+void setup() {
+        size(1240,720);
         frameRate(120);
         //Setup font
         title = loadFont("Dialog-48.vlw");
@@ -96,21 +77,21 @@ public void setup() {
                             .setValue(sliderValue_ShootOne)
                             .setPosition(350,250)
                             //Because is deprecated it only accept hex values
-                            .setColorForeground(0xff0CB7F2)
-                            .setColorValue(0xffFFFFFF)
-                            .setColorLabel(0xffFFFFFF)
+                            .setColorForeground(#0CB7F2)
+                            .setColorValue(#FFFFFF)
+                            .setColorLabel(#FFFFFF)
                             .setSize(40,250)
         ;
 
         //Color of the background
-        background(0xffB28DFF);
+        background(#B28DFF);
         //Open the port
-        String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
+        string portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
         myPort = new Serial(this, portName, 115200);
 }
 
-public void draw() {
-        background(0xffB28DFF);
+void draw() {
+        background(#B28DFF);
         //logo of laboratory
         logo = loadImage("Images/logo.png");
         image(logo, 966,620,268,95);
@@ -124,17 +105,18 @@ public void draw() {
         watch();
         //show the player one
         life_one();
-        //Check if the player was shooted
-        Serial_lifePone();
+        //Player One
+        Serial_PlayerOne();
+
 }
 
-public void watch() {
+void watch() {
         fill(255);
         textSize(48);
         text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
 }
 
-public void life_one() {
+void life_one() {
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
         if(life_PO > 50) {
@@ -145,15 +127,14 @@ public void life_one() {
                 fill(r, g, b);
                 ellipse(200, 120, frameCount%70, frameCount%70);
         }
-        //Aqui no esta jalando
         if((life_PO <= 50) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
                 fill(255,247,77);
                 ellipse(200, 120, frameCount%50, frameCount%50);
                 background_death = color(255,247,77);
-                myKnobA.setColorForeground(0xff794DFF);
+                myKnobA.setColorForeground(#794DFF);
                 myKnobA.setColorBackground(background_death);
-                myKnobA.setColorValueLabel(0xff05A73F);
+                myKnobA.setColorValueLabel(#05A73F);
         }
         if (life_PO <= 0) {
                 //If the user end the game change the color to red
@@ -165,12 +146,12 @@ public void life_one() {
         }
 }
 
-public void Serial_lifePone(){
+void Serial_PlayerOne(){
         if(myPort.available() > 0)
         {
-                serialvalue_lifeOne = myPort.read(); // read it and store it in val
-                println(serialvalue_lifeOne);
-                if (serialvalue_lifeOne == 1) {
+                Serial = myPort.read(); // read it and store it in val
+                println(Serial);
+                if (Serial == 1) {
                         life_PO = life_PO - 5;
                         fill(255,35,1);
                         ellipse(200,120, frameCount%100, frameCount%100);
@@ -178,59 +159,10 @@ public void Serial_lifePone(){
                         text("Kishishita",85,200);
                         myKnobA.setValue(life_PO);
                 }
-        }
-}
-
-/*void Serial_Shoots_POne() {
-        if(myPort.available() > 0)
-        {
-                serialvalue_shootsOne = myPort.read(); // read it and store it in val
-                println(serialvalue_shootsOne);
-                if (serialvalue_shootsOne == 2) {
+                if (Serial == 2) {
                         sliderValue_ShootOne = sliderValue_ShootOne + 1;
+                        //println(sliderValue_ShootOne);
                         Shoots_One_Slider.setValue(sliderValue_ShootOne);
                 }
         }
-
-} */
-class StopWatchTimer {
-  int startTime = 0, stopTime = 0;
-  boolean running = false; 
-  public void start() {
-    startTime = millis();
-    running = true;
-  }
-  public void stop() {
-    stopTime = millis();
-    running = false;
-  }
-  public int getElapsedTime() {
-    int elapsed;
-    if (running) {
-      elapsed = (millis() - startTime);
-    }
-    else {
-      elapsed = (stopTime - startTime);
-    }
-    return elapsed;
-  }
-  public int second() {
-    return (getElapsedTime() / 1000) % 60;
-  }
-  public int minute() {
-    return (getElapsedTime() / (1000*60)) % 60;
-  }
-  public int hour() {
-    return (getElapsedTime() / (1000*60*60)) % 24;
-  }
-}
-  public void settings() {  size(1240,720); }
-  static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "Serial_Processing" };
-    if (passedArgs != null) {
-      PApplet.main(concat(appletArgs, passedArgs));
-    } else {
-      PApplet.main(appletArgs);
-    }
-  }
 }
