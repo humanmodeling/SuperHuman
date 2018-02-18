@@ -25,12 +25,19 @@ The dynamic of the game is almost the same as in paintball.
 * When the life counter is 0 ***Game Over***.
 * When the shoot counter is 30 ***Game Over***.
 
-### Weapons
+### Weapons Impacts
 
 Weapon |   Impact
 :----: | :---------:
   Laser    | 1
   IR   | 5
+
+### Weapons shoots
+
+Weapon |   Shoot
+:----: | :---------:
+  Laser    | 1
+  IR   | 1
 
 ##### NOTE you must charge the muscle power to shoot the Special weapon
 
@@ -75,7 +82,7 @@ Swagata Das:
 
 * [Github](https://github.com/sdswoops824)
 
-Chetan Thakur 
+Chetan Thakur
 
 ## License
 
