@@ -38,7 +38,7 @@ After charging muscle power, you can shoot.
 The team have to take enemy flag or down all of enemy.
 
 - Blind battle
-Each player take the blindfold and use GridEye and Ultrasonic sensor.  
+Each player take the blindfold and use GridEye and Ultrasonic sensor to find the enemy players.  
 Use only IR LED weapon.
 
 ## System
