@@ -13,21 +13,21 @@ Our team proposes a paintball game by integrating multiple ideas of human-augmen
 
 ## Rules
 ### General rule
-Almost same as a paintball.
+Almost same as a paintball.  
 Players shoot enemy players.
 
 ### Player life
-10 points.
+10 points.  
 When you lose lives, game over.
 
 ### Weapon
 - Laser
-General weapon.
+General weapon.  
 1 points lose.
 
 - IR LED
-Special weapon.
-5 points lose.
+Special weapon.  
+5 points lose.  
 After charging muscle power, you can shoot.
 
 ### Time
@@ -38,7 +38,7 @@ After charging muscle power, you can shoot.
 The team have to take enemy flag or down all of enemy.
 
 - Blind battle
-Each player take the blindfold and use GridEye and Ultrasonic sensor.
+Each player take the blindfold and use GridEye and Ultrasonic sensor.  
 Use only IR LED weapon.
 
 ## System
