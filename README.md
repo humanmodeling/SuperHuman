@@ -17,29 +17,30 @@ Almost same as a paintball.
 Players shoot enemy players.
 
 ### Player life
-10 points.  
-When you lose lives, game over.
+10 initial points.  
+When you lose lives (all points?), game over.
 
 ### Weapon
 - Laser
 General weapon.  
-1 points lose.
+Lose 1 point.
 
 - IR LED
 Special weapon.  
-5 points lose.  
+Lose 5 points.  
 After charging muscle power, you can shoot.
 
 ### Time
-10 minutes or enemy team down.
+10 minutes (of overall game?) or enemy team down.
 
 ### Special game
 - Flag battle
-The team have to take enemy flag or down all of enemy.
+If one team takes the game flag, the other team loses automatically.
 
 - Blind battle
 Each player take the blindfold and use GridEye and Ultrasonic sensor to find the enemy players.  
 Use only IR LED weapon.
+Can be played by visually impaired players.
 
 ## System
 
@@ -73,6 +74,10 @@ Antonio Vega Ramirez:
 Yusuke Kishishita:
 
 * [Github](https://github.com/bigface0202)
+
+Swagata Das:
+
+* [Github](https://github.com/sdswoops824)
 
 ## License
 
