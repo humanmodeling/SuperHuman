@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream; 
 import java.io.IOException; 
 
-public class Serial_Processing extends PApplet {
+public class Interface extends PApplet {
 
 //Libraries
 
@@ -28,12 +28,11 @@ ControlP5 cp5;
 Knob myKnobA;
 Slider Shoots_One_Slider;
 
-
 //Player one
 //Serial variables
 int serialuniversalvalue = 0;
 //Player one knob Variables
-int life_PO = 100;
+int life_PO = 10;
 int background_death = color(0, 160, 100);
 //Slider player one variables Shoot
 int sliderValue_ShootOne = 0;
@@ -71,7 +70,7 @@ public void setup() {
         myKnobA = cp5.addKnob("Life")
                   .setFont(life_title)
                   .setViewStyle(3)
-                  .setRange(0,100)
+                  .setRange(0,10)
                   .setValue(life_PO)
                   .setPosition(78,250)
                   .setRadius(120)
@@ -137,35 +136,38 @@ public void watch() {
 }
 
 public void Serial_Read_Data() {
-        if(myPort.available() > 0)
-        {
+        if(myPort.available() > 0) {
                 serialuniversalvalue = myPort.read(); // read it and store it in val
                 println(serialuniversalvalue);
         }
 }
 
 public void Serial_Event_PlayerOne(){
-        if (serialuniversalvalue == 1) {
-                life_PO = life_PO - 5;
-                fill(255,35,1);
-                ellipse(195,120,frameCount%100,frameCount%100);
-                fill(255,35,1);
-                textFont(title);
-                text("Kishishita",85,200);
+        //This is equal to one point because laser impact
+        if(serialuniversalvalue == 1) {
+                life_PO = life_PO - 1;
                 myKnobA.setValue(life_PO);
                 serialuniversalvalue = 0;
         }
-        if (serialuniversalvalue == 2) {
+        //This is equal to five points because IR impact
+        if(serialuniversalvalue == 2) {
+                life_PO = life_PO - 25;
+                myKnobA.setValue(life_PO);
+                serialuniversalvalue = 0;
+        }
+        //This will count 1 if the user shoot the laser gun
+        if(serialuniversalvalue == 3) {
                 sliderValue_ShootOne = sliderValue_ShootOne + 1;
                 Shoots_One_Slider.setValue(sliderValue_ShootOne);
                 serialuniversalvalue = 0;
         }
-        if(serialuniversalvalue == 3) {
+        //This will show if the special gun was charged
+        if(serialuniversalvalue == 4) {
                 IROne_empty = "No";
                 IROne_charged = "Yes";
         }
-        if(serialuniversalvalue == 4) {
-                IROne_empty = "No";
+        //This will show if the special weapon was shotted
+        if(serialuniversalvalue == 5) {
                 IROne_charged = "No";
                 IROne_shotted = "Yes";
         }
@@ -175,12 +177,12 @@ public void Player_one() {
         textFont(title);
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
-        if(life_PO > 50) {
+        if(life_PO > 5) {
                 noStroke();
                 fill(69,252,131);
                 ellipse(195,120,frameCount%70,frameCount%70);
         }
-        if((life_PO <= 50) && (life_PO > 0)) {
+        if((life_PO <= 5) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
                 fill(255,247,77);
                 ellipse(195,120,frameCount%50,frameCount%50);
@@ -252,7 +254,7 @@ class StopWatchTimer {
 }
   public void settings() {  size(1240,720); }
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "Serial_Processing" };
+    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "Interface" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {
