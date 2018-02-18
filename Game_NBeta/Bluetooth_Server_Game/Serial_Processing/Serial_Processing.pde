@@ -9,11 +9,6 @@ ControlP5 cp5;
 Knob myKnobA;
 Slider Shoots_One_Slider;
 
-//Player one orbe variables Color
-int r = 186;
-int g = 255;
-int b = 201;
-
 //Serial variables
 //Player one
 int serialuniversalvalue = 0;
@@ -98,18 +93,22 @@ void draw() {
         image(logo, 966,620,268,95);
         //Title of the game
         fill(255);
+        textFont(title);
         text("BlazerMuscle",470,70);
         //Name of the team
         fill(255);
+        textFont(title);
         text("Team Roger One",430,120);
         //Show the watch
         watch();
-        //Serial_Read
+        //Read the incoming data of the serial port
         Serial_Read_Data();
         //Check for player one
         Serial_PlayerOne();
-        //show events life for player one
+        //Show events life for player one
         life_one();
+        //Show the IR
+        IR_ShootOne_Event();
 }
 
 void watch() {
@@ -130,8 +129,9 @@ void Serial_PlayerOne(){
         if (serialuniversalvalue == 1) {
                 life_PO = life_PO - 5;
                 fill(255,35,1);
-                ellipse(200,120, frameCount%100, frameCount%100);
+                ellipse(195,120,frameCount%100,frameCount%100);
                 fill(255,35,1);
+                textFont(title);
                 text("Kishishita",85,200);
                 myKnobA.setValue(life_PO);
                 serialuniversalvalue = 0;
@@ -145,20 +145,18 @@ void Serial_PlayerOne(){
 }
 
 void life_one() {
+        textFont(title);
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
         if(life_PO > 50) {
                 noStroke();
-                r = 69;
-                g = 252;
-                b = 131;
-                fill(r, g, b);
-                ellipse(200, 120, frameCount%70, frameCount%70);
+                fill(69,252,131);
+                ellipse(195,120,frameCount%70,frameCount%70);
         }
         if((life_PO <= 50) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
                 fill(255,247,77);
-                ellipse(200, 120, frameCount%50, frameCount%50);
+                ellipse(195,120,frameCount%50,frameCount%50);
                 background_death = color(255,247,77);
                 myKnobA.setColorForeground(#794DFF);
                 myKnobA.setColorBackground(background_death);
@@ -167,9 +165,33 @@ void life_one() {
         if (life_PO <= 0) {
                 //If the user end the game change the color to red
                 fill(255,35,1);
-                ellipse(200, 120, frameCount%20, frameCount%20);
+                ellipse(195, 120,frameCount%20,frameCount%20);
                 background_death = color(255,35,1);
                 myKnobA.setColorBackground(background_death);
                 myKnobA.setColorValue(255);
         }
+}
+
+void IR_ShootOne_Event() {
+  if(serialuniversalvalue == 0) {
+  //Red indicate that the Special Weapon is not loaded
+  fill(0,112,184);
+  ellipse(97,560,frameCount%50,frameCount%50);
+  textFont(life_title);
+  text("Special Weapon", 132, 567);
+ }
+ //Blue indicate that the Special Weapon is loaded
+ if(serialuniversalvalue == 3) {
+   fill(#0F34FA);
+   ellipse(100, 560,frameCount%90,frameCount%90);
+   textFont(life_title);
+   text("Special Weapon Loaded", 132, 567);
+ }
+ //Green indicate that the Special Weapon was shooted
+ if(serialuniversalvalue == 4) {
+   fill(#12FA0F);
+   ellipse(100, 560,frameCount%90,frameCount%90);
+   textFont(life_title);
+   text("Special Weapon Shooted", 132, 567);
+ }
 }
