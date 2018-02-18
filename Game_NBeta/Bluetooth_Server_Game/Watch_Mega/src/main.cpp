@@ -12,8 +12,6 @@
 void TheGame();//Show a message before the game start
 void Points();
 void Laser_Weapon();//Activate the laser gun
-void IR_Points();//Count the IR impacts
-void SendPluse();//Send the laser pulse
 void Special_Weapon();//Check if the Super Weapon is activated
 void Special_Weapon_Activated();//If the bottom is pressed shoot the special weapon
 void Special_Weapon_Shoot();//contain the IR coding
@@ -23,6 +21,8 @@ void shoot_life();//format of the life and impacts
 void timer();//format of the clock
 void calculateTime();//Function that calculate the time
 void Game_Over();//Function that is called when the game is over
+//New Added
+void Serial_Reader();
 
 // If using software SPI
 #define OLED_MOSI  11
@@ -34,23 +34,19 @@ char buffer[10];
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 //Receptor
-
-//Points
-
-char point_counter = 0;
-
+//Serial reader
+char Serial_Universal_Reader = 0;
 //Point Variable
 int points = 0;
-
 //Game_Over
 int end = 0;
 
 //Laser shoot
 const int Laser_WeaponIn = 2;//pin for pullup resistor D2
-int ledLaser = 13;//pin for laser
-int laser_value = 0;
-int last_laser_value = 0;// previous state of the button
-int shoots = 0;// shoots counter variable
+int ledLaser = 13;//Pin for laser
+int laser_value = 0;//Check the last state of the buttom
+int last_laser_value = 0;//Previous state of the button
+int shoots = 0;//Shoots counter variable
 //IR shoot
 IRsend irsend; //create a IRsend object just apply for pin 9 in ATMega328
 char Super_Gun;//In this variable we will save the data that was send by the other Arduino
@@ -81,14 +77,13 @@ void setup() {
         pinMode(Laser_WeaponIn, INPUT); //Set pin 2 as input
         //IR Pull Up bottom
         pinMode(IR_WeaponIn, INPUT); //Set pin 7 as input
-        //laser_read_serial.setInterval(1000, Laser_Points);//repeats every 1 second, can be changed
-        //IR_read_serial.setInterval(1000, IR_Points);//repeats every 1 second, can be changed
-
 }
 
 void loop() {
         //Just will set this display for the first 5 seconds
         oled_timer();
+        //Read Serial
+        Serial_Reader();
         //Laser and IR Points
         Points();
         //Check how many shoots did the player
@@ -101,7 +96,7 @@ void loop() {
 
 void TheGame() {
         //Draw a counter of the time to begin the game
-        for (int i=0; i < 6; i++) {
+        for(int i=0; i < 6; i++) {
                 display.clearDisplay();
                 display.setCursor(0,0);
                 int xy = i;
@@ -114,73 +109,66 @@ void TheGame() {
         }
 }
 
+void Serial_Reader() {
+        if(Serial1.available()) {
+                Serial_Universal_Reader = Serial1.read();
+        }
+}
+
 //Check points
-
 void Points() {
-  if (Serial1.available()) { // If data is available to read
-          point_counter = Serial1.read(); // read it and store it in val
-          if (point_counter == '1') {
-                  points = points + 1;
-                  Serial2.write('1');
-                  point_counter = '0';
-                  oled_LF();
-                  delay(2000);
-                  end = points;
-                  if (end >= 20) {
-                          while(1) {
-                                  Game_Over();
-                          }
-                  }
-          }
-          if (point_counter == '3') {
-                  points = points + 5;
-                  Serial2.write('2');
-                  oled_LF();
-                  delay(2000);
-                  end = points;
-                  point_counter = '0';
-                  if(end >= 20) {
-                          while(1) {
-                                  Game_Over();
-                          }
-                  }
-          }
-
-  }
+        if(Serial_Universal_Reader == '1') {
+                points = points + 1;
+                Serial2.write('1');
+                oled_LF();
+                delay(2000);
+                end = points;
+                if (end >= 20) {
+                        while(1) {
+                                Game_Over();
+                        }
+                }
+        }
+        if(Serial_Universal_Reader == '3') {
+                points = points + 5;
+                Serial2.write('2');
+                oled_LF();
+                delay(2000);
+                end = points;
+                if(end >= 20) {
+                        while(1) {
+                                Game_Over();
+                        }
+                }
+        }
 
 }
 //Activate the laser gun
 void Laser_Weapon() {
         laser_value = digitalRead(Laser_WeaponIn);
-        if (laser_value != last_laser_value) {
-                if (laser_value == LOW) {
+        if(laser_value != last_laser_value) {
+                if(laser_value == LOW) {
                         shoots = shoots + 1;
                         Serial2.write('3');
                         delay(10);
                         oled_LF();
-                        SendPluse(); //I call the function pulse
+                        digitalWrite(ledLaser, HIGH);
+                        delay(2000);
+                        digitalWrite(ledLaser, LOW);
                 }
         }
         last_laser_value = laser_value;//Evaluate the last state of the push buttom
 }
-//Shoot one time the laser gun
-void SendPluse() {
-        digitalWrite(ledLaser, HIGH);
-        delay(2000);
-        digitalWrite(ledLaser, LOW);
-}
 //Shoot the special Gun
 void Special_Weapon() {
-        if (Serial1.available()) { // If data is available to read
-                Super_Gun = Serial1.read(); // read it and store it in val
-                if (Super_Gun == '2') {
-                        //this led advice that the weapon can be shoot
-                        digitalWrite(ledIR_advice, HIGH);
-                        Serial2.write('4');
-                        delay(10);
-                        //this varible will save the state that the special weapon is charged
-                        special_weapon_active = 2;
-                }
+        Super_Gun = Serial_Universal_Reader;         //Read the serial port value and store it
+        if(Super_Gun == '2') {
+                //this led advice that the weapon can be shoot
+                digitalWrite(ledIR_advice, HIGH);
+                Serial2.write('4');
+                delay(10);
+                //this varible will save the state that the special weapon is charged
+                special_weapon_active = 2;
         }
 }
 
@@ -188,10 +176,10 @@ void Special_Weapon_Activated() {
         //Check the state of the bottom
         ledIR_state = digitalRead(IR_WeaponIn);
         //Check if the state of the bottom changed
-        if (ledIR_state != last_ledIR_state) {
-                if (ledIR_state == HIGH) {//Maybe this change to low deppending of the configuration of the
+        if(ledIR_state != last_ledIR_state) {
+                if(ledIR_state == HIGH) {//Maybe this change to low deppending of the configuration of the
                         //if the weapon is charged it will shoot
-                        if (special_weapon_active == 2) {
+                        if(special_weapon_active == 2) {
                                 Special_Weapon_Shoot();
                                 Serial2.write('5');
                                 special_weapon_active = 0;
@@ -208,7 +196,6 @@ void Special_Weapon_Shoot() {
         delay(500);
         digitalWrite(ledIR_advice, LOW);
 }
-
 //Call the funtion that display the shoots and impacts
 void oled_LF() {
         display.clearDisplay();
