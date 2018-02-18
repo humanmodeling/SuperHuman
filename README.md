@@ -99,7 +99,10 @@ This project is licensed under creative commons Licence (cc) - see the [LICENSE.
 
 ### Special game
 
-- Flag battle The team have to take enemy flag or down all of enemy.
+- Flag battle 
 
-- Blind battle Each player take the blindfold and use GridEye and Ultrasonic sensor to find the enemy players.<br>
-  Use only IR LED weapon.
+The team have to take the enemy flag to win.
+
+- Blind battle 
+
+Each player will not be able yo use his/her ***view***. To support the user in the game he/her will use and GridEye (infrared sensor) and an ultrasonic sensor to find the enemy players. ***Use only IR LED weapon.***
