@@ -8,22 +8,22 @@ StopWatchTimer sw;
 ControlP5 cp5;
 Knob myKnobA;
 Slider Shoots_One_Slider;
-//orbe variables Color
+
+//Player one orbe variables Color
 int r = 186;
 int g = 255;
 int b = 201;
 
 //Serial variables
 //Player one
-int serialvalue_lifeOne = 0;
-int serialvalue_shootsOne = 0;
+int serialuniversalvalue = 0;
 
 //Player one knob Variables
 int life_PO = 100;
 int background_death = color(0, 160, 100);
 
 //Slider player one variables Shoot
-int sliderValue_ShootOne = 10;
+int sliderValue_ShootOne = 0;
 
 //Watch Variables
 int s = second();
@@ -75,7 +75,7 @@ void setup() {
                             //.setNumberOfTickMarks(10)
                             //.setColorTickMark(220)
                             .setValue(sliderValue_ShootOne)
-                            .setPosition(350,250)
+                            .setPosition(350,240)
                             //Because is deprecated it only accept hex values
                             .setColorForeground(#0CB7F2)
                             .setColorValue(#FFFFFF)
@@ -88,6 +88,7 @@ void setup() {
         //Open the port
         String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
         myPort = new Serial(this, portName, 115200);
+        myPort.buffer(3);
 }
 
 void draw() {
@@ -103,16 +104,36 @@ void draw() {
         text("Team Roger One",430,120);
         //Show the watch
         watch();
-        //show the player one
+        //Check for player one
+        Serial_PlayerOne();
+        //show events life for player one
         life_one();
-        //Check if the player was shooted
-        Serial_lifePone();
 }
 
 void watch() {
         fill(255);
         textSize(48);
         text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
+}
+
+void Serial_PlayerOne(){
+        if(myPort.available() > 0)
+        {
+                serialuniversalvalue = myPort.read(); // read it and store it in val
+                println(serialuniversalvalue);
+                if (serialuniversalvalue == 1) {
+                        life_PO = life_PO - 5;
+                        fill(255,35,1);
+                        ellipse(200,120, frameCount%100, frameCount%100);
+                        fill(255,35,1);
+                        text("Kishishita",85,200);
+                        myKnobA.setValue(life_PO);
+                }
+                if (serialuniversalvalue == 2) {
+                        sliderValue_ShootOne = sliderValue_ShootOne + 1;
+                        Shoots_One_Slider.setValue(sliderValue_ShootOne);
+                }
+        }
 }
 
 void life_one() {
@@ -126,7 +147,6 @@ void life_one() {
                 fill(r, g, b);
                 ellipse(200, 120, frameCount%70, frameCount%70);
         }
-        //Aqui no esta jalando
         if((life_PO <= 50) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
                 fill(255,247,77);
@@ -145,32 +165,3 @@ void life_one() {
                 myKnobA.setColorValue(255);
         }
 }
-
-void Serial_lifePone(){
-        if(myPort.available() > 0)
-        {
-                serialvalue_lifeOne = myPort.read(); // read it and store it in val
-                println(serialvalue_lifeOne);
-                if (serialvalue_lifeOne == 1) {
-                        life_PO = life_PO - 5;
-                        fill(255,35,1);
-                        ellipse(200,120, frameCount%100, frameCount%100);
-                        fill(255,35,1);
-                        text("Kishishita",85,200);
-                        myKnobA.setValue(life_PO);
-                }
-        }
-}
-
-/*void Serial_Shoots_POne() {
-        if(myPort.available() > 0)
-        {
-                serialvalue_shootsOne = myPort.read(); // read it and store it in val
-                println(serialvalue_shootsOne);
-                if (serialvalue_shootsOne == 2) {
-                        sliderValue_ShootOne = sliderValue_ShootOne + 1;
-                        Shoots_One_Slider.setValue(sliderValue_ShootOne);
-                }
-        }
-
-} */
