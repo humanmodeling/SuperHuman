@@ -123,7 +123,7 @@ void Points() {
                 oled_LF();
                 delay(2000);
                 end = points;
-                if (end >= 20) {
+                if (end >= 10) {
                         while(1) {
                                 Game_Over();
                         }
@@ -135,7 +135,7 @@ void Points() {
                 oled_LF();
                 delay(2000);
                 end = points;
-                if(end >= 20) {
+                if(end >= 10) {
                         while(1) {
                                 Game_Over();
                         }
