@@ -71,12 +71,13 @@ Yusuke Kishishita:
 
 * [Github](https://github.com/bigface0202)
 
-## License
-
 Swagata Das:
 
 * [Github](https://github.com/sdswoops824)
 
+Chetan Thakur 
+
+## License
 
 This project is licensed under creative commons Licence (cc) - see the [LICENSE.md](https://github.com/totovr/SuperHuman/blob/master/LICENCE.md) file for details
 
