@@ -151,7 +151,7 @@ public void Serial_Event_PlayerOne(){
         }
         //This is equal to five points because IR impact
         if(serialuniversalvalue == 2) {
-                life_PO = life_PO - 25;
+                life_PO = life_PO - 5;
                 myKnobA.setValue(life_PO);
                 serialuniversalvalue = 0;
         }
@@ -170,6 +170,9 @@ public void Serial_Event_PlayerOne(){
         if(serialuniversalvalue == 5) {
                 IROne_charged = "No";
                 IROne_shotted = "Yes";
+                sliderValue_ShootOne = sliderValue_ShootOne + 1;
+                Shoots_One_Slider.setValue(sliderValue_ShootOne);
+                serialuniversalvalue = 0;
         }
 }
 

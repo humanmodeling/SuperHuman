@@ -3,7 +3,8 @@
 Number |       Purpose
 :----: | :-----------------:
   0    |     Null Value
-  1    |        Life
-  2    |     Laser Shoot
-  3    | Special Gun Charged
-  4    | Special Gun Shotted
+  1    | Life (Laser Impact)
+  2    |  Life (IR Impact)
+  3    |    Laser Shoot (
+  4    | Special Gun Charged
+  5    | Special Gun Shotted
