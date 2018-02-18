@@ -38,8 +38,9 @@ int background_death = color(0, 160, 100);
 //Slider player one variables Shoot
 int sliderValue_ShootOne = 0;
 //Special weapon Variables
-String IROne_empty = "No";
+String IROne_empty = "Yes";
 String IROne_charged = "No";
+String IROne_shotted = "No";
 
 //Watch Variables
 int s = second();
@@ -127,8 +128,6 @@ public void draw() {
         Serial_Event_PlayerOne();
         //Show events life for player one
         Player_one();
-        //Show the IR serial event
-        //IR_ShootOne_SerialEvent();
 }
 
 public void watch() {
@@ -160,11 +159,15 @@ public void Serial_Event_PlayerOne(){
                 sliderValue_ShootOne = sliderValue_ShootOne + 1;
                 Shoots_One_Slider.setValue(sliderValue_ShootOne);
                 serialuniversalvalue = 0;
-
         }
         if(serialuniversalvalue == 3) {
-                IROne_empty = "Yes";
+                IROne_empty = "No";
                 IROne_charged = "Yes";
+        }
+        if(serialuniversalvalue == 4) {
+                IROne_empty = "No";
+                IROne_charged = "No";
+                IROne_shotted = "Yes";
         }
 }
 
@@ -194,7 +197,7 @@ public void Player_one() {
                 myKnobA.setColorBackground(background_death);
                 myKnobA.setColorValue(255);
         }
-        if(IROne_empty == "No") {
+        if(IROne_empty == "Yes") {
                 //Red indicate that the Special Weapon is not loaded
                 fill(0,112,184);
                 ellipse(97,560,frameCount%50,frameCount%50);
@@ -203,22 +206,19 @@ public void Player_one() {
         }
         if(IROne_charged == "Yes") {
                 fill(0xff0F34FA);
-                ellipse(100, 560,frameCount%50,frameCount%50);
+                ellipse(100,560,frameCount%50,frameCount%50);
                 textFont(life_title);
                 text("Special Weapon Loaded", 132, 567);
-                //IROne_empty = "No";
-                //IROne_charged = "No";
         }
-}
-
-/*void IR_ShootOne_SerialEvent() {
-        if(serialuniversalvalue == 4) {
-                fill(#12FA0F);
-                ellipse(100, 560,frameCount%90,frameCount%90);
+        if(IROne_shotted == "Yes") {
+                IROne_shotted = "No";
+                fill(0xff12FA0F);
+                ellipse(100,560,frameCount%50,frameCount%50);
                 textFont(life_title);
                 text("Special Weapon Shooted", 132, 567);
+                IROne_empty = "Yes";
         }
-}*/
+}
 class StopWatchTimer {
   int startTime = 0, stopTime = 0;
   boolean running = false; 
