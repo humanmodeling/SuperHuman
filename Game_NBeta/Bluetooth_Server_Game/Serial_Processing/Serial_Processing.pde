@@ -104,6 +104,8 @@ void draw() {
         text("Team Roger One",430,120);
         //Show the watch
         watch();
+        //Serial_Read
+        Serial_Read_Data();
         //Check for player one
         Serial_PlayerOne();
         //show events life for player one
@@ -116,23 +118,29 @@ void watch() {
         text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
 }
 
-void Serial_PlayerOne(){
+void Serial_Read_Data() {
         if(myPort.available() > 0)
         {
                 serialuniversalvalue = myPort.read(); // read it and store it in val
                 println(serialuniversalvalue);
-                if (serialuniversalvalue == 1) {
-                        life_PO = life_PO - 5;
-                        fill(255,35,1);
-                        ellipse(200,120, frameCount%100, frameCount%100);
-                        fill(255,35,1);
-                        text("Kishishita",85,200);
-                        myKnobA.setValue(life_PO);
-                }
-                if (serialuniversalvalue == 2) {
-                        sliderValue_ShootOne = sliderValue_ShootOne + 1;
-                        Shoots_One_Slider.setValue(sliderValue_ShootOne);
-                }
+        }
+}
+
+void Serial_PlayerOne(){
+        if (serialuniversalvalue == 1) {
+                life_PO = life_PO - 5;
+                fill(255,35,1);
+                ellipse(200,120, frameCount%100, frameCount%100);
+                fill(255,35,1);
+                text("Kishishita",85,200);
+                myKnobA.setValue(life_PO);
+                serialuniversalvalue = 0;
+        }
+        if (serialuniversalvalue == 2) {
+                sliderValue_ShootOne = sliderValue_ShootOne + 1;
+                Shoots_One_Slider.setValue(sliderValue_ShootOne);
+                serialuniversalvalue = 0;
+
         }
 }
 
