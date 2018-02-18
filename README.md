@@ -87,6 +87,10 @@ Swagata Das:
 
 Chetan Thakur
 
+Yuichi Kurita
+
+- [Official page](http://www.bsys.hiroshima-u.ac.jp/~kurita/cal.html)
+
 ## License
 
 This project is licensed under creative commons Licence (cc) - see the [LICENSE.md](https://github.com/totovr/SuperHuman/blob/master/LICENCE.md) file for details
