@@ -13,7 +13,7 @@ Our team proposes a paintball game by integrating multiple ideas of human-augmen
 
 ## Rules
 ### General rule
-Almost same as a paintball.  
+Almost same as a paintball.  
 Players shoot enemy players.
 
 ### Player life
