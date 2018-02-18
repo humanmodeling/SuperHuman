@@ -17,9 +17,9 @@ script:
     - platformio ci --lib="." --board=esp32dev Game_Stable/Shoulder-Dev32/src
     - platformio ci --lib="." --board=megaatmega2560 Game_Stable/Watch_Mega/src
     #Beta
-    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Server/src
-    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Shoulder-Dev32/src
-    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Watch_Mega/src
+    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Server/src
+    - platformio ci --lib="." --board=esp32dev Game_NBeta/Device/Shoulder-Dev32/src
+    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Watch_Mega/src
 
 notifications:
   email:
