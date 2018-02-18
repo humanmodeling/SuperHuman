@@ -28,16 +28,18 @@ ControlP5 cp5;
 Knob myKnobA;
 Slider Shoots_One_Slider;
 
-//Serial variables
-//Player one
-int serialuniversalvalue = 0;
 
+//Player one
+//Serial variables
+int serialuniversalvalue = 0;
 //Player one knob Variables
 int life_PO = 100;
 int background_death = color(0, 160, 100);
-
 //Slider player one variables Shoot
 int sliderValue_ShootOne = 0;
+//Special weapon Variables
+String IROne_empty = "No";
+String IROne_charged = "No";
 
 //Watch Variables
 int s = second();
@@ -96,7 +98,6 @@ public void setup() {
                             .setColorLabel(0xffFFFFFF)
                             .setSize(40,250)
         ;
-
         //Color of the background
         background(0xffB28DFF);
         //Open the port
@@ -123,11 +124,11 @@ public void draw() {
         //Read the incoming data of the serial port
         Serial_Read_Data();
         //Check for player one
-        Serial_PlayerOne();
+        Serial_Event_PlayerOne();
         //Show events life for player one
-        life_one();
-        //Show the IR
-        IR_ShootOne_Event();
+        Player_one();
+        //Show the IR serial event
+        //IR_ShootOne_SerialEvent();
 }
 
 public void watch() {
@@ -144,7 +145,7 @@ public void Serial_Read_Data() {
         }
 }
 
-public void Serial_PlayerOne(){
+public void Serial_Event_PlayerOne(){
         if (serialuniversalvalue == 1) {
                 life_PO = life_PO - 5;
                 fill(255,35,1);
@@ -161,9 +162,13 @@ public void Serial_PlayerOne(){
                 serialuniversalvalue = 0;
 
         }
+        if(serialuniversalvalue == 3) {
+                IROne_empty = "Yes";
+                IROne_charged = "Yes";
+        }
 }
 
-public void life_one() {
+public void Player_one() {
         textFont(title);
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
@@ -189,31 +194,31 @@ public void life_one() {
                 myKnobA.setColorBackground(background_death);
                 myKnobA.setColorValue(255);
         }
+        if(IROne_empty == "No") {
+                //Red indicate that the Special Weapon is not loaded
+                fill(0,112,184);
+                ellipse(97,560,frameCount%50,frameCount%50);
+                textFont(life_title);
+                text("Special Weapon", 132, 567);
+        }
+        if(IROne_charged == "Yes") {
+                fill(0xff0F34FA);
+                ellipse(100, 560,frameCount%50,frameCount%50);
+                textFont(life_title);
+                text("Special Weapon Loaded", 132, 567);
+                //IROne_empty = "No";
+                //IROne_charged = "No";
+        }
 }
 
-public void IR_ShootOne_Event() {
-  if(serialuniversalvalue == 0) {
-  //Red indicate that the Special Weapon is not loaded
-  fill(0,112,184);
-  ellipse(97,560,frameCount%50,frameCount%50);
-  textFont(life_title);
-  text("Special Weapon", 132, 567);
- }
- //Blue indicate that the Special Weapon is loaded
- if(serialuniversalvalue == 3) {
-   fill(0xff0F34FA);
-   ellipse(100, 560,frameCount%90,frameCount%90);
-   textFont(life_title);
-   text("Special Weapon Loaded", 132, 567);
- }
- //Green indicate that the Special Weapon was shooted
- if(serialuniversalvalue == 4) {
-   fill(0xff12FA0F);
-   ellipse(100, 560,frameCount%90,frameCount%90);
-   textFont(life_title);
-   text("Special Weapon Shooted", 132, 567);
- }
-}
+/*void IR_ShootOne_SerialEvent() {
+        if(serialuniversalvalue == 4) {
+                fill(#12FA0F);
+                ellipse(100, 560,frameCount%90,frameCount%90);
+                textFont(life_title);
+                text("Special Weapon Shooted", 132, 567);
+        }
+}*/
 class StopWatchTimer {
   int startTime = 0, stopTime = 0;
   boolean running = false; 
