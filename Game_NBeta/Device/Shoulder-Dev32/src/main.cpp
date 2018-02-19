@@ -22,9 +22,7 @@ int emgfullcharge = 8;//led to indicate full charge
 int emg_counter = 0;
 
 //declare objects of SimpleTimer library
- SimpleTimer EMG_TIMER;//Don't write "timer" as and object
- //SimpleTimer laser_read;
- //SimpleTimer IR_read;
+SimpleTimer EMG_TIMER; //Don't write "timer" as and object
 
 // IR receptor
 int IR_receptorPin = 17;//Pin used to read IR values
@@ -50,12 +48,10 @@ void setup() {
 
 void loop() {
         //Read laser sensors
-        //laser_read.run();
         Laser_Sensor();
         //EMG sensor reading
         EMG_TIMER.run();
         //IR reding
-        //IR_read.run();
         IR_Receptor();
 }
 
@@ -86,12 +82,9 @@ void repeatEMG() {
                 emg = 0;
         }
         else if (emg_counter>10) {
-                digitalWrite(emgfullcharge,HIGH);
-                delay(200);
-                digitalWrite(emgfullcharge,LOW);
                 emg_counter = 0;
                 Serial.write('2');  // Sends '2' to the master to activate the special gun
-
+                Serial.write(0);  // Sends '2' to the master to activate the special gun
         }
 }
 //Decode the IR pulse
