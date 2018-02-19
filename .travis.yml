@@ -15,8 +15,7 @@ matrix:
       
     - os: osx
       env: ARCH="x86_64"
-      osx_image: xcode8
-
+      
 install:
     - pip install -U platformio
     #
