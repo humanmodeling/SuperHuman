@@ -49,7 +49,7 @@ int last_laser_value = 0;//Previous state of the button
 int shoots = 0;//Shoots counter variable
 //IR shoot
 IRsend irsend; //create a IRsend object just apply for pin 9 in ATMega328
-char Super_Gun;//In this variable we will save the data that was send by the other Arduino
+char Super_Gun = 0;//In this variable we will save the data that was send by the other Arduino
 int ledIR_advice = 6;//if the special gun is activated a led will turn on
 int IR_WeaponIn = 7;//here we read the bottom of the gun
 int ledIR_state = 0;//if we push the bottom the gun will be shoot
@@ -186,6 +186,7 @@ void Special_Weapon_Activated() {
                                 Special_Weapon_Shoot();
                                 Serial2.write('5');
                                 special_weapon_active = 0;
+                                digitalWrite(ledIR_advice, LOW);
                         }
                 }
         }
