@@ -20,7 +20,7 @@ Number |   Purpose
 PIN |         Purpose
 :-: | :----------------------:
  4  |      Laser receptor
- 2  |        EMG sensor
+16  |        EMG sensor
 17  |       IR receptor
  5  |     Impact received
  7  | led to indicate charging

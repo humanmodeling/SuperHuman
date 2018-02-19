@@ -16,9 +16,8 @@ int points = 0;
 int LaserValue = 0;
 
 //EMG Sensor
-const int emgPin = 2;// Pin to read the EMG sensor
+const int emgPin = 16;// Pin to read the EMG sensor
 int emg = 0;
-int emgcharging = 7;//led to indicate charging
 int emgfullcharge = 8;//led to indicate full charge
 int emg_counter = 0;
 
@@ -42,7 +41,6 @@ void setup() {
         Serial.begin(38400);
         pinMode(IR_Impact, OUTPUT);//Turn on pin 5 if we received an impact of IR
         pinMode(emgPin, INPUT);//Turn on pin 16 to read the EMG sensor
-        pinMode(emgcharging, OUTPUT);//Turn on when emg charging takes place
         pinMode(emgfullcharge, OUTPUT);//Turn on when IR gun is fully charged
         irrecv.enableIRIn(); // Start the receiver
         EMG_TIMER.setInterval(1000, repeatEMG);//repeats every 1 second
@@ -83,10 +81,9 @@ void Laser_Sensor() {
 void repeatEMG() {
         emg = analogRead(emgPin);
         if(emg > 900) {
-                digitalWrite(emgcharging,HIGH);
-                delay(100);
-                digitalWrite(emgcharging,LOW);
+                delay(1000);
                 emg_counter = emg_counter + 1;
+                emg = 0;
         }
         else if (emg_counter>10) {
                 digitalWrite(emgfullcharge,HIGH);
@@ -94,6 +91,7 @@ void repeatEMG() {
                 digitalWrite(emgfullcharge,LOW);
                 emg_counter = 0;
                 Serial.write('2');  // Sends '2' to the master to activate the special gun
+
         }
 }
 //Decode the IR pulse
@@ -101,10 +99,7 @@ void IR_Receptor() {
         digitalWrite(IR_Impact,LOW);
         if (irrecv.decode(&results)) {
                 if (results.decode_type == SONY) {
-                        Serial.write('3'); // Sends '3' to the master to advice that we were shoot by IR
-                        //digitalWrite(IR_Impact,HIGH);//LED will turn on because we were hit
-                        //delay(500);
-                        //digitalWrite(IR_Impact,LOW);
+                        Serial.write('3');
                 }
                 irrecv.resume(); // Receive the next value
         }
