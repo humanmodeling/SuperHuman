@@ -12,7 +12,7 @@ void setup() {
         //Pin to check if we recive data from Slave1
         pinMode(ledPinSOne, OUTPUT); // Set pin as OUTPUT
         //We will use this for Master1
-        Serial1.begin(38400); // Start serial communication at 38400 bps
+        Serial1.begin(115200); // Start serial communication at 38400 bps
         //We will use this to send the data to Processing
         Serial.begin(115200);
 }
