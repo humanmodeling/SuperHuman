@@ -16,7 +16,7 @@ int points = 0;
 int LaserValue = 0;
 
 //EMG Sensor
-const int emgPin = 16;// Pin to read the EMG sensor
+const int emgPin = 2;// Pin to read the EMG sensor
 int emg = 0;
 int emgfullcharge = 8;//led to indicate full charge
 int emg_counter = 0;
