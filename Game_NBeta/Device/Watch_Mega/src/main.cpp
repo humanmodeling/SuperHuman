@@ -123,7 +123,8 @@ void Points() {
                 oled_LF();
                 delay(2000);
                 end = points;
-                if (end >= 10) {
+                Serial_Universal_Reader = 0;
+                if (end >= 20) {
                         while(1) {
                                 Game_Over();
                         }
@@ -135,7 +136,8 @@ void Points() {
                 oled_LF();
                 delay(2000);
                 end = points;
-                if(end >= 10) {
+                Serial_Universal_Reader = 0;
+                if(end >= 20) {
                         while(1) {
                                 Game_Over();
                         }
@@ -191,7 +193,7 @@ void Special_Weapon_Activated() {
 }
 
 void Special_Weapon_Shoot() {
-        shoots = shoots + 1;
+        shoots = shoots + 5;
         irsend.sendSony(0x68B90, 20);// the second statement is the number of bits
         delay(500);
         digitalWrite(ledIR_advice, LOW);
