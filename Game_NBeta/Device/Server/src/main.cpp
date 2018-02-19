@@ -6,15 +6,13 @@ void Serial_Event_Uno();//Events of the player one
 
 //Bluetooth variables
 char StateSerial1 = 0;
-int ledPinSOne = 7; // Set the pin to digital I/O 7
+int ledPinSOne = 13; // Set the pin to digital I/O 7
 
 void setup() {
         //Pin to check if we recive data from Slave1
         pinMode(ledPinSOne, OUTPUT); // Set pin as OUTPUT
         //We will use this for Master1
         Serial1.begin(38400); // Start serial communication at 38400 bps
-        //We will use this for Master2
-        Serial2.begin(38400); // Start serial communication at 38400 bps
         //We will use this to send the data to Processing
         Serial.begin(115200);
 }
@@ -32,7 +30,6 @@ void Serial_Universal_Read() {
 }
 
 void Serial_Event_Uno() {
-                StateSerial1 = Serial1.read(); // read it and store it in StateSerial1
                 //User was damaged by laser -1 point
                 if(StateSerial1 == '1') {
                         Serial.write(1);
@@ -64,5 +61,7 @@ void Serial_Event_Uno() {
                         delay(500); // Wait 500 milliseconds for next reading
                 } else {
                 digitalWrite(ledPinSOne, LOW);
+                StateSerial1 = 0;
+
         }
 }
