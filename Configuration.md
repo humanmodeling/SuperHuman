@@ -41,6 +41,17 @@ PIN |       Purpose
 13  |      Laser LED
 A3  |       IR LED
 
+**This PIN are defined for an Arduino Dev32**
+
+PIN |         Purpose
+:-: | :----------------------:
+ 4  |      Laser receptor
+ 2  |        EMG sensor
+17  |       IR receptor
+ 5  |     Impact received
+ 7  | led to indicate charging
+ 8  |  led to indicate charge
+
 ## Bluetooth Module Configuration
 
 Name |  Role  | Baud Rate |    Address
@@ -54,3 +65,8 @@ Name |  Role  | Baud Rate |    Address
  S4  | SLAVE  |  115200   |  21,13,22f38
  M4  | MASTER |  115200   |   21,13,a2ce
  S5  | SLAVE  |  115200   |   21,13,e72f
+ 
+ ### Dev32 PIN MAP
+
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/esp32_pinmap.png" width="600">
+
