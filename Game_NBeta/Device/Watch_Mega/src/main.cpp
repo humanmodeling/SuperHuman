@@ -194,10 +194,11 @@ void Special_Weapon_Activated() {
 }
 
 void Special_Weapon_Shoot() {
+        digitalWrite(ledIR_advice, LOW);
         shoots = shoots + 5;
         irsend.sendSony(0x68B90, 20);// the second statement is the number of bits
-        delay(500);
-        digitalWrite(ledIR_advice, LOW);
+        oled_LF();
+        delay(2000);
 }
 //Call the funtion that display the shoots and impacts
 void oled_LF() {
