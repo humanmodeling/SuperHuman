@@ -64,7 +64,7 @@ void loop() {
 void Laser_Sensor() {
         LaserValue = analogRead(LSpin);
         //laser_value must be changed sometimes
-        if(LaserValue > 180) {
+        if(LaserValue > 3000) {
                 if(end < 20) {
                         end=+1;
                         Serial.write('1'); // Sends '1' to the master to count as one point
