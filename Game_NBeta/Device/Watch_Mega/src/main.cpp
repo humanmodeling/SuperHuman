@@ -169,6 +169,7 @@ void Special_Weapon() {
                 digitalWrite(ledIR_advice, HIGH);
                 Serial2.write('4');
                 delay(10);
+                Super_Gun = 0;
                 //this varible will save the state that the special weapon is charged
                 special_weapon_active = 2;
         }
@@ -179,13 +180,12 @@ void Special_Weapon_Activated() {
         ledIR_state = digitalRead(IR_WeaponIn);
         //Check if the state of the bottom changed
         if(ledIR_state != last_ledIR_state) {
-                if(ledIR_state == HIGH) {//Maybe this change to low deppending of the configuration of the
+                if(ledIR_state == LOW) {//Maybe this change to low deppending of the configuration of the
                         //if the weapon is charged it will shoot
                         if(special_weapon_active == 2) {
                                 Special_Weapon_Shoot();
                                 Serial2.write('5');
                                 special_weapon_active = 0;
-                                Super_Gun = '0';
                         }
                 }
         }
