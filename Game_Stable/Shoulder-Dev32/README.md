@@ -15,12 +15,12 @@ Number |   Purpose
 
 ## Map of Micro controller PIN usage
 
-**This PIN are defined for an Arduino Nano**
+**This PIN are defined for an Arduino Dev32**
 
 PIN |         Purpose
 :-: | :----------------------:
  4  |      Laser receptor
-16  |        EMG sensor
+ 2  |        EMG sensor
 17  |       IR receptor
  5  |     Impact received
  7  | led to indicate charging
