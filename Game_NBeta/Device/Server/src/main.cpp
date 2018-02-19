@@ -15,6 +15,7 @@ void setup() {
         Serial1.begin(115200); // Start serial communication at 38400 bps
         //We will use this to send the data to Processing
         Serial.begin(115200);
+        delay(2000);
 }
 
 void loop() {
@@ -32,30 +33,35 @@ void Serial_Universal_Read() {
 void Serial_Event_Uno() {
                 //User was damaged by laser -1 point
                 if(StateSerial1 == '1') {
+                        StateSerial1 = 0;
                         Serial.write(1);
                         digitalWrite(ledPinSOne, HIGH);
                         delay(500); // Wait 500 milliseconds for next reading
                 }
                 //User was damaged by IR -5 points
                 if(StateSerial1 == '2') {
+                        StateSerial1 = 0;
                         Serial.write(2);
                         digitalWrite(ledPinSOne, HIGH);
                         delay(500); // Wait 500 milliseconds for next reading
                 }
                 //User activate the laser gun
                 if(StateSerial1 == '3') {
+                        StateSerial1 = 0;
                         Serial.write(3);
                         digitalWrite(ledPinSOne, HIGH);
                         delay(500); // Wait 500 milliseconds for next reading
                 }
                 //User charged the special weapon
                 if(StateSerial1 == '4') {
+                        StateSerial1 = 0;
                         Serial.write(4);
                         digitalWrite(ledPinSOne, HIGH);
                         delay(500); // Wait 500 milliseconds for next reading
                 }
                 //User shotted the special weapon
                 if(StateSerial1 == '5') {
+                        StateSerial1 = 0;
                         digitalWrite(ledPinSOne, HIGH);
                         Serial.write(5);
                         delay(500); // Wait 500 milliseconds for next reading

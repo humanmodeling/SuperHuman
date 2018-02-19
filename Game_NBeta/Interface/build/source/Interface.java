@@ -165,6 +165,7 @@ public void Serial_Event_PlayerOne(){
         if(serialuniversalvalue == 4) {
                 IROne_empty = "No";
                 IROne_charged = "Yes";
+                serialuniversalvalue = 0;
         }
         //This will show if the special weapon was shotted
         if(serialuniversalvalue == 5) {
@@ -218,7 +219,7 @@ public void Player_one() {
         if(IROne_shotted == "Yes") {
                 IROne_shotted = "No";
                 fill(0xff12FA0F);
-                ellipse(100,560,frameCount%50,frameCount%50);
+                rect(100,560,100,50);
                 textFont(life_title);
                 text("Special Weapon Shooted", 132, 567);
                 IROne_empty = "Yes";
