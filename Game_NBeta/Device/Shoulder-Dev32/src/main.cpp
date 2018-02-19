@@ -42,8 +42,6 @@ void setup() {
         pinMode(emgfullcharge, OUTPUT);//Turn on when IR gun is fully charged
         irrecv.enableIRIn(); // Start the receiver
         EMG_TIMER.setInterval(500, repeatEMG);//repeats every 1 second
-        //laser_read.setInterval(100, Laser_Sensor);//repeats every 0.1 seconds can be changed
-        //IR_read.setInterval(100, IR_Receptor);//repeats every 0.1 seconds can be changed
 }
 
 void loop() {
