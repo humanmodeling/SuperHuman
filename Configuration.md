@@ -11,7 +11,7 @@ Number |   Purpose
   2    | Special Gun
   3    |  IR Point
 
-**This values are the ones that are used for the Bluetooth Connected to the server**
+**This values are the ones that are used for the Bluetooth Connected to the server for player one**
 
 Number |        Purpose
 :----: | :-------------------:
