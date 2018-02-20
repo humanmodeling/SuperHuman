@@ -12,6 +12,18 @@ matrix:
       
     - os: linux
       env: ARCH="x86_64"
+      
+# blocklist
+branches:
+  except:
+  - Case
+  - Old_Version
+  - Beta
+
+# safelist
+branches:
+  only:
+  - master
         
 install:
     - pip install -U platformio
