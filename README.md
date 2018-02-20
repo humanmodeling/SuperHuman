@@ -44,11 +44,7 @@ Laser  |   1
 
 10 minutes or enemy team down.
 
-## System
-
-### Overview
-
-![useful image]({{ site.url }}/assets/image.png)
+## System Overview
 
 ![Overview](https://github.com/totovr/SuperHuman/blob/master/assets/overview1.png)
 
