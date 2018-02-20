@@ -25,8 +25,11 @@ install:
     - platformio lib -g install 4 13 135 419
 
 script:
-    - platformio ci --lib="." --board=esp32dev Game_Stable/Shoulder-Dev32/src
-    - platformio ci --lib="." --board=megaatmega2560 Game_Stable/Watch_Mega/src
+    #Stable
+    - platformio ci --lib="." --board=esp32dev Game_Stable/One_Player/Device/Shoulder-Dev32/src
+    - platformio ci --lib="." --board=megaatmega2560 Game_Stable/One_Player/Device/Watch_Mega/src
+    - platformio ci --lib="." --board=megaatmega2560 Game_Stable/One_Player/Device/Server/src
+    
     #Beta
     - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Server/src
     - platformio ci --lib="." --board=esp32dev Game_NBeta/Device/Shoulder-Dev32/src
