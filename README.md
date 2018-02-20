@@ -46,19 +46,19 @@ Laser  |   1
 
 ## System Overview
 
-![Overview](https://github.com/totovr/SuperHuman/blob/master/assets/overview1.png)
+![Overview](assets/overview1.png)
 
 ### Transmitter
 
-![Transmitter](https://github.com/totovr/SuperHuman/blob/master/assets/overview3.png)
+![Transmitter](assets/overview3.png)
 
 ### Force-feedback
 
-![Force-feedback](https://github.com/totovr/SuperHuman/blob/master/assets/overview2.png)
+![Force-feedback](assets/overview2.png)
 
 ### Special weapon
 
-![Special weapon](https://github.com/totovr/SuperHuman/blob/master/assets/overview4.png)
+![Special weapon](assets/overview4.png)
 
 ## Contributing
 
