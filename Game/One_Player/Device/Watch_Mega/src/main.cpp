@@ -96,7 +96,7 @@ void loop() {
 
 void TheGame() {
         //Draw a counter of the time to begin the game
-        for(int i=0; i < 6; i++) {
+        for(int i=5; i > 0; i--) {
                 display.clearDisplay();
                 display.setCursor(0,0);
                 int xy = i;
