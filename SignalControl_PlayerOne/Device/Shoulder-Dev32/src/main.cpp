@@ -9,7 +9,6 @@
 void Laser_Sensor();
 void repeatEMG();
 void IR_Receptor();
-void IndicateCharging();
 
 //Laser receptor
 const int LSpin = 4;// Pin to read the laser sensor
@@ -21,11 +20,6 @@ const int emgPin = 2;// Pin to read the EMG sensor
 int emg = 0;
 int emgfullcharge = 8;//led to indicate full charge
 int emg_counter = 0;
-int emgchargeLED1 = 26;
-int emgchargeLED2 = 27;
-int emgchargeLED3 = 32;
-int emgchargeLED4 = 33;
-
 
 //declare objects of SimpleTimer library
 SimpleTimer EMG_TIMER; //Don't write "timer" as and object
@@ -48,22 +42,15 @@ void setup() {
         pinMode(emgfullcharge, OUTPUT);//Turn on when IR gun is fully charged
         irrecv.enableIRIn(); // Start the receiver
         EMG_TIMER.setInterval(500, repeatEMG);//repeats every 1 second
-        pinMode(emgchargeLED1,OUTPUT);
-        pinMode(emgchargeLED2,OUTPUT);
-        pinMode(emgchargeLED3,OUTPUT);
-        pinMode(emgchargeLED4,OUTPUT);
 }
 
 void loop() {
         //Read laser sensors
         Laser_Sensor();
-        //Indicate how much charging now
-        IndicateCharging();
         //EMG sensor reading
         EMG_TIMER.run();
         //IR reding
         IR_Receptor();
-
 }
 
 //Decode
@@ -92,35 +79,11 @@ void repeatEMG() {
                 emg_counter = emg_counter + 1;
                 emg = 0;
         }
-        else if (emg_counter>9){
-                digitalWrite(emgchargeLED1,LOW); // Turn off the indicateCharging
-                digitalWrite(emgchargeLED2,LOW);
-                digitalWrite(emgchargeLED3,LOW);
-                digitalWrite(emgchargeLED4,LOW);
+        else if (emg_counter>10) {
                 emg_counter = 0;
                 Serial.write('2');  // Sends '2' to the master to activate the special gun
                 Serial.write(0);  // Sends '2' to the master to activate the special gun
         }
-}
-void IndicateCharging() {
-  if (emg_counter==2){
-    digitalWrite(emgchargeLED1,HIGH);
-  }
-  else if (emg_counter==4){
-    digitalWrite(emgchargeLED1,HIGH);
-    digitalWrite(emgchargeLED2,HIGH);
-  }
-  else if (emg_counter==6){
-    digitalWrite(emgchargeLED1,HIGH);
-    digitalWrite(emgchargeLED2,HIGH);
-    digitalWrite(emgchargeLED3,HIGH);
-  }
-  else if (emg_counter==8){
-    digitalWrite(emgchargeLED1,HIGH);
-    digitalWrite(emgchargeLED2,HIGH);
-    digitalWrite(emgchargeLED3,HIGH);
-    digitalWrite(emgchargeLED4,HIGH);
-  }
 }
 //Decode the IR pulse
 void IR_Receptor() {

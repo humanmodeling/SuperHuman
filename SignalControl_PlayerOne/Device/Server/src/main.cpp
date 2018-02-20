@@ -1,8 +1,12 @@
 #include <Arduino.h>
 
 //Declare the functions
+void activation_one();//Activate the flag to read data from player one
 void Serial_Universal_Read();//Read the serial port
 void Serial_Event_Uno();//Events of the player one
+
+//Flag variables
+char flag_one = 0;
 
 //Bluetooth variables
 char StateSerial1 = 0;
@@ -19,53 +23,67 @@ void setup() {
 }
 
 void loop() {
+        activation_one();
         Serial_Universal_Read();
         Serial_Event_Uno();
 }
 
-void Serial_Universal_Read() {
-        //Read Serial One
+void activation_one() {
         if(Serial1.available()) {
                 StateSerial1 = Serial1.read();
+                if(StateSerial1 == 'O') {
+                        StateSerial1 = 0;
+                        flag_one = 'A';
+                }
+
+        }
+}
+
+void Serial_Universal_Read() {
+        //Read Serial One
+        if(flag_one == 'A') {
+                if(Serial1.available()) {
+                        StateSerial1 = Serial1.read();
+                }
         }
 }
 
 void Serial_Event_Uno() {
-                //User was damaged by laser -1 point
-                if(StateSerial1 == '1') {
-                        StateSerial1 = 0;
-                        Serial.write(1);
-                        digitalWrite(ledPinSOne, HIGH);
-                        delay(500); // Wait 500 milliseconds for next reading
-                }
-                //User was damaged by IR -5 points
-                if(StateSerial1 == '2') {
-                        StateSerial1 = 0;
-                        Serial.write(2);
-                        digitalWrite(ledPinSOne, HIGH);
-                        delay(500); // Wait 500 milliseconds for next reading
-                }
-                //User activate the laser gun
-                if(StateSerial1 == '3') {
-                        StateSerial1 = 0;
-                        Serial.write(3);
-                        digitalWrite(ledPinSOne, HIGH);
-                        delay(500); // Wait 500 milliseconds for next reading
-                }
-                //User charged the special weapon
-                if(StateSerial1 == '4') {
-                        StateSerial1 = 0;
-                        Serial.write(4);
-                        digitalWrite(ledPinSOne, HIGH);
-                        delay(500); // Wait 500 milliseconds for next reading
-                }
-                //User shotted the special weapon
-                if(StateSerial1 == '5') {
-                        StateSerial1 = 0;
-                        digitalWrite(ledPinSOne, HIGH);
-                        Serial.write(5);
-                        delay(500); // Wait 500 milliseconds for next reading
-                } else {
+        //User was damaged by laser -1 point
+        if(StateSerial1 == '1') {
+                StateSerial1 = 0;
+                Serial.write(1);
+                digitalWrite(ledPinSOne, HIGH);
+                delay(500);         // Wait 500 milliseconds for next reading
+        }
+        //User was damaged by IR -5 points
+        if(StateSerial1 == '2') {
+                StateSerial1 = 0;
+                Serial.write(2);
+                digitalWrite(ledPinSOne, HIGH);
+                delay(500);         // Wait 500 milliseconds for next reading
+        }
+        //User activate the laser gun
+        if(StateSerial1 == '3') {
+                StateSerial1 = 0;
+                Serial.write(3);
+                digitalWrite(ledPinSOne, HIGH);
+                delay(500);         // Wait 500 milliseconds for next reading
+        }
+        //User charged the special weapon
+        if(StateSerial1 == '4') {
+                StateSerial1 = 0;
+                Serial.write(4);
+                digitalWrite(ledPinSOne, HIGH);
+                delay(500);         // Wait 500 milliseconds for next reading
+        }
+        //User shotted the special weapon
+        if(StateSerial1 == '5') {
+                StateSerial1 = 0;
+                digitalWrite(ledPinSOne, HIGH);
+                Serial.write(5);
+                delay(500);         // Wait 500 milliseconds for next reading
+        } else {
                 digitalWrite(ledPinSOne, LOW);
                 StateSerial1 = 0;
 
