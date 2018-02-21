@@ -72,4 +72,4 @@ Name |  Role  | Baud Rate |    Address
 
 ### Arduino Mega PIN MAP
 
-<img src="https://github.com/totovr/SuperHuman/blob/master/Images/arduino-mega-pinmap.png" width="600">
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/arduino-mega-pinmap.png" width="800">
