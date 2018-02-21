@@ -1,18 +1,12 @@
-language: python
-
+llanguage: python
 python:
-    - "2.7"
-    
+    - "2.7"   
 matrix:
-
   include:
-  
     - os: linux
-      env: ARCH="i686"
-      
+      env: ARCH="i686"      
     - os: linux
-      env: ARCH="x86_64"
-      
+      env: ARCH="x86_64"    
 # blocklist
 branches:
   except:
@@ -20,15 +14,12 @@ branches:
   - Old_Version
   - Beta
   - master
-
 # safelist
 branches:
   only:
-  - Stable
-        
+  - Stable        
 install:
     - pip install -U platformio
-    #
     # Libraries from PlatformIO Library Registry:
     #
     # https://platformio.org/lib/show/4/IRremote
@@ -36,7 +27,6 @@ install:
     #https://platformio.org/lib/show/135/Adafruit%20SSD1306
     # https://platformio.org/lib/show/419/SimpleTimer
     - platformio lib -g install 4 13 135 419
-
 script:
     #Stable
     - platformio ci --lib="." --board=esp32dev Game/One_Player/Device/Shoulder-Dev32/src
@@ -47,7 +37,6 @@ script:
     #- platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Server/src
     #- platformio ci --lib="." --board=esp32dev Game_NBeta/Device/Shoulder-Dev32/src
     #- platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Watch_Mega/src
-
 notifications:
   email:
     on_success: change
