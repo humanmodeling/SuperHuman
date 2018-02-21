@@ -1,6 +1,6 @@
-# Watch
+# Serial Configuration
 
-## Serial values
+### Shoulder Serial Values
 
 **This values are the ones that are used for the Bluetooth Connected to the Shoulder**
 > Apply for all the players
@@ -14,6 +14,8 @@ Number |   Purpose
 
 > Apply for all the players
 
+### Watch Serial Values
+
 **This values are the ones that are used for the Serial communication to connected with the server for player one**
 
 Number |        Purpose
@@ -25,6 +27,8 @@ Number |        Purpose
   4    | Special Gun Available
   5    |  Special Gun Shooted
   O    |  Activate the Player
+ 
+### Server Serial Values 
   
 **This values are used in the server for serial communication to connect with Processing for player one**
 
@@ -39,7 +43,9 @@ Number |       Purpose
   O    |  Activate the Player
 
 > letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), example "O" = 79
-  
+
+### Processing Serial values
+
 **This values are used in Processing to read serial communication of player one**
 
 Number |       Purpose
@@ -54,9 +60,23 @@ Number |       Purpose
   
 > letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), example "O" = 79
 
-## Map of Micro controller PIN usage
+## Bluetooth Module Configuration
 
-**This PINS are defined for an Arduino Mega**
+Name |  Role  | Baud Rate |    Address
+:--: | :----: | :-------: | :------------:
+ S1  | SLAVE  |  115200   | 98d3,31,fc767a
+ M1  | MASTER |  115200   | 98d3,31,fb70f8
+ S2  | SLAVE  |  115200   |   21,13,e57b
+ M2  | MASTER |  115200   |  21,13,13882
+ S3  | SLAVE  |  115200   |  21,13,1388b
+ M3  | MASTER |  115200   |   21,13,e621
+ S4  | SLAVE  |  115200   |  21,13,22f38
+ M4  | MASTER |  115200   |   21,13,a2ce
+ S5  | SLAVE  |  115200   |   21,13,e72f
+
+# Map of Microcontroller PINS 
+
+### This PINS are defined for an Arduino Mega
 
 PIN |       Purpose
 :-: | :-----------------:
@@ -71,7 +91,11 @@ PIN |       Purpose
 13  |      Laser LED
 A3  |       IR LED
 
-**This PINS are defined for an Arduino Dev32**
+### Arduino Mega PIN MAP
+
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/arduino-mega-pinmap.png" width="800">
+
+### This PINS are defined for an Arduino Dev32
 
 PIN |         Purpose
 :-: | :----------------------:
@@ -82,26 +106,6 @@ PIN |         Purpose
  7  | led to indicate charging
  8  |  led to indicate charge
  
- 
-
-## Bluetooth Module Configuration
-
-Name |  Role  | Baud Rate |    Address
-:--: | :----: | :-------: | :------------:
- S1  | SLAVE  |  115200   | 98d3,31,fc767a
- M1  | MASTER |  115200   | 98d3,31,fb70f8
- S2  | SLAVE  |  115200   |   21,13,e57b
- M2  | MASTER |  115200   |  21,13,13882
- S3  | SLAVE  |  115200   |  21,13,1388b
- M3  | MASTER |  115200   |   21,13,e621
- S4  | SLAVE  |  115200   |  21,13,22f38
- M4  | MASTER |  115200   |   21,13,a2ce
- S5  | SLAVE  |  115200   |   21,13,e72f
- 
- ### Dev32 PIN MAP
+### Dev32 PIN MAP
 
 <img src="https://github.com/totovr/SuperHuman/blob/master/Images/esp32_pinmap.png" width="600">
-
-### Arduino Mega PIN MAP
-
-<img src="https://github.com/totovr/SuperHuman/blob/master/Images/arduino-mega-pinmap.png" width="800">
