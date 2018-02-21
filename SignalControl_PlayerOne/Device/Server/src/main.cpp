@@ -1,12 +1,12 @@
 #include <Arduino.h>
 
 //Declare the functions
-void activation_one();//Activate the flag to read data from player one
 void Serial_Universal_Read();//Read the serial port
 void Serial_Event_Uno();//Events of the player one
 
 //Flag variables
-char flag_one = 0;
+String Activation_one = "No";
+String flag_one = "No";
 
 //Bluetooth variables
 char StateSerial1 = 0;
@@ -23,28 +23,28 @@ void setup() {
 }
 
 void loop() {
-        activation_one();
         Serial_Universal_Read();
-        Serial_Event_Uno();
-}
-
-void activation_one() {
-        if(Serial1.available()) {
-                StateSerial1 = Serial1.read();
-                if(StateSerial1 == 'O') {
-                        Serial.write('O');
-                        StateSerial1 = 0;
-                        flag_one = 'A';
-                }
-
+        if(flag_one == "Yes") {
+                Serial_Event_Uno();
         }
 }
 
 void Serial_Universal_Read() {
         //Read Serial One
-        if(flag_one == 'A') {
-                if(Serial1.available()) {
-                        StateSerial1 = Serial1.read();
+        if(Serial1.available()) {
+                StateSerial1 = Serial1.read();
+                //This will check if the Watch is activated
+                if(Activation_one == "No") {
+                        //79 correspond to an O
+                        if(StateSerial1 == 79) {
+                                //Send a O to activate the player in the interface
+                                Serial.write('O');
+                                StateSerial1 = 0;
+                                //Activate the flag of the Serial events of player one
+                                flag_one = "Yes";
+                                //If watch was activated this bucle will run just one time
+                                Activation_one = "Yes";
+                        }
                 }
         }
 }
@@ -56,30 +56,29 @@ void Serial_Event_Uno() {
                 Serial.write(1);
                 digitalWrite(ledPinSOne, HIGH);
                 delay(500);         // Wait 500 milliseconds for next reading
-        }
-        //User was damaged by IR -5 points
-        if(StateSerial1 == '2') {
+        } else if(StateSerial1 == '2') {
+                //User was damaged by IR -5 points
+
                 StateSerial1 = 0;
                 Serial.write(2);
                 digitalWrite(ledPinSOne, HIGH);
                 delay(500);         // Wait 500 milliseconds for next reading
-        }
-        //User activate the laser gun
-        if(StateSerial1 == '3') {
+        } else if(StateSerial1 == '3') {
+                //User activate the laser gun
+
                 StateSerial1 = 0;
                 Serial.write(3);
                 digitalWrite(ledPinSOne, HIGH);
                 delay(500);         // Wait 500 milliseconds for next reading
-        }
-        //User charged the special weapon
-        if(StateSerial1 == '4') {
+        } else if(StateSerial1 == '4') {
+                //User charged the special weapon
+
                 StateSerial1 = 0;
                 Serial.write(4);
                 digitalWrite(ledPinSOne, HIGH);
                 delay(500);         // Wait 500 milliseconds for next reading
-        }
-        //User shotted the special weapon
-        if(StateSerial1 == '5') {
+        } else if(StateSerial1 == '5') {
+                //User shotted the special weapon
                 StateSerial1 = 0;
                 digitalWrite(ledPinSOne, HIGH);
                 Serial.write(5);
@@ -87,6 +86,6 @@ void Serial_Event_Uno() {
         } else {
                 digitalWrite(ledPinSOne, LOW);
                 StateSerial1 = 0;
-
         }
+
 }

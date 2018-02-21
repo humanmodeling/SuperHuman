@@ -21,6 +21,9 @@ int sliderValue_ShootOne = 0;
 String IROne_empty = "Yes";
 String IROne_charged = "No";
 String IROne_shotted = "No";
+//Activation variables
+String flag_one = "No";
+String activation = "No";
 
 //Watch Variables
 int s = second();
@@ -88,6 +91,27 @@ void setup() {
 }
 
 void draw() {
+        //Set the background of the game
+        Game_BackGround();
+        //Show the watch
+        Watch();
+        //Read the incoming data of the serial port
+        Serial_Read_Data();
+        if(flag_one == "Yes") {
+                //Check for player one
+                Serial_Event_PlayerOne();
+                //Show events life for player one
+                Player_one();
+        } else {
+                textFont(title);
+                text("Disconnected", 55, 200);
+                noStroke();
+                fill(255,35,1);
+                ellipse(200, 120,frameCount%20,frameCount%20);
+        }
+}
+
+void Game_BackGround() {
         background(#B28DFF);
         //logo of laboratory
         logo = loadImage("Images/logo.png");
@@ -100,17 +124,9 @@ void draw() {
         fill(255);
         textFont(title);
         text("Team Roger One",430,120);
-        //Show the watch
-        watch();
-        //Read the incoming data of the serial port
-        Serial_Read_Data();
-        //Check for player one
-        Serial_Event_PlayerOne();
-        //Show events life for player one
-        Player_one();
 }
 
-void watch() {
+void Watch() {
         fill(255);
         textSize(48);
         text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 20, 700);
@@ -119,7 +135,13 @@ void watch() {
 void Serial_Read_Data() {
         if(myPort.available() > 0) {
                 serialuniversalvalue = myPort.read(); // read it and store it in val
-                println(serialuniversalvalue);
+                if(activation == "No") {
+                        println(serialuniversalvalue);
+                        if(serialuniversalvalue == 79) {
+                                flag_one = "Yes";
+                                activation = "Yes";
+                        }
+                }
         }
 }
 
@@ -165,12 +187,13 @@ void Player_one() {
         if(life_PO > 5) {
                 noStroke();
                 fill(69,252,131);
-                ellipse(195,120,frameCount%70,frameCount%70);
+                ellipse(200,120,frameCount%70,frameCount%70);
         }
         if((life_PO <= 5) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
+                noStroke();
                 fill(255,247,77);
-                ellipse(195,120,frameCount%50,frameCount%50);
+                ellipse(200,120,frameCount%50,frameCount%50);
                 background_death = color(255,247,77);
                 myKnobA.setColorForeground(#794DFF);
                 myKnobA.setColorBackground(background_death);
@@ -178,20 +201,23 @@ void Player_one() {
         }
         if (life_PO <= 0) {
                 //If the user end the game change the color to red
+                noStroke();
                 fill(255,35,1);
-                ellipse(195, 120,frameCount%20,frameCount%20);
+                ellipse(200, 120,frameCount%20,frameCount%20);
                 background_death = color(255,35,1);
                 myKnobA.setColorBackground(background_death);
                 myKnobA.setColorValue(255);
         }
         if(IROne_empty == "Yes") {
                 //Red indicate that the Special Weapon is not loaded
+                noStroke();
                 fill(0,112,184);
                 ellipse(97,560,frameCount%50,frameCount%50);
                 textFont(life_title);
                 text("Special Weapon", 132, 567);
         }
         if(IROne_charged == "Yes") {
+                noStroke();
                 fill(#0F34FA);
                 ellipse(100,560,frameCount%50,frameCount%50);
                 textFont(life_title);
@@ -199,6 +225,7 @@ void Player_one() {
         }
         if(IROne_shotted == "Yes") {
                 IROne_shotted = "No";
+                noStroke();
                 fill(#12FA0F);
                 rect(100,560,100,50);
                 textFont(life_title);
