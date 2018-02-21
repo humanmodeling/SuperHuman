@@ -3,6 +3,7 @@
 ## Serial values
 
 **This values are the ones that are used for the Bluetooth Connected to the Shoulder**
+> Apply for all the players
 
 Number |   Purpose
 :----: | :---------:
@@ -11,7 +12,9 @@ Number |   Purpose
   2    | Special Gun
   3    |  IR Point
 
-**This values are the ones that are used for the Bluetooth Connected to the server for player one**
+> Apply for all the players
+
+**This values are the ones that are used for the Serial communication to connected with the server for player one**
 
 Number |        Purpose
 :----: | :-------------------:
@@ -21,8 +24,9 @@ Number |        Purpose
   3    |      Laser Shoot
   4    | Special Gun Available
   5    |  Special Gun Shooted
+  O    |  Activate the Player
   
-**This values are the ones that are used for serial configuration in Processing for player one**
+**This values are used in the server for serial communication to connect with Processing for player one**
 
 Number |       Purpose
 :----: | :-----------------:
@@ -32,9 +36,23 @@ Number |       Purpose
   3    |    Laser Shoot 
   4    | Special Gun Charged
   5    | Special Gun Shotted
+  O    |  Activate the Player
 
+> letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), example "O" = 79
+  
+**This values are used in Processing to read serial communication of player one**
 
-> Note that the Laser Point and the IR Point are impacts that we received because we were hit
+Number |       Purpose
+:----: | :-----------------:
+  0    |     Null Value
+  1    | Life (Laser Impact)
+  2    |  Life (IR Impact)
+  3    |    Laser Shoot 
+  4    | Special Gun Charged
+  5    | Special Gun Shotted
+  O    |  Activate the Player
+  
+> letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), example "O" = 79
 
 ## Map of Micro controller PIN usage
 
@@ -63,6 +81,8 @@ PIN |         Purpose
  5  |     Impact received
  7  | led to indicate charging
  8  |  led to indicate charge
+ 
+ 
 
 ## Bluetooth Module Configuration
 
