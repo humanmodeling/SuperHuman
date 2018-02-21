@@ -93,12 +93,7 @@ This project is licensed under creative commons Licence (cc) - see the [LICENSE.
 
 ## Future task
 
-### Special game
+#### Special game
 
-- Flag battle 
-
-The team have to take the enemy flag to win.
-
-- Blind battle 
-
-Each player will not be able yo use his/her ***view***. To support the user in the game he/her will use and GridEye (infrared sensor) and an ultrasonic sensor to find the enemy players. ***Use only IR LED weapon.***
+- [ ] Flag battle "The team have to take the enemy flag to win."
+- [ ] Blind battle "Each player will not be able to use his/her ***view***. To support the user in the game he/her will use and GridEye (infrared sensor) and an ultrasonic sensor to find the enemy players. ***Use only IR LED weapon.***"
