@@ -70,3 +70,6 @@ Name |  Role  | Baud Rate |    Address
 
 <img src="https://github.com/totovr/SuperHuman/blob/master/Images/esp32_pinmap.png" width="600">
 
+### Arduino Mega PIN MAP
+
+<img src="https://github.com/totovr/SuperHuman/blob/master/Images/arduino-mega-pinmap.png" width="600">
