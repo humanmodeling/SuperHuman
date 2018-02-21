@@ -32,6 +32,7 @@ void activation_one() {
         if(Serial1.available()) {
                 StateSerial1 = Serial1.read();
                 if(StateSerial1 == 'O') {
+                        Serial.write('O');
                         StateSerial1 = 0;
                         flag_one = 'A';
                 }
