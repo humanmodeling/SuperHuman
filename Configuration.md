@@ -21,12 +21,24 @@ Number |        Purpose
   3    |      Laser Shoot
   4    | Special Gun Available
   5    |  Special Gun Shooted
+  
+**This values are the ones that are used for serial configuration in Processing for player one**
 
-### Note that the Laser Point and the IR Point are impacts that we received because we were hit
+Number |       Purpose
+:----: | :-----------------:
+  0    |     Null Value
+  1    | Life (Laser Impact)
+  2    |  Life (IR Impact)
+  3    |    Laser Shoot 
+  4    | Special Gun Charged
+  5    | Special Gun Shotted
+
+
+> Note that the Laser Point and the IR Point are impacts that we received because we were hit
 
 ## Map of Micro controller PIN usage
 
-**This PIN are defined for an Arduino Mega**
+**This PINS are defined for an Arduino Mega**
 
 PIN |       Purpose
 :-: | :-----------------:
@@ -41,7 +53,7 @@ PIN |       Purpose
 13  |      Laser LED
 A3  |       IR LED
 
-**This PIN are defined for an Arduino Dev32**
+**This PINS are defined for an Arduino Dev32**
 
 PIN |         Purpose
 :-: | :----------------------:
