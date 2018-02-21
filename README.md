@@ -66,7 +66,7 @@ Please read [CONTRIBUTING.md](https://github.com/totovr/Processing/blob/master/C
 
 I use [SemVer](http://semver.org/) for versioning.
 
-## Author
+## Authors
 
 Antonio Vega Ramirez:
 
