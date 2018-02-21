@@ -85,7 +85,7 @@ void setup() {
         //Color of the background
         background(#B28DFF);
         //Open the port
-        String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
+        String portName = Serial.list()[0]; //change the 0 to a 1 or 2 etc. to match your port
         myPort = new Serial(this, portName, 115200);
         myPort.buffer(3);
 }
@@ -107,7 +107,7 @@ void draw() {
                 text("Disconnected", 55, 200);
                 noStroke();
                 fill(255,35,1);
-                ellipse(200, 120,frameCount%20,frameCount%20);
+                ellipse(200, 120,50,50);
         }
 }
 
@@ -187,13 +187,13 @@ void Player_one() {
         if(life_PO > 5) {
                 noStroke();
                 fill(69,252,131);
-                ellipse(200,120,frameCount%70,frameCount%70);
+                ellipse(200,120,50,50);
         }
         if((life_PO <= 5) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
                 noStroke();
                 fill(255,247,77);
-                ellipse(200,120,frameCount%50,frameCount%50);
+                ellipse(200,120,50,50);
                 background_death = color(255,247,77);
                 myKnobA.setColorForeground(#794DFF);
                 myKnobA.setColorBackground(background_death);
@@ -203,7 +203,7 @@ void Player_one() {
                 //If the user end the game change the color to red
                 noStroke();
                 fill(255,35,1);
-                ellipse(200, 120,frameCount%20,frameCount%20);
+                ellipse(200, 120,50,50);
                 background_death = color(255,35,1);
                 myKnobA.setColorBackground(background_death);
                 myKnobA.setColorValue(255);
@@ -212,14 +212,14 @@ void Player_one() {
                 //Red indicate that the Special Weapon is not loaded
                 noStroke();
                 fill(0,112,184);
-                ellipse(97,560,frameCount%50,frameCount%50);
+                ellipse(97,560,50,50);
                 textFont(life_title);
                 text("Special Weapon", 132, 567);
         }
         if(IROne_charged == "Yes") {
                 noStroke();
                 fill(#0F34FA);
-                ellipse(100,560,frameCount%50,frameCount%50);
+                ellipse(100,560,50,50);
                 textFont(life_title);
                 text("Special Weapon Loaded", 132, 567);
         }
@@ -227,7 +227,7 @@ void Player_one() {
                 IROne_shotted = "No";
                 noStroke();
                 fill(#12FA0F);
-                ellipse(100,560,100,50);
+                rect(100,560,100,50);
                 textFont(life_title);
                 text("Special Weapon Shooted", 132, 567);
                 IROne_empty = "Yes";
