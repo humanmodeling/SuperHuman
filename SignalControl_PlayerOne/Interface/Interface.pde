@@ -227,7 +227,7 @@ void Player_one() {
                 IROne_shotted = "No";
                 noStroke();
                 fill(#12FA0F);
-                ellipse(100,560,100,50);
+                rect(100,560,100,50);
                 textFont(life_title);
                 text("Special Weapon Shooted", 132, 567);
                 IROne_empty = "Yes";
