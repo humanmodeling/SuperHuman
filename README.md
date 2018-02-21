@@ -1,6 +1,6 @@
 # Super Human Game
 
-[![Build Status](https://travis-ci.org/totovr/SuperHuman.svg?branch=master)](https://travis-ci.org/totovr/SuperHuman)
+[![Build Status](https://travis-ci.org/totovr/SuperHuman.svg?branch=Stable)](https://travis-ci.org/totovr/SuperHuman)
 
 ## Abstract
 
