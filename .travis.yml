@@ -19,11 +19,12 @@ branches:
   - Case
   - Old_Version
   - Beta
+  - master
 
 # safelist
 branches:
   only:
-  - master
+  - Stable
         
 install:
     - pip install -U platformio
