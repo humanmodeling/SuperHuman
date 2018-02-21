@@ -12,6 +12,18 @@ matrix:
       
     - os: linux
       env: ARCH="x86_64"
+      
+# blocklist
+branches:
+  except:
+  - Case
+  - Old_Version
+  - Beta
+
+# safelist
+branches:
+  only:
+  - master
         
 install:
     - pip install -U platformio
@@ -26,14 +38,14 @@ install:
 
 script:
     #Stable
-    - platformio ci --lib="." --board=esp32dev Game_Stable/One_Player/Device/Shoulder-Dev32/src
-    - platformio ci --lib="." --board=megaatmega2560 Game_Stable/One_Player/Device/Watch_Mega/src
-    - platformio ci --lib="." --board=megaatmega2560 Game_Stable/One_Player/Device/Server/src
+    - platformio ci --lib="." --board=esp32dev Game/One_Player/Device/Shoulder-Dev32/src
+    - platformio ci --lib="." --board=megaatmega2560 Game/One_Player/Device/Watch_Mega/src
+    - platformio ci --lib="." --board=megaatmega2560 Game/One_Player/Device/Server/src
     
     #Beta
-    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Server/src
-    - platformio ci --lib="." --board=esp32dev Game_NBeta/Device/Shoulder-Dev32/src
-    - platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Watch_Mega/src
+    #- platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Server/src
+    #- platformio ci --lib="." --board=esp32dev Game_NBeta/Device/Shoulder-Dev32/src
+    #- platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Watch_Mega/src
 
 notifications:
   email:
