@@ -60,7 +60,7 @@ int special_weapon_active = 0;//Variable to know if the IR was shooted
 
 void setup() {
         //Master of the Shoulder Bluetooth
-        Serial1.begin(38400);
+        Serial1.begin(115200);
         //Slave of the server
         Serial2.begin(115200); // Start serial communication at 38400 bps
         //OLED configuration
