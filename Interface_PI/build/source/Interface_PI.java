@@ -1,6 +1,25 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import processing.serial.*; 
+import controlP5.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Interface_PI extends PApplet {
+
 //Libraries
-import processing.serial.*;
-import controlP5.*;
+
+
 
 //General objects
 Serial myPort;
@@ -59,8 +78,8 @@ PImage logo;
 PFont title;
 PFont life_title;//knob
 
-void setup() {
-        size(800,600);
+public void setup() {
+        
         frameRate(120);
         //Setup font
         title = loadFont("Dialog-28.vlw");
@@ -97,9 +116,9 @@ void setup() {
                             .setValue(sliderValue_ShootOne)
                             .setPosition(285,240)
                             //Because is deprecated it only accept hex values
-                            .setColorForeground(#0CB7F2)
-                            .setColorValue(#FFFFFF)
-                            .setColorLabel(#FFFFFF)
+                            .setColorForeground(0xff0CB7F2)
+                            .setColorValue(0xffFFFFFF)
+                            .setColorLabel(0xffFFFFFF)
                             .setSize(40,250)
         ;
         //New cp5_two Knob constructor for player two
@@ -130,20 +149,20 @@ void setup() {
                             .setValue(sliderValue_ShootTwo)
                             .setPosition(695,240)
                             //Because is deprecated it only accept hex values
-                            .setColorForeground(#0CB7F2)
-                            .setColorValue(#FFFFFF)
-                            .setColorLabel(#FFFFFF)
+                            .setColorForeground(0xff0CB7F2)
+                            .setColorValue(0xffFFFFFF)
+                            .setColorLabel(0xffFFFFFF)
                             .setSize(40,250)
         ;
         //Color of the background
-        background(#B28DFF);
+        background(0xffB28DFF);
         //Open the port
         String portName = Serial.list()[5]; //change the 0 to a 1 or 2 etc. to match your port
         myPort = new Serial(this, portName, 115200);
         myPort.buffer(3);
 }
 
-void draw() {
+public void draw() {
         //Set the background of the game
         Game_BackGround();
         //Show the watch
@@ -157,7 +176,7 @@ void draw() {
                 Player_One();
         } else {
                 textFont(title);
-                fill(#FFFFFF);
+                fill(0xffFFFFFF);
                 text("Disconnected",55,210);
                 noStroke();
                 fill(255,35,1);
@@ -170,7 +189,7 @@ void draw() {
                 Player_Two();
         } else {
                 textFont(title);
-                fill(#FFFFFF);
+                fill(0xffFFFFFF);
                 text("Disconnected",460,210);
                 noStroke();
                 fill(255,35,1);
@@ -179,8 +198,8 @@ void draw() {
 
 }
 
-void Game_BackGround() {
-        background(#B28DFF);
+public void Game_BackGround() {
+        background(0xffB28DFF);
         //logo of laboratory
         logo = loadImage("Images/logo.png");
         image(logo, 20,20,248,75);
@@ -194,14 +213,14 @@ void Game_BackGround() {
         text("Team Roger One",305,90);
 }
 
-void Watch() {
+public void Watch() {
         fill(255);
         textFont(title);
         text("TIMER",660,40);
         text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2),642,70);
 }
 
-void Serial_Read_Data() {
+public void Serial_Read_Data() {
         if(myPort.available() > 0) {
                 serialuniversalvalue = myPort.read(); // read it and store it in val
                 if(activation_one == "No") {
@@ -221,7 +240,7 @@ void Serial_Read_Data() {
         }
 }
 
-void Serial_Event_PlayerOne(){
+public void Serial_Event_PlayerOne(){
         //This is equal to one point because laser impact
         if(serialuniversalvalue == 1) {
                 life_PO = life_PO - 1;
@@ -256,9 +275,9 @@ void Serial_Event_PlayerOne(){
         }
 }
 
-void Player_One() {
+public void Player_One() {
         textFont(title);
-        fill(#FFFFFF);
+        fill(0xffFFFFFF);
         text("Kishishita", 85, 210);
         //Generate the ellipse above the name
         if(life_PO > 5) {
@@ -272,9 +291,9 @@ void Player_One() {
                 fill(255,247,77);
                 ellipse(143,150,40,40);
                 background_death_one = color(255,247,77);
-                myKnobA.setColorForeground(#794DFF);
+                myKnobA.setColorForeground(0xff794DFF);
                 myKnobA.setColorBackground(background_death_one);
-                myKnobA.setColorValueLabel(#05A73F);
+                myKnobA.setColorValueLabel(0xff05A73F);
         }
         if (life_PO <= 0) {
                 //If the user end the game change the color to red
@@ -295,7 +314,7 @@ void Player_One() {
         }
         if(IROne_charged == "Yes") {
                 noStroke();
-                fill(#0F34FA);
+                fill(0xff0F34FA);
                 ellipse(90,560,40,40);
                 textFont(life_title);
                 text("Special Weapon Loaded",122,567);
@@ -303,7 +322,7 @@ void Player_One() {
         if(IROne_shotted == "Yes") {
                 IROne_shotted = "No";
                 noStroke();
-                fill(#12FA0F);
+                fill(0xff12FA0F);
                 rect(90,560,100,50);
                 textFont(life_title);
                 text("Special Weapon Shooted",122,567);
@@ -311,7 +330,7 @@ void Player_One() {
         }
 }
 
-void Serial_Event_PlayerTwo() {
+public void Serial_Event_PlayerTwo() {
   //This is equal to one point because laser impact
   if(serialuniversalvalue == 6) {
           life_PT = life_PT - 1;
@@ -346,9 +365,9 @@ void Serial_Event_PlayerTwo() {
   }
 }
 
-void Player_Two() {
+public void Player_Two() {
   textFont(title);
-  fill(#FFFFFF);
+  fill(0xffFFFFFF);
   text("Sue",528,210);
   //Generate the ellipse above the name
   if(life_PT > 5) {
@@ -362,9 +381,9 @@ void Player_Two() {
           fill(255,247,77);
           ellipse(553,150,40,40);
           background_death_two = color(255,247,77);
-          myKnobB.setColorForeground(#794DFF);
+          myKnobB.setColorForeground(0xff794DFF);
           myKnobB.setColorBackground(background_death_one);
-          myKnobB.setColorValueLabel(#05A73F);
+          myKnobB.setColorValueLabel(0xff05A73F);
   }
   if (life_PT <= 0) {
           //If the user end the game change the color to red
@@ -385,7 +404,7 @@ void Player_Two() {
   }
   if(IRTwo_charged == "Yes") {
           noStroke();
-          fill(#0F34FA);
+          fill(0xff0F34FA);
           ellipse(495,560,40,40);
           textFont(life_title);
           text("Special Weapon Loaded",527,567);
@@ -393,10 +412,51 @@ void Player_Two() {
   if(IRTwo_shotted == "Yes") {
           IRTwo_shotted = "No";
           noStroke();
-          fill(#12FA0F);
+          fill(0xff12FA0F);
           rect(495,560,100,50);
           textFont(life_title);
           text("Special Weapon Shooted",527,567);
           IRTwo_empty = "Yes";
+  }
+}
+class StopWatchTimer {
+  int startTime = 0, stopTime = 0;
+  boolean running = false; 
+  public void start() {
+    startTime = millis();
+    running = true;
+  }
+  public void stop() {
+    stopTime = millis();
+    running = false;
+  }
+  public int getElapsedTime() {
+    int elapsed;
+    if (running) {
+      elapsed = (millis() - startTime);
+    }
+    else {
+      elapsed = (stopTime - startTime);
+    }
+    return elapsed;
+  }
+  public int second() {
+    return (getElapsedTime() / 1000) % 60;
+  }
+  public int minute() {
+    return (getElapsedTime() / (1000*60)) % 60;
+  }
+  public int hour() {
+    return (getElapsedTime() / (1000*60*60)) % 24;
+  }
+}
+  public void settings() {  size(800,600); }
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "Interface_PI" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
   }
 }
