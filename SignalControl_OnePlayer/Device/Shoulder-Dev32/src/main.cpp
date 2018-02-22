@@ -41,7 +41,7 @@ int end = 0;
 
 void setup() {
         // initialize serial communication at 38400 bits per second:
-        Serial.begin(38400);
+        Serial.begin(115200);
         pinMode(IR_Impact, OUTPUT);//Turn on pin 5 if we received an impact of IR
         pinMode(emgPin, INPUT);//Turn on pin 16 to read the EMG sensor
         pinMode(emgfullcharge, OUTPUT);//Turn on when IR gun is fully charged
