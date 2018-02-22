@@ -116,7 +116,7 @@ void TheGame() {
         }
         //This will activate the server
         Serial2.write('T');
-        //the value of O is 79 in ASCII
+        //the value of O is 84 in ASCII
 }
 
 void Serial_Reader() {
