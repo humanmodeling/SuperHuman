@@ -80,7 +80,6 @@ Name |  Role  | Baud Rate |    Address
 
 PIN |       Purpose
 :-: | :-----------------:
- 2  |    Laser Button
  3  |       IR
  7  | Super Weapon Button
  8  |       OLED (CLK)
@@ -91,6 +90,7 @@ PIN |       Purpose
 13  |       Laser
 42  | Air pressure indicate LED
 44  | Super Gun indicate LED
+50  |    Laser Button
 A1  | Air pressure sensor
 
 ### Arduino Mega PIN MAP
