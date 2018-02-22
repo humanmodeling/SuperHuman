@@ -80,16 +80,18 @@ Name |  Role  | Baud Rate |    Address
 
 PIN |       Purpose
 :-: | :-----------------:
- 2  |    Laser Bottom
- 6  |    Super Gun LED
- 7  | Super Weapon Bottom
- 8  |        OLED
- 9  |        OLED
-10  |        OLED
-11  |        OLED
-12  |        OLED
-13  |      Laser LED
-A3  |       IR LED
+ 2  |    Laser Button
+ 3  |       IR
+ 7  | Super Weapon Button
+ 8  |       OLED (CLK)
+ 9  |       OLED (MOSI)
+10  |       OLED (RES)
+11  |       OLED (DC)
+12  |       OLED (CS)
+13  |       Laser
+38  | Air pressure indicate LED
+40  | Super Gun indicate LED
+A1  | Air pressure sensor
 
 ### Arduino Mega PIN MAP
 
