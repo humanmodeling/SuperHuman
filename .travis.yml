@@ -6,23 +6,6 @@ matrix:
     - os: linux
       env: ARCH="i686"      
     - os: linux
-<<<<<<< HEAD
-      env: ARCH="x86_64"
-      
-# blocklist
-branches:
-  except:
-  - Case
-  - Old_Version
-  - Beta
-  - master
-
-# safelist
-branches:
-  only:
-  - Stable
-        
-=======
       env: ARCH="x86_64"    
 # blocklist
 branches:
@@ -33,7 +16,6 @@ branches:
 branches:
   only:
   - Stable        
->>>>>>> master
 install:
     - pip install -U platformio
     # Libraries from PlatformIO Library Registry:
@@ -53,10 +35,6 @@ script:
     #- platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Server/src
     #- platformio ci --lib="." --board=esp32dev Game_NBeta/Device/Shoulder-Dev32/src
     #- platformio ci --lib="." --board=megaatmega2560 Game_NBeta/Device/Watch_Mega/src
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 notifications:
   email:
     on_success: change
