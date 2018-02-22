@@ -25,10 +25,10 @@ void Serial_Reader();//Read Serial1
 
 //Oled display settings
 // If using software SPI
-#define OLED_MOSI  11
-#define OLED_CLK   12
-#define OLED_DC    9
-#define OLED_CS    8
+#define OLED_MOSI  5
+#define OLED_CLK   8
+#define OLED_DC    11
+#define OLED_CS    12
 #define OLED_RESET 10
 char buffer[10];
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
@@ -39,19 +39,22 @@ char Serial_Universal_Reader = 0;
 //Point Variable
 int points = 0;
 //Laser shoot
-const int Laser_WeaponIn = 2;//pin for pullup resistor D2
-int ledLaser = 13;//Pin for laser
+const int Laser_WeaponIn = 50;//pin for pullup resistor D2
+int ledLaser = 24;//Pin for laser
+int IR = 9;
 int laser_value = 0;//Check the last state of the buttom
 int last_laser_value = 0;//Previous state of the button
 int shoots = 0;//Shoots counter variable
 //IR shoot
 IRsend irsend; //create a IRsend object just apply for pin 9 in ATMega328
 char Super_Gun = 0;//In this variable we will save the data that was send by the other Arduino
-int ledIR_advice = 6;//if the special gun is activated a led will turn on
+int ledIR_advice = 44;//if the special gun is activated a led will turn on
+int ledAirpressure_warning = 42;//When the air is less, this LED tunn on.
 int IR_WeaponIn = 7;//here we read the bottom of the gun
 int ledIR_state = 0;//if we push the bottom the gun will be shoot
 int last_ledIR_state = 0;//Save the last state of the bottom
 int special_weapon_active = 0;//Variable to know if the IR was shooted
+
 //Game_Over
 int end = 0;
 
@@ -71,7 +74,12 @@ void setup() {
         //Laser shoot configuration
         pinMode(ledLaser, OUTPUT); //Set pin 13 as output
         //IR shoot configuration
-        pinMode(ledIR_advice, OUTPUT); //Set pin 6 as output
+        pinMode(IR,OUTPUT); // The library initializes pin 9 as an output
+        //digitalWrite(9, LOW);// Since our LED is connected to pin 9, we initialize it here
+        //IR shoot configuration
+        pinMode(ledIR_advice, OUTPUT); //Set pin 44 as output
+        //Air pressure configuration
+        pinMode(ledAirpressure_warning, OUTPUT); //Set pin 42 as output
         //Laser Pull Up bottom
         pinMode(Laser_WeaponIn, INPUT); //Set pin 2 as input
         //IR Pull Up bottom
@@ -198,7 +206,7 @@ void Special_Weapon_Activated() {
 void Special_Weapon_Shoot() {
         digitalWrite(ledIR_advice, LOW);
         shoots = shoots + 5;
-        irsend.sendSony(0x68B90, 20);// the second statement is the number of bits
+        irsend.sendSony(0xa90, 12);// the second statement is the number of bits
         oled_LF();
         delay(2000);
 }
