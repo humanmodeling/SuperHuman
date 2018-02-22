@@ -76,6 +76,7 @@ Name |  Role  | Baud Rate |    Address
  S6  | SLAVE  |  115200   |  21,13,222ad 
  M6  | MASTER |  115200   |  21,13,2d0ae
  
+ > See this [tutorial](https://github.com/totovr/Arduino/tree/master/HC-05/MASTER_SLAVE) to know how to configure the modules 
 
 # Map of Microcontroller PINS 
 
