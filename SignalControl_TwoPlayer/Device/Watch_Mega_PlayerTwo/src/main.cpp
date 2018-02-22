@@ -60,7 +60,7 @@ int end = 0;
 
 void setup() {
         //Master of the Shoulder Bluetooth
-        Serial1.begin(38400);
+        Serial1.begin(115200);
         //Slave of the server
         Serial2.begin(115200); // Start serial communication at 115200 bps
         //OLED configuration
