@@ -276,6 +276,7 @@ public void Serial_Event_PlayerOne(){
 
 public void Player_One() {
         textFont(title);
+        fill(0xffFFFFFF);
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
         if(life_PO > 5) {
@@ -354,7 +355,7 @@ public void Serial_Event_PlayerTwo() {
           serialuniversalvalue = 0;
   }
   //This will show if the special weapon was shotted
-  if(serialuniversalvalue == 5) {
+  if(serialuniversalvalue == 10) {
           IRTwo_charged = "No";
           IRTwo_shotted = "Yes";
           sliderValue_ShootTwo = sliderValue_ShootTwo + 1;
@@ -364,7 +365,58 @@ public void Serial_Event_PlayerTwo() {
 }
 
 public void Player_Two() {
-
+  textFont(title);
+  fill(0xffFFFFFF);
+  text("Sue",932,200);
+  //Generate the ellipse above the name
+  if(life_PT > 5) {
+          noStroke();
+          fill(69,252,131);
+          ellipse(970,120,frameCount%70,frameCount%70);
+  }
+  if((life_PT <= 5) && (life_PT > 0)) {
+          //If the user end the game change the color to yellow
+          noStroke();
+          fill(255,247,77);
+          ellipse(970,120,frameCount%50,frameCount%50);
+          background_death_two = color(255,247,77);
+          myKnobB.setColorForeground(0xff794DFF);
+          myKnobB.setColorBackground(background_death_one);
+          myKnobB.setColorValueLabel(0xff05A73F);
+  }
+  if (life_PT <= 0) {
+          //If the user end the game change the color to red
+          noStroke();
+          fill(255,35,1);
+          ellipse(970,120,frameCount%20,frameCount%20);
+          background_death_two = color(255,35,1);
+          myKnobB.setColorBackground(background_death_two);
+          myKnobB.setColorValue(255);
+  }
+  if(IRTwo_empty == "Yes") {
+          //Red indicate that the Special Weapon is not loaded
+          noStroke();
+          fill(0,112,184);
+          ellipse(904,560,frameCount%50,frameCount%50);
+          textFont(life_title);
+          text("Special Weapon",934,567);
+  }
+  if(IRTwo_charged == "Yes") {
+          noStroke();
+          fill(0xff0F34FA);
+          ellipse(904,560,frameCount%50,frameCount%50);
+          textFont(life_title);
+          text("Special Weapon Loaded",934,567);
+  }
+  if(IRTwo_shotted == "Yes") {
+          IRTwo_shotted = "No";
+          noStroke();
+          fill(0xff12FA0F);
+          rect(904,560,100,50);
+          textFont(life_title);
+          text("Special Weapon Shooted",934,567);
+          IRTwo_empty = "Yes";
+  }
 }
 class StopWatchTimer {
   int startTime = 0, stopTime = 0;
