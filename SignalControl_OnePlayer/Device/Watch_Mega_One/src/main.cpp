@@ -100,21 +100,6 @@ void loop() {
         //If is charged activate the weapo with a bottom
         Special_Weapon_Activated();
 }
-/*
-void TheGame() {
-        //Draw a counter of the time to begin the game
-        for(int i=0; i < 6; i++) {
-                display.clearDisplay();
-                display.setCursor(0,0);
-                int xy = i;
-                display.print("          ");
-                display.print("  Ready?      ");
-                display.print(xy);
-                display.print("               ");
-                delay(1000);
-                display.display();
-        }
-}*/
 
 void TheGame() {
        //Draw a counter of the time to begin the game
@@ -129,6 +114,7 @@ void TheGame() {
                delay(1000);
                display.display();
        }
+       Serial2.write('O');
 }
 
 void Serial_Reader() {
