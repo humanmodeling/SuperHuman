@@ -10,7 +10,6 @@ matrix:
 # blocklist
 branches:
   except:
-  - Beta
   - master
 # safelist
 branches:
