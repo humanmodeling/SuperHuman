@@ -6,9 +6,11 @@ Physical activities are highly significant in maintaining a healthy life. Howeve
 
 ### The instructions to Setup the game are written for MacOS High Sierra, Windows and Linux users.
 
-> Game Interface in Raspberry PI 3
+##### Interface of the game in Raspberry PI 3
 
 <img src="assets/Interface.png" width="600">
+
+<img src="assets/Interface_Active.png" width="600">
 
 ## Rules
 
