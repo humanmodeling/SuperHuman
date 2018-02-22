@@ -89,8 +89,8 @@ PIN |       Purpose
 11  |       OLED (DC)
 12  |       OLED (CS)
 13  |       Laser
-38  | Air pressure indicate LED
-40  | Super Gun indicate LED
+42  | Air pressure indicate LED
+44  | Super Gun indicate LED
 A1  | Air pressure sensor
 
 ### Arduino Mega PIN MAP
