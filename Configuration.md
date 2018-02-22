@@ -73,6 +73,9 @@ Name |  Role  | Baud Rate |    Address
  S4  | SLAVE  |  115200   |  21,13,22f38
  M4  | MASTER |  115200   |   21,13,a2ce
  S5  | SLAVE  |  115200   |   21,13,e72f
+ S6  | SLAVE  |  115200   |  21,13,222ad 
+ M6  | MASTER |  115200   |  21,13,2d0ae
+ 
 
 # Map of Microcontroller PINS 
 
