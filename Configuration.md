@@ -80,10 +80,10 @@ Name |  Role  | Baud Rate |    Address
 
 PIN |       Purpose
 :-: | :-----------------:
- 3  |       IR
  7  | Super Weapon Button
+ 5  |       OLED (MOSI)
  8  |       OLED (CLK)
- 9  |       OLED (MOSI)
+ 8  |       IR
 10  |       OLED (RES)
 11  |       OLED (DC)
 12  |       OLED (CS)
