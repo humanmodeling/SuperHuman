@@ -21,14 +21,14 @@ void shoot_life();//format of the life and impacts
 void timer();//format of the clock
 void calculateTime();//Function that calculate the time
 void Game_Over();//Function that is called when the game is over
-void Serial_Reader();//Read Serial1
+//New Added
+void Serial_Reader();
 
-//Oled display settings
 // If using software SPI
-#define OLED_MOSI  11
-#define OLED_CLK   12
-#define OLED_DC    9
-#define OLED_CS    8
+#define OLED_MOSI  5
+#define OLED_CLK   8
+#define OLED_DC    11
+#define OLED_CS    12
 #define OLED_RESET 10
 char buffer[10];
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
@@ -38,28 +38,31 @@ Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 char Serial_Universal_Reader = 0;
 //Point Variable
 int points = 0;
+//Game_Over
+int end = 0;
+
 //Laser shoot
-const int Laser_WeaponIn = 2;//pin for pullup resistor D2
-int ledLaser = 13;//Pin for laser
+const int Laser_WeaponIn = 50;//pin for pullup resistor D2
+int ledLaser = 24;//Pin for laser
+int IR = 9;
 int laser_value = 0;//Check the last state of the buttom
 int last_laser_value = 0;//Previous state of the button
 int shoots = 0;//Shoots counter variable
 //IR shoot
 IRsend irsend; //create a IRsend object just apply for pin 9 in ATMega328
 char Super_Gun = 0;//In this variable we will save the data that was send by the other Arduino
-int ledIR_advice = 6;//if the special gun is activated a led will turn on
+int ledIR_advice = 44;//if the special gun is activated a led will turn on
+int ledAirpressure_warning = 42;//When the air is less, this LED tunn on.
 int IR_WeaponIn = 7;//here we read the bottom of the gun
 int ledIR_state = 0;//if we push the bottom the gun will be shoot
 int last_ledIR_state = 0;//Save the last state of the bottom
 int special_weapon_active = 0;//Variable to know if the IR was shooted
-//Game_Over
-int end = 0;
 
 void setup() {
         //Master of the Shoulder Bluetooth
         Serial1.begin(38400);
         //Slave of the server
-        Serial2.begin(115200); // Start serial communication at 115200 bps
+        Serial2.begin(115200); // Start serial communication at 38400 bps
         //OLED configuration
         display.begin(SSD1306_SWITCHCAPVCC);
         display.display();
@@ -71,7 +74,12 @@ void setup() {
         //Laser shoot configuration
         pinMode(ledLaser, OUTPUT); //Set pin 13 as output
         //IR shoot configuration
-        pinMode(ledIR_advice, OUTPUT); //Set pin 6 as output
+        pinMode(IR,OUTPUT); // The library initializes pin 9 as an output
+        //digitalWrite(9, LOW);// Since our LED is connected to pin 9, we initialize it here
+        //IR shoot configuration
+        pinMode(ledIR_advice, OUTPUT); //Set pin 44 as output
+        //Air pressure configuration
+        pinMode(ledAirpressure_warning, OUTPUT); //Set pin 42 as output
         //Laser Pull Up bottom
         pinMode(Laser_WeaponIn, INPUT); //Set pin 2 as input
         //IR Pull Up bottom
@@ -92,10 +100,10 @@ void loop() {
         //If is charged activate the weapo with a bottom
         Special_Weapon_Activated();
 }
-
+/*
 void TheGame() {
         //Draw a counter of the time to begin the game
-        for(int i=5; i > 0; i--) {
+        for(int i=0; i < 6; i++) {
                 display.clearDisplay();
                 display.setCursor(0,0);
                 int xy = i;
@@ -106,8 +114,21 @@ void TheGame() {
                 delay(1000);
                 display.display();
         }
-        //This will activate the server
-        Serial2.write('O');
+}*/
+
+void TheGame() {
+       //Draw a counter of the time to begin the game
+       for(int i=6; i > 0; i--){
+               display.clearDisplay();
+               display.setCursor(0,0);
+               int xy = i;
+               display.print("          ");
+               display.print("  Ready?      ");
+               display.print(xy);
+               display.print("               ");
+               delay(1000);
+               display.display();
+       }
 }
 
 void Serial_Reader() {
@@ -169,6 +190,7 @@ void Special_Weapon() {
                 //this led advice that the weapon can be shoot
                 digitalWrite(ledIR_advice, HIGH);
                 Serial2.write('4');
+                Serial2.write(0);
                 delay(10);
                 Super_Gun = 0;
                 //this varible will save the state that the special weapon is charged
@@ -186,6 +208,7 @@ void Special_Weapon_Activated() {
                         if(special_weapon_active == 2) {
                                 Special_Weapon_Shoot();
                                 Serial2.write('5');
+                                Serial2.write(0);
                                 special_weapon_active = 0;
                                 digitalWrite(ledIR_advice, LOW);
                         }
