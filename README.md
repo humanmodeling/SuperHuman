@@ -8,7 +8,7 @@ Physical activities are highly significant in maintaining a healthy life. Howeve
 
 > Game Interface in Raspberry PI 3
 
-<img src="assets/Interface.JPG" width="250">
+<img src="assets/Interface.JPG" width="400">
 
 ## Rules
 
