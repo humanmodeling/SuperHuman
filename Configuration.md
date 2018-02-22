@@ -78,8 +78,8 @@ Number |       Purpose
 
 Name |  Role  | Baud Rate |    Address
 :--: | :----: | :-------: | :------------:
- S1  | SLAVE  |  115200   | 98d3,31,fc767a
- M1  | MASTER |  115200   | 98d3,31,fb70f8
+ S1  | SLAVE  |  115200   | 98d3,31,fb70f8
+ M1  | MASTER |  115200   | 18,e4,34c812
  S2  | SLAVE  |  115200   |   21,13,e57b
  M2  | MASTER |  115200   |  21,13,13882
  S3  | SLAVE  |  115200   |  21,13,1388b
