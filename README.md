@@ -8,7 +8,7 @@ Physical activities are highly significant in maintaining a healthy life. Howeve
 
 > Game Interface in Raspberry PI 3
 
-![Interface](assets/Interface.JPG)
+<img src="assets/Interface.JPG" width="500">
 
 ## Rules
 
@@ -48,19 +48,19 @@ Laser  |   1
 
 ## System Overview
 
-![Overview](assets/overview1.png)
+<img src="assets/overview1.png" width="600">
 
 ### Transmitter
 
-![Transmitter](assets/overview3.png)
+<img src="assets/overview3.png" width="600">
 
 ### Force-feedback
 
-![Force-feedback](assets/overview2.png)
+<img src="assets/overview2.png" width="600">
 
 ### Special weapon
 
-![Special weapon](assets/overview4.png)
+<img src="assets/overview4.png" width="600">
 
 ## Contributing
 
