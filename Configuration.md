@@ -58,7 +58,21 @@ Number |       Purpose
   5    | Special Gun Shotted
   O    |  Activate the Player
   
-> letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), example "O" = 79
+> letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), for example 'O' in ASCII has a numerical value of 79
+
+**This values are the ones that are used for serial configuration in processing for player two**
+
+Number |       Purpose
+:----: | :-----------------:
+  0    |     Null Value
+  6    | Life (Laser Impact)
+  7    |  Life (IR Impact)
+  8    |    Laser Shoot 
+  9    | Special Gun Charged
+  A    | Special Gun Shotted
+  
+  > letters value are in [ASCII](http://www.theasciicode.com.ar/extended-ascii-code/capital-letter-o-acute-accent-ascii-code-224.html), for example 'A' in ASCII has a numerical value of 10
+
 
 ## Bluetooth Module Configuration
 
