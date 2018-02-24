@@ -89,6 +89,8 @@ Name |  Role  | Baud Rate |    Address
  S5  | SLAVE  |  115200   |   21,13,e72f
  S6  | SLAVE  |  115200   |  21,13,222ad 
  M6  | MASTER |  115200   |  21,13,2d0ae
+ S7  | SLAVE  |  115200   |  98d3,31,fc766f
+ M7  | MASTER |  115200   |  98d3,31,fb6fb7
  
  > See this [tutorial](https://github.com/totovr/Arduino/tree/master/HC-05/MASTER_SLAVE) to know how to configure the modules 
 
