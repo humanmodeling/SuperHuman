@@ -28,22 +28,21 @@ function draw() {
   // First user
   fill(255);
   textSize(64);
-  text("Kishishita", width/13, height/6);
-
-  arc(width/6, height/3, 180, 180, myAngle/2, 360 - myAngle/2);
+  text("Kishishita", 110, 100);
 
   // life ellipse
+  //outsice
+  arc(240, 200, 180, 180, 0, 360);
+  //inside
   fill(myColor);
-  arc(width/6, height/3, 150, 150, myAngle/2, 360 - myAngle/2);
+  arc(240, 200, 160, 160, myAngle/2, 360 - myAngle/2);
 
   fill(255);
   textSize(32);
-  text("life", width/6.6, height/1.9);
+  text("life", 220, 320);
 
 }
 
-
-// dynamically adjust the canvas to the window
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
