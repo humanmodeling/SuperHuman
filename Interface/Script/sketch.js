@@ -1,6 +1,6 @@
 // gui params
-var myAngle = 30;
-var myColor = '#eeee00';
+var myAngle = 0;
+var myColor = '#30ee00';
 
 var gui;
 
@@ -15,6 +15,7 @@ function setup() {
 
   // Only call draw when then gui is changed
   noLoop();
+  angleMode(DEGREES);
 
 }
 
@@ -23,8 +24,23 @@ function draw() {
 
   // this is a piece of cake
   background(0);
-  fill(myColor);
-  angleMode(DEGREES);
-  arc(width/2, height/2, 100, 100, myAngle/2, 360 - myAngle/2, PIE);
 
+  // First user
+  fill(255);
+  textSize(64);
+  text("Kishishita", width/13, height/6);
+
+  fill(myColor);
+  arc(width/6, height/3, 150, 150, myAngle/2, 360 - myAngle/2);
+
+  fill(255);
+  textSize(32);
+  text("life", width/6.6, height/1.95);
+
+}
+
+
+// dynamically adjust the canvas to the window
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
