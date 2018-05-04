@@ -1,0 +1,40 @@
+{
+  "name": "p5bots",
+  "version": "0.3.2",
+  "description": "Get sensor data into your p5 sketches",
+  "repository": "https://github.com/sarahgp/p5bots",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/p5bots-server/app.js -d 'examples'"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "concat-files": "^0.1.0",
+    "derequire": "^2.0.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-jscs": "^2.0.0",
+    "grunt-jsdoc": "^0.6.7",
+    "grunt-lib-phantomjs": "~0.4.0",
+    "grunt-mocha": "~0.4.6",
+    "grunt-mocha-chai-sinon": "0.0.9",
+    "grunt-newer": "^1.1.0",
+    "mocha": "^2.2.5",
+    "mock-socket.io": "^1.0.0",
+    "phantomjs": "~1.9.2-4"
+  },
+  "dependencies": {
+    "brfs": "^1.4.0",
+    "commander": "^2.8.1",
+    "express": "^4.14.0",
+    "firmata": "^0.14.1",
+    "nanotimer": "^0.3.10",
+    "serialport": "^4.0.7",
+    "socket.io": "^1.3.6"
+  },
+  "author": "Sarah Groff-Palermo",
+  "license": "LGPL-2.1"
+}

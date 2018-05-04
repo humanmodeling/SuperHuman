@@ -30,12 +30,15 @@ function draw() {
   textSize(64);
   text("Kishishita", width/13, height/6);
 
+  arc(width/6, height/3, 180, 180, myAngle/2, 360 - myAngle/2);
+
+  // life ellipse
   fill(myColor);
   arc(width/6, height/3, 150, 150, myAngle/2, 360 - myAngle/2);
 
   fill(255);
   textSize(32);
-  text("life", width/6.6, height/1.95);
+  text("life", width/6.6, height/1.9);
 
 }
 
