@@ -9,9 +9,9 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // Create the GUI
-  sliderRange(0, 90, 1);
-  gui = createGui('p5.gui');
-  gui.addGlobals('myColor', 'myAngle');
+  //sliderRange(0, 90, 1);
+  //gui = createGui('p5.gui');
+  //gui.addGlobals('myColor', 'myAngle');
 
   // Only call draw when then gui is changed
   noLoop();
