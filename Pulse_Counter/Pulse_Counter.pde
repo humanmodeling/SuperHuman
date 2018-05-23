@@ -11,7 +11,7 @@ void setup() {
  
 void loop() {
         //Check how many shoots recived the player
-        Laser_Weapon();
+        IR();
 }
  
 //Activate the laser gun
