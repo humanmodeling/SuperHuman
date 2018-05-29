@@ -4,8 +4,7 @@
 
 WiFiMulti WiFiMulti;
 
-void setup()
-{
+void setup() {
     Serial.begin(115200);
     delay(10);
 
@@ -17,8 +16,8 @@ void setup()
     Serial.print("Wait for WiFi... ");
 
     while(WiFiMulti.run() != WL_CONNECTED) {
-        Serial.print(".");
-        delay(500);
+            Serial.print(".");
+            delay(500);
     }
 
     Serial.println("");
@@ -30,12 +29,9 @@ void setup()
 }
 
 
-void loop()
-{
+void loop() {
     const uint16_t port = 5204;
     const char * host = "10.31.1.98"; // ip or dns
-
-
 
     Serial.print("connecting to ");
     Serial.println(host);
@@ -44,10 +40,10 @@ void loop()
     WiFiClient client;
 
     if (!client.connect(host, port)) {
-        Serial.println("connection failed");
-        Serial.println("wait 5 sec...");
-        delay(5000);
-        return;
+            Serial.println("connection failed");
+            Serial.println("wait 5 sec...");
+            delay(5000);
+            return;
     }
 
     // This will send the request to the server

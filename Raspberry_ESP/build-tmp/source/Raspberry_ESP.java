@@ -1,6 +1,25 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import processing.net.*; 
+import processing.io.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Raspberry_ESP extends PApplet {
+
 // Import the libraries
-import processing.net.*;
-import processing.io.*;
+
+
 
 // Declare objects
 Server server;
@@ -10,17 +29,17 @@ Client client;
 float newMessageColor = 255;
 String incomingMessage = "";
 
-void setup() {
-  size(400,200);
+public void setup() {
+  
   //frameRate(30);
   // Create the Server on port 5204
   server = new Server(this, 5204);
 }
 
-void draw() {
+public void draw() {
   background(newMessageColor);
   // newMessageColor fades to white over time
-  newMessageColor = constrain(newMessageColor + 0.3,0,255);
+  newMessageColor = constrain(newMessageColor + 0.3f,0,255);
   textAlign(CENTER);
   fill(255);
 
@@ -33,7 +52,7 @@ void draw() {
   incoming_read();
 }
 
-void incoming_read() {
+public void incoming_read() {
   // If a client is available, we will find out
   // If there is no client, it will be"null"
   client = server.available();
@@ -52,9 +71,19 @@ void incoming_read() {
 }
 
 // The serverEvent function is called whenever a new client connects.
-void serverEvent(Server server, Client client) {
+public void serverEvent(Server server, Client client) {
   incomingMessage = "A new client has connected: " + client.ip();
   println(incomingMessage);
   // Reset newMessageColor to black
   newMessageColor = 0;
+}
+  public void settings() {  size(400,200); }
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "--present", "--window-color=#666666", "--stop-color=#cccccc", "Raspberry_ESP" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
