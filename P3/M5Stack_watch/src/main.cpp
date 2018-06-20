@@ -133,21 +133,21 @@ void IR_Transmitter() {
 
 void Fsr_charging() {
   wristforce = analogRead(fsrPin);
-  if (wristforce > fsrthreshold){
-      ++squezecounter ;
-      M5.Lcd.fillRect(240, 195 - (squezecounter * 25), 60, 20, YELLOW);
-      delay(500);
-      if(squezecounter == maxsquezecount){
-        squezecounter = 0;
-        ++shootCount;
-        M5.Lcd.fillRect(240,70,60,20,BLACK);
-        M5.Lcd.fillRect(240,95,60,20,BLACK);
-        M5.Lcd.fillRect(240,120,60,20,BLACK);
-        M5.Lcd.fillRect(240,145,60,20,BLACK);
-        M5.Lcd.fillRect(240,170,60,20,BLACK);
+  if (wristforce > fsrthreshold) {
+    ++squezecounter ;
+    M5.Lcd.fillRect(240, 195 - (squezecounter * 25), 60, 20, YELLOW);
+    delay(500);
+    if (squezecounter == maxsquezecount) {
+      squezecounter = 0;
+      ++shootCount;
+      M5.Lcd.fillRect(240,70,60,20,BLACK);
+      M5.Lcd.fillRect(240,95,60,20,BLACK);
+      M5.Lcd.fillRect(240,120,60,20,BLACK);
+      M5.Lcd.fillRect(240,145,60,20,BLACK);
+      M5.Lcd.fillRect(240,170,60,20,BLACK);
 
-        M5.Lcd.fillRect(130, 195 - (shootCount * 25), 60, 20, GREEN);
-      }
+      M5.Lcd.fillRect(130, 195 - (shootCount * 25), 60, 20, GREEN);
+    }
   }
 }
 
