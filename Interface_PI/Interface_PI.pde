@@ -18,7 +18,7 @@ Server server;
 Client client;
 
 // Used to indicate a new message has arrived
-float newMessageColor = 255;
+float newMessageColor = #ffffff;
 char incomingMessage = '0';
 char value_received = '0';
 
@@ -56,127 +56,6 @@ PImage logo;
 PFont title;
 PFont life_title;//knob
 
-void setup() {
-        size(800,600);
-        frameRate(120);
-        //Setup font
-        title = loadFont("Dialog-28.vlw");
-        life_title = loadFont("Dialog-20.vlw");
-        textFont(title);
-        //Watch setup
-        sw = new StopWatchTimer();
-        sw.start();
-        //New cp5_one Knob constructor for player one
-        cp5_one = new ControlP5(this);
-        myKnobA = cp5_one.addKnob("Life")
-                  .setFont(life_title)
-                  .setViewStyle(3)
-                  .setRange(0,5)
-                  .setValue(life_PO)
-                  .setPosition(25,250)
-                  .setRadius(120)
-                  .hideTickMarks()
-                  .setNumberOfTickMarks(20)
-                  .setTickMarkLength(8)
-                  .setTickMarkWeight(3)
-                  .snapToTickMarks(true)
-                  .setColorForeground(color(186,255,201,191))
-                  .setColorBackground(background_death_one)
-                  //.setColorActive(color(255,255,0))
-                  .setDragDirection(Knob.VERTICAL)
-        ;
-        //New cp5_one Slider constructor
-        Shoots_One_Slider = cp5_one.addSlider("Shoots")
-                            .setFont(life_title)
-                            .setRange(0,30)
-                            //.setNumberOfTickMarks(10)
-                            //.setColorTickMark(220)
-                            .setValue(sliderValue_ShootOne)
-                            .setPosition(285,240)
-                            //Because is deprecated it only accept hex values
-                            .setColorForeground(#0CB7F2)
-                            .setColorValue(#FFFFFF)
-                            .setColorLabel(#FFFFFF)
-                            .setSize(40,250)
-        ;
-        //New cp5_two Knob constructor for player two
-        cp5_two = new ControlP5(this);
-        myKnobB = cp5_two.addKnob("Life")
-                  .setFont(life_title)
-                  .setViewStyle(3)
-                  .setRange(0,5)
-                  .setValue(life_PT)
-                  .setPosition(430,250)
-                  .setRadius(120)
-                  .hideTickMarks()
-                  .setNumberOfTickMarks(20)
-                  .setTickMarkLength(8)
-                  .setTickMarkWeight(3)
-                  .snapToTickMarks(true)
-                  .setColorForeground(color(186,255,201,191))
-                  .setColorBackground(background_death_one)
-                  //.setColorActive(color(255,255,0))
-                  .setDragDirection(Knob.VERTICAL)
-        ;
-        //New cp5_two Slider constructor
-        Shoots_Two_Slider = cp5_two.addSlider("Shoots")
-                            .setFont(life_title)
-                            .setRange(0,30)
-                            //.setNumberOfTickMarks(10)
-                            //.setColorTickMark(220)
-                            .setValue(sliderValue_ShootTwo)
-                            .setPosition(695,240)
-                            //Because is deprecated it only accept hex values
-                            .setColorForeground(#0CB7F2)
-                            .setColorValue(#FFFFFF)
-                            .setColorLabel(#FFFFFF)
-                            .setSize(40,250)
-        ;
-        //Color of the background
-        background(#B28DFF);
-        //Open the port
-        // Create the Server on port 5204
-        server = new Server(this, 5204);
-}
-
-void draw() {
-        //Set the background of the game
-        Game_BackGround();
-        //Show the watch
-        Watch();
-        //Read the incoming data of the serial port
-        WiFi_Read_Data();
-        if(flag_one == "Yes") {
-                //Check for player one
-                Serial_Event_PlayerOne();
-                //Show events life for player one
-                Player_One();
-        } else {
-                textFont(title);
-                fill(#FFFFFF);
-                text("Disconnected",55,210);
-                noStroke();
-                fill(255,35,1);
-                ellipse(143,150,40,40);
-                //ellipse(143, 150, frameCount%20, frameCount%20);
-        }
-        if(flag_two == "Yes") {
-                //Check for player two
-                Serial_Event_PlayerTwo();
-                //Show events life for player two
-                Player_Two();
-        } else {
-                textFont(title);
-                fill(#FFFFFF);
-                text("Disconnected",460,210);
-                noStroke();
-                fill(255,35,1);
-                ellipse(553, 150, 40, 40);
-                //ellipse(553, 150, frameCount%20, frameCount%20);
-        }
-
-}
-
 void Game_BackGround() {
         background(#B28DFF);
         //logo of laboratory
@@ -205,7 +84,7 @@ void WiFi_Read_Data() {
   client = server.available();
   if (client != null) {
     // Receive the message
-    // The message is read using readString().
+    // The message is read using readChar().
     incomingMessage = client.readChar();
     value_received = incomingMessage;
     //println(value_received);
@@ -255,9 +134,9 @@ void Player_One() {
         if((life_PO <= 3) && (life_PO > 1)) {
                 //If the user end the game change the color to yellow
                 noStroke();
-                fill(255,247,77);
+                fill(#fff74d);
                 ellipse(143,150,40,40);
-                background_death_one = color(255,247,77);
+                background_death_one = color(#fff74d);
                 myKnobA.setColorForeground(#794DFF);
                 myKnobA.setColorBackground(background_death_one);
                 myKnobA.setColorValueLabel(#05A73F);
@@ -295,9 +174,9 @@ void Player_Two() {
   if((life_PT <= 3) && (life_PT > 1)) {
           //If the user end the game change the color to yellow
           noStroke();
-          fill(255,247,77);
+          fill(#fff74d);
           ellipse(553,150,40,40);
-          background_death_two = color(255,247,77);
+          background_death_two = color(#fff74d);
           myKnobB.setColorForeground(#794DFF);
           myKnobB.setColorBackground(background_death_one);
           myKnobB.setColorValueLabel(#05A73F);
@@ -305,18 +184,111 @@ void Player_Two() {
   if (life_PT <= 1) {
           //If the user end the game change the color to red
           noStroke();
-          fill(255,35,1);
+          fill(#ff2301);
           ellipse(553,150,40,40);
-          background_death_two = color(255,35,1);
+          background_death_two = color(#ff2301);
           myKnobB.setColorBackground(background_death_two);
-          myKnobB.setColorValue(255);
+          myKnobB.setColorValue(#ffffff);
   }
 }
 
 // The serverEvent function is called whenever a new client connects.
 void serverEvent(Server server, Client client) {
-  
+
   println(client.ip());
   // Reset newMessageColor to black
   newMessageColor = 0;
+}
+
+void setup() {
+        size(800,600);
+        frameRate(120);
+        //Setup font
+        title = loadFont("Dialog-28.vlw");
+        life_title = loadFont("Dialog-20.vlw");
+        textFont(title);
+        //Watch setup
+        sw = new StopWatchTimer();
+        sw.start();
+        //New cp5_one Knob constructor for player one
+        cp5_one = new ControlP5(this);
+        myKnobA = cp5_one.addKnob("Life")
+                  .setFont(life_title)
+                  .setViewStyle(3)
+                  .setRange(0,5)
+                  .setValue(life_PO)
+                  .setPosition(25,250)
+                  .setRadius(120)
+                  .hideTickMarks()
+                  .setNumberOfTickMarks(5)
+                  .setTickMarkLength(8)
+                  .setTickMarkWeight(3)
+                  .snapToTickMarks(true)
+                  .setColorForeground(color(186,255,201,191))
+                  .setColorBackground(background_death_one)
+                  //.setColorActive(color(255,255,0))
+                  .setDragDirection(Knob.VERTICAL)
+        ;
+        //New cp5_two Knob constructor for player two
+        cp5_two = new ControlP5(this);
+        myKnobB = cp5_two.addKnob("Life")
+                  .setFont(life_title)
+                  .setViewStyle(3)
+                  .setRange(0,5)
+                  .setValue(life_PT)
+                  .setPosition(430,250)
+                  .setRadius(120)
+                  .hideTickMarks()
+                  .setNumberOfTickMarks(5)
+                  .setTickMarkLength(8)
+                  .setTickMarkWeight(3)
+                  .snapToTickMarks(true)
+                  .setColorForeground(color(186,255,201,191))
+                  .setColorBackground(background_death_one)
+                  //.setColorActive(color(255,255,0))
+                  .setDragDirection(Knob.VERTICAL)
+        ;
+        //Color of the background
+        background(#B28DFF);
+        //Open the port
+        // Create the Server on port 5204
+        server = new Server(this, 5204);
+}
+
+void draw() {
+        //Set the background of the game
+        Game_BackGround();
+        //Show the watch
+        Watch();
+        //Read the incoming data of the serial port
+        WiFi_Read_Data();
+        if(flag_one == "Yes") {
+                //Check for player one
+                Serial_Event_PlayerOne();
+                //Show events life for player one
+                Player_One();
+        } else {
+                textFont(title);
+                fill(#FFFFFF);
+                text("Disconnected",55,210);
+                noStroke();
+                fill(255,35,1);
+                ellipse(143,150,40,40);
+                //ellipse(143, 150, frameCount%20, frameCount%20);
+        }
+        if(flag_two == "Yes") {
+                //Check for player two
+                Serial_Event_PlayerTwo();
+                //Show events life for player two
+                Player_Two();
+        } else {
+                textFont(title);
+                fill(#FFFFFF);
+                text("Disconnected",460,210);
+                noStroke();
+                fill(255,35,1);
+                ellipse(553, 150, 40, 40);
+                //ellipse(553, 150, frameCount%20, frameCount%20);
+        }
+
 }
