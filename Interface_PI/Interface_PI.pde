@@ -144,9 +144,9 @@ void Player_One() {
         if (life_PO <= 1) {
                 //If the user end the game change the color to red
                 noStroke();
-                fill(255,35,1);
+                fill(#ff2301);
                 ellipse(143,150,40,40);
-                background_death_one = color(255,35,1);
+                background_death_one = color(#ff2301);
                 myKnobA.setColorBackground(background_death_one);
                 myKnobA.setColorValue(255);
         }
@@ -168,7 +168,7 @@ void Player_Two() {
   //Generate the ellipse above the name
   if(life_PT > 3) {
           noStroke();
-          fill(69,252,131);
+          fill(#45fc83);
           ellipse(553,150,40,40);
   }
   if((life_PT <= 3) && (life_PT > 1)) {
@@ -224,7 +224,7 @@ void setup() {
                   .setTickMarkLength(8)
                   .setTickMarkWeight(3)
                   .snapToTickMarks(true)
-                  .setColorForeground(color(186,255,201,191))
+                  .setColorForeground(color(#baffc9,191))
                   .setColorBackground(background_death_one)
                   //.setColorActive(color(255,255,0))
                   .setDragDirection(Knob.VERTICAL)
@@ -243,7 +243,7 @@ void setup() {
                   .setTickMarkLength(8)
                   .setTickMarkWeight(3)
                   .snapToTickMarks(true)
-                  .setColorForeground(color(186,255,201,191))
+                  .setColorForeground(color(#baffc9,191))
                   .setColorBackground(background_death_one)
                   //.setColorActive(color(255,255,0))
                   .setDragDirection(Knob.VERTICAL)

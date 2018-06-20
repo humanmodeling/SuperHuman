@@ -1,10 +1,16 @@
-**This values are the ones that are used for serial configuration in processing**
+**This values are the ones that are used for WiFi configuration in processing**
 
-Number |       Purpose
-:----: | :-----------------:
-  0    |     Null Value
-  1    | Life (Laser Impact)
-  2    |  Life (IR Impact)
-  3    |    Laser Shoot 
-  4    | Special Gun Charged
-  5    | Special Gun Shotted
+| Number |       Purpose      |
+| :----: | :----------------: |
+|    H   | P1 lose life point |
+|    R   |  P1 win life point |
+|    W   | P2 lose life point |
+|    X   |  P2 win life point |
+|    Z   | P3 lose life point |
+|    Y   |  P3 win life point |
+|    P   | P4 lose life point |
+|    Q   |  P4 win life point |
+|    S   | P5 lose life point |
+|    T   |  P5 win life point |
+|    I   | P6 lose life point |
+|    J   |  P6 win life point |
