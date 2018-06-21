@@ -245,6 +245,9 @@ void Serial_Event_PlayerFive() {
     life_PFive = life_PFive - 1;
     myKnobE.setValue(life_PFive);
     value_received = '0';
+  } else if (value_received == 'T' && life_PFive < 5) {
+    life_PFive = life_PFive + 1;
+    myKnobE.setValue(life_PFive);
   }
 }
 
@@ -261,6 +264,9 @@ void Serial_Event_PlayerSix() {
     life_PSix = life_PSix - 1;
     myKnobF.setValue(life_PSix);
     value_received = '0';
+  } else if (value_received == 'J' && life_PSix < 5) {
+    life_PSix = life_PSix + 1;
+    myKnobF.setValue(life_PSix);
   }
 }
 
