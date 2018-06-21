@@ -54,7 +54,7 @@ FSR sensor : 1
 | 2 | Switch |
 | 3 | IR LED |
 | 17 | IR receiver |
-| 35 | FSR sensor |
+| 36 | FSR sensor |
 
 ### P2
 | PIN | ROLE |
