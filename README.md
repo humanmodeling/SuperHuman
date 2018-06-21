@@ -48,54 +48,6 @@ FSR sensor : 1
 | P5 | - |
 | P6 | - |
 
-### P1
-| PIN | ROLE |
-|:-: |:-:|
-| 2 | Switch |
-| 3 | IR LED |
-| 17 | IR receiver |
-| 36 | FSR sensor |
-
-### P2
-| PIN | ROLE |
-|:-: |:-:|
-| 2 | Switch |
-| 3 | IR LED |
-| 17 | IR receiver |
-| 35 | FSR sensor |
-
-### P3
-| PIN | ROLE |
-|:-: |:-:|
-| 2 | Switch |
-| 3 | IR LED |
-| 17 | IR receiver |
-| 35 | FSR sensor |
-
-### P4
-| PIN | ROLE |
-|:-: |:-:|
-| 2 | Switch |
-| 3 | IR LED |
-| 17 | IR receiver |
-| 35 | FSR sensor |
-
-### P5
-| PIN | ROLE |
-|:-: |:-:|
-| 2 | Switch |
-| 3 | IR LED |
-| 17 | IR receiver |
-| 35 | FSR sensor |
-
-### P6
-| PIN | ROLE |
-|:-: |:-:|
-| 2 | Switch |
-| 3 | IR LED |
-| 17 | IR receiver |
-| 35 | FSR sensor |
-
 
 ## PIN
 | PIN No. | Material |
@@ -103,7 +55,7 @@ FSR sensor : 1
 | 2 | Switch |
 | 3 | IR LED |
 | 17 | IR receiver |
-| 35 | FSR sensor |
+| 3 | FSR sensor |
 
 ## Parameter
 ### switchOut
