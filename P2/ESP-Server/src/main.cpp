@@ -58,22 +58,22 @@ void watch() {
 }
 
 void valves_actuation() {
-  if(lifeCount == 4){
+  if (lifeCount == 4) {
     digitalWrite(PGM_valve1,HIGH);
     digitalWrite(PGM_valve2,LOW);
     digitalWrite(PGM_valve3,LOW);
     digitalWrite(PGM_valve4,LOW);
-  }else if(lifeCount == 3){
+  } else if (lifeCount == 3){
     digitalWrite(PGM_valve1,HIGH);
     digitalWrite(PGM_valve2,HIGH);
     digitalWrite(PGM_valve3,LOW);
     digitalWrite(PGM_valve4,LOW);
-  }else if(lifeCount == 2){
+  } else if (lifeCount == 2){
     digitalWrite(PGM_valve1,HIGH);
     digitalWrite(PGM_valve2,HIGH);
     digitalWrite(PGM_valve3,HIGH);
     digitalWrite(PGM_valve4,LOW);
-  }else if(lifeCount == 1){
+  } else if (lifeCount == 1){
     digitalWrite(PGM_valve1,HIGH);
     digitalWrite(PGM_valve2,HIGH);
     digitalWrite(PGM_valve3,HIGH);
