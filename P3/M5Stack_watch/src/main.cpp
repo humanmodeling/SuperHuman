@@ -21,7 +21,7 @@ https://github.com/me-no-dev/arduino-esp32fs-plugin
 /*Pin*/
 int switch_PIN = 2; //SHOT switch
 int IR_receptorPin = 17;//Pin used to read IR values
-int fsrPin = 35;//Chetan: Pin used for reading FSR sensor readings.
+int fsrPin = 36;//Chetan: Pin used for reading FSR sensor readings.
 
 /*Game status*/
 int switchOut = 0;
