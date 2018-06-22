@@ -34,7 +34,7 @@ class Life {
             fill(69, 252, 131);
             ellipse(x, y, 40, 40);
     }
-    if((life_temporal <= 3) && (life_temporal > 1)) {
+    if ((life_temporal <= 3) && (life_temporal > 1)) {
             //If the user end the game change the color to yellow
             noStroke();
             fill(#fff74d);
