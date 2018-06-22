@@ -21,6 +21,7 @@ https://github.com/me-no-dev/arduino-esp32fs-plugin
 /*Pin*/
 int switch_PIN = 2; //SHOT switch
 int IR_receptorPin = 17;//Pin used to read IR values
+int fsrPin = 36;//Chetan: Pin used for reading FSR sensor readings.
 
 /*Game status*/
 int switchOut = 0;
@@ -28,6 +29,12 @@ int last_switchOut = 0;
 int shootCount = 0;
 int lifeCount = 5;
 int recoverFlag = 0; //If recoverFlag = 0, player can recover 1 muscle. After use recover item, this flag = 1.
+
+// Chetan: Following four variables are needed for FSR based device charging mechanism.
+int wristforce;
+int squezecounter, maxsquezecount = 5;
+int fsrthreshold = 4000;
+
 
 /*Other*/
 int i = 0;
@@ -50,6 +57,7 @@ void IR_Receptor();
 void IR_Transmitter();
 void Game_over();
 void wifi_connection_esp();//function for Wi-Fi
+void Fsr_charging(); //Chetan; Functoin declaration of fsr based charging system
 
 // This port and IP are the ones that we will use to connect to ESP32
 const uint16_t port = 80;
@@ -91,34 +99,58 @@ void IR_Transmitter() {
   /*Shoot switch was pressed*/
   /*Read switch*/
   switchOut = digitalRead(switch_PIN);
-  if (last_switchOut != switchOut) {
-    if (switchOut == HIGH) {
-      irsend.sendSony(0xa90, 12);
-      /*Make shooting sound*/
-      file_shoot->close();
-      file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
-      wav->begin(file_shoot, out);
-      dacWrite(25, 0);
-      //Showing the SHOOT!!!!
-      M5.Lcd.setTextColor(RED);
-      M5.Lcd.setCursor(0, 220);
-      M5.Lcd.print("SHOOT!!!");
-      shootCount = shootCount + 1;
-      client_M5Stack.println("S");
-      if (shootCount % 5 == 0 ){
-        M5.Lcd.fillRect(130, 70+((shootCount / 5 - 1) * 25), 60, 20, BLACK); //Remove a shot
-      }
+  if (shootCount > 0){
+    if (last_switchOut != switchOut) {
+      if (switchOut == HIGH) {
+        irsend.sendSony(0xa90, 12);
+        /*Make shooting sound*/
+        file_shoot->close();
+        file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
+        wav->begin(file_shoot, out);
+        dacWrite(25, 0);
+        //Showing the SHOOT!!!!
+        M5.Lcd.setTextColor(RED);
+        M5.Lcd.setCursor(0, 220);
+        M5.Lcd.print("SHOOT!!!");
 
-      //Delete the SHOOT!!!!
-      delay(100);
-      M5.Lcd.setTextColor(BLACK);
-      M5.Lcd.setCursor(0, 220);
-      M5.Lcd.print("SHOOT!!!");
-      M5.Lcd.setTextColor(WHITE);
+        client_M5Stack.println("S");
+        M5.Lcd.fillRect(130, 195 - (shootCount * 25), 60, 20, BLACK); //Remove a shot
+        shootCount = shootCount - 1;
+
+        //Delete the SHOOT!!!!
+        delay(100);
+        M5.Lcd.setTextColor(BLACK);
+        M5.Lcd.setCursor(0, 220);
+        M5.Lcd.print("SHOOT!!!");
+        M5.Lcd.setTextColor(WHITE);
+      }
     }
+    last_switchOut = switchOut;
   }
-  last_switchOut = switchOut;
 }
+
+// Chetan: Add fsr based charging function.
+
+void Fsr_charging() {
+  wristforce = analogRead(fsrPin);
+  if (wristforce > fsrthreshold){
+      ++squezecounter ;
+      M5.Lcd.fillRect(240, 195 - (squezecounter * 25), 60, 20, YELLOW);
+      delay(500);
+      if(squezecounter == maxsquezecount){
+        squezecounter = 0;
+        ++shootCount;
+        M5.Lcd.fillRect(240,70,60,20,BLACK);
+        M5.Lcd.fillRect(240,95,60,20,BLACK);
+        M5.Lcd.fillRect(240,120,60,20,BLACK);
+        M5.Lcd.fillRect(240,145,60,20,BLACK);
+        M5.Lcd.fillRect(240,170,60,20,BLACK);
+
+        M5.Lcd.fillRect(130, 195 - (shootCount * 25), 60, 20, GREEN);
+      }
+  }
+}
+
 void Game_over(){
   if(lifeCount == 0){
     M5.Lcd.fillScreen(BLUE);
@@ -135,7 +167,7 @@ void watch_functions() {
   /*LCD setup*/
   M5.Lcd.setTextFont(4);
   M5.Lcd.setCursor(0, 0);
-  M5.Lcd.print(lifeCount);
+  M5.Lcd.print("PLAYER5");
   M5.Lcd.setCursor(0, 30);
   M5.Lcd.print("IP :");
   M5.Lcd.setCursor(40, 30);
@@ -160,6 +192,10 @@ void watch_functions() {
 
   /*IR Transmitter*/
   IR_Transmitter();
+
+  /*FSR based shooting charging*/
+  Fsr_charging();
+
 
   /*Game over*/
   Game_over();
@@ -227,6 +263,7 @@ void setup() {
 
   /*Game setup*/
   pinMode(switch_PIN, INPUT);
+  pinMode(fsrPin, INPUT); // Reading FSR sensor readings.
   delay(1000);
   //M5.Lcd.print("START!!");
   //delay(2000);
@@ -243,18 +280,22 @@ void setup() {
   M5.Lcd.fillRect(20,170,60,20,RED);
 
   /*Show your bullets*/
+  /*
   M5.Lcd.fillRect(130,70,60,20,GREEN);
   M5.Lcd.fillRect(130,95,60,20,GREEN);
   M5.Lcd.fillRect(130,120,60,20,GREEN);
   M5.Lcd.fillRect(130,145,60,20,GREEN);
   M5.Lcd.fillRect(130,170,60,20,GREEN);
+  */
 
   /*Show your charge*/
+  /*
   M5.Lcd.fillRect(240,70,60,20,YELLOW);
   M5.Lcd.fillRect(240,95,60,20,YELLOW);
   M5.Lcd.fillRect(240,120,60,20,YELLOW);
   M5.Lcd.fillRect(240,145,60,20,YELLOW);
   M5.Lcd.fillRect(240,170,60,20,YELLOW);
+  */
 
   //At the begining, IR turn on. I don't know why. This code turn off the IR.
   irsend.sendSony(0xa90, 12);
