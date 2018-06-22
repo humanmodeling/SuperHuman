@@ -81,11 +81,6 @@ void valves_actuation() {
     digitalWrite(PGM_valve2,HIGH);
     digitalWrite(PGM_valve3,HIGH);
     digitalWrite(PGM_valve4,HIGH);
-  }else{
-    digitalWrite(PGM_valve1,LOW);
-    digitalWrite(PGM_valve2,LOW);
-    digitalWrite(PGM_valve3,LOW);
-    digitalWrite(PGM_valve4,LOW);
   }
 }
 
@@ -118,10 +113,10 @@ void setup() {
   Serial.begin(115200);
   delay(10);
   // PIN setup
-  pinMode(PGM_valve1,INPUT);
-  pinMode(PGM_valve2,INPUT);
-  pinMode(PGM_valve3,INPUT);
-  pinMode(PGM_valve4,INPUT);
+  pinMode(PGM_valve1,OUTPUT);
+  pinMode(PGM_valve2,OUTPUT);
+  pinMode(PGM_valve3,OUTPUT);
+  pinMode(PGM_valve4,OUTPUT);
 
   // ESP Server
   WiFi.begin(ssid, password);
