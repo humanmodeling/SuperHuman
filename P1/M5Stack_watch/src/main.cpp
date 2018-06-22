@@ -70,7 +70,8 @@ const char* password = "1234superhuman";
 void IR_Receptor() {
   if (irrecv.decode(&results)) {
     if (results.decode_type == SONY) {
-      delay(1000);
+      client_M5Stack.print("H");
+      delay(20);
       M5.Lcd.setTextColor(BLACK);
       M5.Lcd.fillRect(20, 70+((5-lifeCount) * 25), 60, 20, BLACK); //Remove a life
       M5.Lcd.setCursor(0, 0);
@@ -79,7 +80,7 @@ void IR_Receptor() {
       M5.Lcd.setTextColor(WHITE);
       // send one character H (Hit) every time the players was shooted
       client_M5Stack.print("H");
-    }else if (results.decode_type == NEC){
+    } else if (results.decode_type == NEC){
       /*Make recover sound*/
       file_shoot->close();
       file_shoot = new AudioFileSourceSD("/se_maoudamashii_magical25.wav");
@@ -246,7 +247,7 @@ void setup() {
   M5.Lcd.print(host);
 
   // This will comprobe if Stack is connected to the ESP-Server
-  
+
   if (!client_M5Stack.connect(host, port)) {
     M5.Lcd.setCursor(0, 100);
     M5.Lcd.print("connection failed");
@@ -255,7 +256,7 @@ void setup() {
     delay(50);
     return;
   }
-  
+
 
   /*Audio setup*/
   /*Please move music file(se_maoudamashii_battle_gun05.wav) into SD.

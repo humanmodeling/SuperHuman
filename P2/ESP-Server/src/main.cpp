@@ -46,7 +46,7 @@ void watch() {
         Serial.println(c);
         if (c == 'H'){
           lifeCount--;
-        }else if (c == 'S'){
+        } else if (c == 'S'){
           if(lifeCount < 5){
             lifeCount++;
           }
@@ -101,12 +101,7 @@ void server_raspberry() {
   // This will send the request to the server
   if (c == 'H') {
     client_ESP.print("W");
-  } else if (c == 'S') {
-    if(lifeCount < 5){
-    client_ESP.print("X");
-    }
-    //delay(10);
-  }
+  } 
 }
 
 void setup() {
@@ -131,7 +126,7 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  delay(500);
+  //delay(500);
   // This is to start the Server (for the M5Stack)
   server.begin();
 }

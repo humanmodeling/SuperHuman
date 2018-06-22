@@ -120,17 +120,8 @@ void server_raspberry()
     flag_activated = 'Y';
   }
   // This will send the request to the server
-  if (c == 'H')
-  {
+  if (c == 'H') {
     client_ESP.print("H");
-  }
-  else if (c == 'S')
-  {
-    if (lifeCount < 5)
-    {
-      client_ESP.print("R");
-    }
-    delay(10);
   }
 }
 

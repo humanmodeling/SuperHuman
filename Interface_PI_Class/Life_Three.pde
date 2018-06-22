@@ -1,0 +1,3 @@
+Life_Three class {
+
+}
