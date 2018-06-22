@@ -117,7 +117,7 @@ void Game_BackGround() {
   ////Title of the game
   fill(255);
   textFont(title);
-  text("BlazerMuscle", 570, 60);
+  text("MuscleBlazer", 570, 60);
 }
 
 void Watch() {
