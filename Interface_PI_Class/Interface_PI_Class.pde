@@ -1,6 +1,7 @@
 //Libraries
 import processing.net.*;
 import controlP5.*;
+import processing.sound.*;
 
 //General objects
 StopWatchTimer sw;
@@ -22,10 +23,12 @@ Knob myKnobE;
 //Player six Objects
 ControlP5 cp5_six;
 Knob myKnobF;
-
 // Declare server objects
 Server server;
 Client client;
+// Sound objects
+SoundFile laser_sound;
+SoundFile coin_sound;
 
 // Used to indicate a new message has arrived
 float newMessageColor = #ffffff;
@@ -167,11 +170,14 @@ void Serial_Event_PlayerOne() {
   //This is equal to one point because laser impact
   if (value_received == 'H') {
     life_PO = life_PO - 1;
+    laser_sound.play();
     myKnobA.setValue(life_PO);
     value_received = '0';
   } else if (value_received == 'R' && life_PO < 5) {
     life_PO = life_PO + 1;
+    coin_sound.play();
     myKnobA.setValue(life_PO);
+    value_received = '0';
   }
 }
 
@@ -186,11 +192,14 @@ void Serial_Event_PlayerTwo() {
   //This is equal to one point because laser impact
   if (value_received == 'W') {
     life_PT = life_PT - 1;
+    laser_sound.play();
     myKnobB.setValue(life_PT);
     value_received = '0';
   } else if (value_received == 'X' && life_PT < 5) {
     life_PT = life_PT + 1;
+    coin_sound.play();
     myKnobB.setValue(life_PT);
+    value_received = '0';
   }
 }
 
@@ -205,11 +214,14 @@ void Serial_Event_PlayerThree() {
   //This is equal to one point because laser impact
   if (value_received == 'Z') {
     life_PThree = life_PThree - 1;
+    laser_sound.play();
     myKnobC.setValue(life_PThree);
     value_received = '0';
   } else if (value_received == 'Y' && life_PThree < 5) {
     life_PThree = life_PThree + 1;
+    coin_sound.play();
     myKnobC.setValue(life_PThree);
+    value_received = '0';
   }
 }
 
@@ -224,11 +236,14 @@ void Serial_Event_PlayerFour() {
   //This is equal to one point because laser impact
   if (value_received == 'P') {
     life_PFour = life_PFour - 1;
+    laser_sound.play();
     myKnobD.setValue(life_PFour);
     value_received = '0';
   } else if (value_received == 'Q' && life_PFour < 5) {
     life_PFour = life_PFour + 1;
+    coin_sound.play();
     myKnobD.setValue(life_PFour);
+    value_received = '0';
   }
 }
 
@@ -243,11 +258,14 @@ void Serial_Event_PlayerFive() {
   //This is equal to one point because laser impact
   if (value_received == 'S') {
     life_PFive = life_PFive - 1;
+    laser_sound.play();
     myKnobE.setValue(life_PFive);
     value_received = '0';
   } else if (value_received == 'T' && life_PFive < 5) {
     life_PFive = life_PFive + 1;
+    coin_sound.play();
     myKnobE.setValue(life_PFive);
+    value_received = '0';
   }
 }
 
@@ -262,11 +280,14 @@ void Serial_Event_PlayerSix() {
   //This is equal to one point because laser impact
   if (value_received == 'I') {
     life_PSix = life_PSix - 1;
+    laser_sound.play();
     myKnobF.setValue(life_PSix);
     value_received = '0';
   } else if (value_received == 'J' && life_PSix < 5) {
     life_PSix = life_PSix + 1;
+    coin_sound.play();
     myKnobF.setValue(life_PSix);
+    value_received = '0';
   }
 }
 
@@ -413,8 +434,7 @@ void setup() {
   //Open the port
   // Create the Server on port 5204
   server = new Server(this, 5204);
-  // Constructor for players life
-  // contructor variables:
+  // Constructors for players life
   // life of the user, x and y coordinate for the orbe
   lifeC_POne = new Life(life_PO, 195, 140);
   lifeC_PTwo = new Life(life_PT, 550, 140);
@@ -422,6 +442,9 @@ void setup() {
   lifeC_PFour = new Life(life_PFour, 195, 600);
   lifeC_PFive = new Life(life_PFive, 550, 600);
   lifeC_PSix = new Life(life_PSix, 905, 600);
+  // Contructos for the laser sound file
+  laser_sound = new SoundFile(this, "laser.mp3");
+  coin_sound = new SoundFile(this, "coin.mp3");
 }
 
 void draw() {
