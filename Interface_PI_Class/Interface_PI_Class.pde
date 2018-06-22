@@ -102,7 +102,7 @@ PFont life_title;//knob
 
 // Object for players life
 Life lifeC_POne;
-Life lifeC_PTwo;
+Life_Two lifeC_PTwo;
 Life lifeC_PThree;
 Life lifeC_PFour;
 Life lifeC_PFive;
@@ -157,12 +157,7 @@ void Serial_Event_PlayerOne() {
   if (value_received == 'H') {
     life_PO = life_PO - 1;
     laser_sound.play();
-    myKnobA.setValue(life_PO);
-    value_received = '0';
-  } else if (value_received == 'R' && life_PO < 5) {
-    life_PO = life_PO + 1;
-    coin_sound.play();
-    myKnobA.setValue(life_PO);
+    //myKnobA.setValue(life_PO);
     value_received = '0';
   }
 }
@@ -171,7 +166,7 @@ void Player_One() {
   textFont(title);
   fill(#FFFFFF);
   text("Player One", 80, 210);
-  lifeC_POne.display(life_PO);
+  lifeC_POne.display_one(life_PO);
 }
 
 void Serial_Event_PlayerTwo() {
@@ -179,12 +174,7 @@ void Serial_Event_PlayerTwo() {
   if (value_received == 'W') {
     life_PT = life_PT - 1;
     laser_sound.play();
-    myKnobB.setValue(life_PT);
-    value_received = '0';
-  } else if (value_received == 'X' && life_PT < 5) {
-    life_PT = life_PT + 1;
-    coin_sound.play();
-    myKnobB.setValue(life_PT);
+    //myKnobB.setValue(life_PT);
     value_received = '0';
   }
 }
@@ -193,96 +183,76 @@ void Player_Two() {
   textFont(title);
   fill(#FFFFFF);
   text("Player two", 440, 210);
-  lifeC_PTwo.display(life_PT);
+  lifeC_PTwo.display_two(life_PT);
 }
 
-void Serial_Event_PlayerThree() {
-  //This is equal to one point because laser impact
-  if (value_received == 'Z') {
-    life_PThree = life_PThree - 1;
-    laser_sound.play();
-    myKnobC.setValue(life_PThree);
-    value_received = '0';
-  } else if (value_received == 'Y' && life_PThree < 5) {
-    life_PThree = life_PThree + 1;
-    coin_sound.play();
-    myKnobC.setValue(life_PThree);
-    value_received = '0';
-  }
-}
+//void Serial_Event_PlayerThree() {
+//  //This is equal to one point because laser impact
+//  if (value_received == 'Z') {
+//    life_PThree = life_PThree - 1;
+//    laser_sound.play();
+//    myKnobC.setValue(life_PThree);
+//    value_received = '0';
+//  }
+//}
 
-void Player_Three() {
-  textFont(title);
-  fill(#FFFFFF);
-  text("Player three", 770, 210);
-  lifeC_PThree.display(life_PThree);
-}
+//void Player_Three() {
+//  textFont(title);
+//  fill(#FFFFFF);
+//  text("Player three", 770, 210);
+//  lifeC_PThree.display(life_PThree);
+//}
 
-void Serial_Event_PlayerFour() {
-  //This is equal to one point because laser impact
-  if (value_received == 'P') {
-    life_PFour = life_PFour - 1;
-    laser_sound.play();
-    myKnobD.setValue(life_PFour);
-    value_received = '0';
-  } else if (value_received == 'Q' && life_PFour < 5) {
-    life_PFour = life_PFour + 1;
-    coin_sound.play();
-    myKnobD.setValue(life_PFour);
-    value_received = '0';
-  }
-}
+//void Serial_Event_PlayerFour() {
+//  //This is equal to one point because laser impact
+//  if (value_received == 'P') {
+//    life_PFour = life_PFour - 1;
+//    laser_sound.play();
+//    myKnobD.setValue(life_PFour);
+//    value_received = '0';
+//  }
+//}
 
-void Player_Four() {
-  textFont(title);
-  fill(#FFFFFF);
-  text("Player four", 80, 670);
-  lifeC_PFour.display(life_PFour);
-}
+//void Player_Four() {
+//  textFont(title);
+//  fill(#FFFFFF);
+//  text("Player four", 80, 670);
+//  lifeC_PFour.display(life_PFour);
+//}
 
-void Serial_Event_PlayerFive() {
-  //This is equal to one point because laser impact
-  if (value_received == 'S') {
-    life_PFive = life_PFive - 1;
-    laser_sound.play();
-    myKnobE.setValue(life_PFive);
-    value_received = '0';
-  } else if (value_received == 'T' && life_PFive < 5) {
-    life_PFive = life_PFive + 1;
-    coin_sound.play();
-    myKnobE.setValue(life_PFive);
-    value_received = '0';
-  }
-}
+//void Serial_Event_PlayerFive() {
+//  //This is equal to one point because laser impact
+//  if (value_received == 'S') {
+//    life_PFive = life_PFive - 1;
+//    laser_sound.play();
+//    myKnobE.setValue(life_PFive);
+//    value_received = '0';
+//  }
+//}
 
-void Player_Five() {
-  textFont(title);
-  fill(#FFFFFF);
-  text("Player five", 430, 670);
-  lifeC_PFive.display(life_PFive);
-}
+//void Player_Five() {
+//  textFont(title);
+//  fill(#FFFFFF);
+//  text("Player five", 430, 670);
+//  lifeC_PFive.display(life_PFive);
+//}
 
-void Serial_Event_PlayerSix() {
-  //This is equal to one point because laser impact
-  if (value_received == 'I') {
-    life_PSix = life_PSix - 1;
-    laser_sound.play();
-    myKnobF.setValue(life_PSix);
-    value_received = '0';
-  } else if (value_received == 'J' && life_PSix < 5) {
-    life_PSix = life_PSix + 1;
-    coin_sound.play();
-    myKnobF.setValue(life_PSix);
-    value_received = '0';
-  }
-}
+//void Serial_Event_PlayerSix() {
+//  //This is equal to one point because laser impact
+//  if (value_received == 'I') {
+//    life_PSix = life_PSix - 1;
+//    laser_sound.play();
+//    myKnobF.setValue(life_PSix);
+//    value_received = '0';
+//  }
+//}
 
-void Player_Six() {
-  textFont(title);
-  fill(#FFFFFF);
-  text("Player six", 790, 670);
-  lifeC_PSix.display(life_PSix);
-}
+//void Player_Six() {
+//  textFont(title);
+//  fill(#FFFFFF);
+//  text("Player six", 790, 670);
+//  lifeC_PSix.display(life_PSix);
+//}
 
 // The serverEvent function is called whenever a new client connects.
 void serverEvent(Server server, Client client) {
@@ -301,136 +271,143 @@ void setup() {
   //Watch setup
   sw = new StopWatchTimer();
   sw.start();
+
   //New cp5_one Knob constructor for player one
   cp5_one = new ControlP5(this);
-  myKnobA = cp5_one.addKnob("Life")
-    .setFont(life_title)
-    .setViewStyle(3)
-    .setRange(0, 5)
-    .setValue(life_PO)
-    .setPosition(75, 250)
-    .setRadius(120)
-    .hideTickMarks()
-    .setNumberOfTickMarks(5)
-    .setTickMarkLength(8)
-    .setTickMarkWeight(3)
-    .snapToTickMarks(true)
-    .setColorForeground(color(#baffc9, 191))
-    .setColorBackground(background_death_one)
-    //.setColorActive(color(255,255,0))
-    .setDragDirection(Knob.VERTICAL)
-    ;
   //New cp5_two Knob constructor for player two
   cp5_two = new ControlP5(this);
-  myKnobB = cp5_two.addKnob("Life")
-    .setFont(life_title)
-    .setViewStyle(3)
-    .setRange(0, 5)
-    .setValue(life_PT)
-    .setPosition(430, 250)
-    .setRadius(120)
-    .hideTickMarks()
-    .setNumberOfTickMarks(5)
-    .setTickMarkLength(8)
-    .setTickMarkWeight(3)
-    .snapToTickMarks(true)
-    .setColorForeground(color(#baffc9, 191))
-    .setColorBackground(background_death_two)
-    //.setColorActive(color(255,255,0))
-    .setDragDirection(Knob.VERTICAL)
-    ;
-  //New cp5_three Knob constructor for player three
-  cp5_three = new ControlP5(this);
-  myKnobC = cp5_three.addKnob("Life")
-    .setFont(life_title)
-    .setViewStyle(3)
-    .setRange(0, 5)
-    .setValue(life_PThree)
-    .setPosition(785, 250)
-    .setRadius(120)
-    .hideTickMarks()
-    .setNumberOfTickMarks(5)
-    .setTickMarkLength(8)
-    .setTickMarkWeight(3)
-    .snapToTickMarks(true)
-    .setColorForeground(color(#baffc9, 191))
-    .setColorBackground(background_death_three)
-    //.setColorActive(color(255,255,0))
-    .setDragDirection(Knob.VERTICAL)
-    ;
-    //New cp5_two Knob constructor for player four
-  cp5_four = new ControlP5(this);
-  myKnobD = cp5_four.addKnob("Life")
-    .setFont(life_title)
-    .setViewStyle(3)
-    .setRange(0, 5)
-    .setValue(life_PFour)
-    .setPosition(75, 710)
-    .setRadius(120)
-    .hideTickMarks()
-    .setNumberOfTickMarks(5)
-    .setTickMarkLength(8)
-    .setTickMarkWeight(3)
-    .snapToTickMarks(true)
-    .setColorForeground(color(#baffc9, 191))
-    .setColorBackground(background_death_four)
-    //.setColorActive(color(255,255,0))
-    .setDragDirection(Knob.VERTICAL)
-    ;
-    //New cp5_two Knob constructor for player five
-  cp5_five = new ControlP5(this);
-  myKnobE = cp5_five.addKnob("Life")
-    .setFont(life_title)
-    .setViewStyle(3)
-    .setRange(0, 5)
-    .setValue(life_PFive)
-    .setPosition(430, 710)
-    .setRadius(120)
-    .hideTickMarks()
-    .setNumberOfTickMarks(5)
-    .setTickMarkLength(8)
-    .setTickMarkWeight(3)
-    .snapToTickMarks(true)
-    .setColorForeground(color(#baffc9, 191))
-    .setColorBackground(background_death_five)
-    //.setColorActive(color(255,255,0))
-    .setDragDirection(Knob.VERTICAL)
-    ;
-    //New cp5_two Knob constructor for player two
-  cp5_six = new ControlP5(this);
-  myKnobF = cp5_six.addKnob("Life")
-    .setFont(life_title)
-    .setViewStyle(3)
-    .setRange(0, 5)
-    .setValue(life_PSix)
-    .setPosition(785, 710)
-    .setRadius(120)
-    .hideTickMarks()
-    .setNumberOfTickMarks(5)
-    .setTickMarkLength(8)
-    .setTickMarkWeight(3)
-    .snapToTickMarks(true)
-    .setColorForeground(color(#baffc9, 191))
-    .setColorBackground(background_death_six)
-    //.setColorActive(color(255,255,0))
-    .setDragDirection(Knob.VERTICAL)
-    ;
+  // Constructors for players life
+  // life of the user, x and y coordinate for the orbe
+  lifeC_POne = new Life(195, 140, background_death_one);
+  lifeC_PTwo = new Life_Two(550, 140, background_death_two);
+  //lifeC_PThree = new Life(905, 140, background_death_three);
+  //lifeC_PFour = new Life(195, 600, background_death_four);
+  //lifeC_PFive = new Life(550, 600, background_death_five);
+  //lifeC_PSix = new Life(905, 600, background_death_six);
+  // Contructos for the laser sound file
+  laser_sound = new SoundFile(this, "laser.mp3");
+  coin_sound = new SoundFile(this, "coin.mp3");
+  //Display life orbe
+  lifeC_POne.position_one(75, 250);
+  lifeC_PTwo.position_two(430, 250);
+  // myKnobA = cp5_one.addKnob("Life")
+  //   .setFont(life_title)
+  //   .setViewStyle(3)
+  //   .setRange(0, 5)
+  //   .setValue(life_PO)
+  //   .setPosition(75, 250)
+  //   .setRadius(120)
+  //   .hideTickMarks()
+  //   .setNumberOfTickMarks(5)
+  //   .setTickMarkLength(8)
+  //   .setTickMarkWeight(3)
+  //   .snapToTickMarks(true)
+  //   .setColorForeground(color(#baffc9, 191))
+  //   .setColorBackground(background_death_one)
+  //   //.setColorActive(color(255,255,0))
+  //   .setDragDirection(Knob.VERTICAL)
+  //   ;
+
+  //New cp5_two Knob constructor for player two
+  // cp5_two = new ControlP5(this);
+  // myKnobB = cp5_two.addKnob("Life")
+  //   .setFont(life_title)
+  //   .setViewStyle(3)
+  //   .setRange(0, 5)
+  //   .setValue(life_PT)
+  //   .setPosition(430, 250)
+  //   .setRadius(120)
+  //   .hideTickMarks()
+  //   .setNumberOfTickMarks(5)
+  //   .setTickMarkLength(8)
+  //   .setTickMarkWeight(3)
+  //   .snapToTickMarks(true)
+  //   .setColorForeground(color(#baffc9, 191))
+  //   .setColorBackground(background_death_two)
+  //   //.setColorActive(color(255,255,0))
+  //   .setDragDirection(Knob.VERTICAL)
+  //   ;
+  // //New cp5_three Knob constructor for player three
+  // cp5_three = new ControlP5(this);
+  // myKnobC = cp5_three.addKnob("Life")
+  //   .setFont(life_title)
+  //   .setViewStyle(3)
+  //   .setRange(0, 5)
+  //   .setValue(life_PThree)
+  //   .setPosition(785, 250)
+  //   .setRadius(120)
+  //   .hideTickMarks()
+  //   .setNumberOfTickMarks(5)
+  //   .setTickMarkLength(8)
+  //   .setTickMarkWeight(3)
+  //   .snapToTickMarks(true)
+  //   .setColorForeground(color(#baffc9, 191))
+  //   .setColorBackground(background_death_three)
+  //   //.setColorActive(color(255,255,0))
+  //   .setDragDirection(Knob.VERTICAL)
+  //   ;
+  //   //New cp5_two Knob constructor for player four
+  // cp5_four = new ControlP5(this);
+  // myKnobD = cp5_four.addKnob("Life")
+  //   .setFont(life_title)
+  //   .setViewStyle(3)
+  //   .setRange(0, 5)
+  //   .setValue(life_PFour)
+  //   .setPosition(75, 710)
+  //   .setRadius(120)
+  //   .hideTickMarks()
+  //   .setNumberOfTickMarks(5)
+  //   .setTickMarkLength(8)
+  //   .setTickMarkWeight(3)
+  //   .snapToTickMarks(true)
+  //   .setColorForeground(color(#baffc9, 191))
+  //   .setColorBackground(background_death_four)
+  //   //.setColorActive(color(255,255,0))
+  //   .setDragDirection(Knob.VERTICAL)
+  //   ;
+  //   //New cp5_two Knob constructor for player five
+  // cp5_five = new ControlP5(this);
+  // myKnobE = cp5_five.addKnob("Life")
+  //   .setFont(life_title)
+  //   .setViewStyle(3)
+  //   .setRange(0, 5)
+  //   .setValue(life_PFive)
+  //   .setPosition(430, 710)
+  //   .setRadius(120)
+  //   .hideTickMarks()
+  //   .setNumberOfTickMarks(5)
+  //   .setTickMarkLength(8)
+  //   .setTickMarkWeight(3)
+  //   .snapToTickMarks(true)
+  //   .setColorForeground(color(#baffc9, 191))
+  //   .setColorBackground(background_death_five)
+  //   //.setColorActive(color(255,255,0))
+  //   .setDragDirection(Knob.VERTICAL)
+  //   ;
+  //   //New cp5_two Knob constructor for player two
+  // cp5_six = new ControlP5(this);
+  // myKnobF = cp5_six.addKnob("Life")
+  //   .setFont(life_title)
+  //   .setViewStyle(3)
+  //   .setRange(0, 5)
+  //   .setValue(life_PSix)
+  //   .setPosition(785, 710)
+  //   .setRadius(120)
+  //   .hideTickMarks()
+  //   .setNumberOfTickMarks(5)
+  //   .setTickMarkLength(8)
+  //   .setTickMarkWeight(3)
+  //   .snapToTickMarks(true)
+  //   .setColorForeground(color(#baffc9, 191))
+  //   .setColorBackground(background_death_six)
+  //   //.setColorActive(color(255,255,0))
+  //   .setDragDirection(Knob.VERTICAL)
+  //   ;
   //Color of the background
   background(#B28DFF);
   //Open the port
   // Create the Server on port 5204
   server = new Server(this, 5204);
-  // Constructors for players life
-  // life of the user, x and y coordinate for the orbe
-  lifeC_POne = new Life(195, 140);
-  lifeC_PTwo = new Life(550, 140);
-  lifeC_PThree = new Life(905, 140);
-  lifeC_PFour = new Life(195, 600);
-  lifeC_PFive = new Life(550, 600);
-  lifeC_PSix = new Life(905, 600);
-  // Contructos for the laser sound file
-  laser_sound = new SoundFile(this, "laser.mp3");
-  coin_sound = new SoundFile(this, "coin.mp3");
 }
 
 void draw() {
@@ -452,28 +429,28 @@ void draw() {
     //Show events life for player two
     Player_Two();
   }
-  if (flag_three == "Yes") {
-    //Check for player two
-    Serial_Event_PlayerThree();
-    //Show events life for player two
-    Player_Three();
-  }
-  if (flag_four == "Yes") {
-    //Check for player two
-    Serial_Event_PlayerFour();
-    //Show events life for player two
-    Player_Four();
-  }
-  if (flag_five == "Yes") {
-    //Check for player two
-    Serial_Event_PlayerFive();
-    //Show events life for player two
-    Player_Five();
-  }
-  if (flag_six == "Yes") {
-    //Check for player two
-    Serial_Event_PlayerSix();
-    //Show events life for player two
-    Player_Six();
-  }
+  //if (flag_three == "Yes") {
+  //  //Check for player two
+  //  Serial_Event_PlayerThree();
+  //  //Show events life for player two
+  //  Player_Three();
+  //}
+  //if (flag_four == "Yes") {
+  //  //Check for player two
+  //  Serial_Event_PlayerFour();
+  //  //Show events life for player two
+  //  Player_Four();
+  //}
+  //if (flag_five == "Yes") {
+  //  //Check for player two
+  //  Serial_Event_PlayerFive();
+  //  //Show events life for player two
+  //  Player_Five();
+  //}
+  //if (flag_six == "Yes") {
+  //  //Check for player two
+  //  Serial_Event_PlayerSix();
+  //  //Show events life for player two
+  //  Player_Six();
+  //}
 }

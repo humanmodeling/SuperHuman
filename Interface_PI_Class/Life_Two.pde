@@ -1,15 +1,15 @@
-class Life {
+class Life_Two {
   int x;
   int y;
   int background_color;
 
-  Life(int x_temporal, int y_temporal, int temporal_background_color) {
+  Life_Two (int x_temporal, int y_temporal, int temporal_background_color) {
     x = x_temporal;
     y = y_temporal;
     background_color = temporal_background_color;
   }
-  void position_one (int pos_x, int pos_y) {
-    myKnobA = cp5_one.addKnob("Life")
+  void position_two (int pos_x, int pos_y) {
+    myKnobB = cp5_two.addKnob("Life")
       .setFont(life_title)
       .setViewStyle(3)
       .setRange(0, 5)
@@ -27,8 +27,8 @@ class Life {
       .setDragDirection(Knob.VERTICAL)
       ;
   }
-  void display_one(int life_temporal) {
-    myKnobA.setValue(life_temporal);
+  void display_two (int life_temporal) {
+    myKnobB.setValue(life_temporal);
     if(life_temporal > 3) {
             noStroke();
             fill(69, 252, 131);
@@ -40,9 +40,9 @@ class Life {
             fill(#fff74d);
             ellipse(x, y, 40, 40);
             background_death_one = color(#fff74d);
-            myKnobA.setColorForeground(#794DFF);
-            myKnobA.setColorBackground(background_death_one);
-            myKnobA.setColorValueLabel(#05A73F);
+            myKnobB.setColorForeground(#794DFF);
+            myKnobB.setColorBackground(background_death_one);
+            myKnobB.setColorValueLabel(#05A73F);
     }
     if (life_temporal <= 1) {
             //If the user end the game change the color to red
@@ -50,8 +50,8 @@ class Life {
             fill(#ff2301);
             ellipse(x, y, 40, 40);
             background_death_one = color(#ff2301);
-            myKnobA.setColorBackground(background_death_one);
-            myKnobA.setColorValue(255);
+            myKnobB.setColorBackground(background_death_one);
+            myKnobB.setColorValue(255);
     }
   }
 }
