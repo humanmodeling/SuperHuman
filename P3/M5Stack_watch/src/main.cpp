@@ -70,6 +70,8 @@ const char* password = "1234superhuman";
 void IR_Receptor() {
   if (irrecv.decode(&results)) {
     if (results.decode_type == SONY) {
+      // send one character H (Hit) every time the players was shooted
+      client_M5Stack.print("H");
       delay(1000);
       M5.Lcd.setTextColor(BLACK);
       M5.Lcd.fillRect(20, 70+((5-lifeCount) * 25), 60, 20, BLACK); //Remove a life
@@ -77,18 +79,6 @@ void IR_Receptor() {
       M5.Lcd.print(lifeCount);
       lifeCount--;
       M5.Lcd.setTextColor(WHITE);
-      // send one character H (Hit) every time the players was shooted
-      client_M5Stack.print("H");
-    }else if (results.decode_type == NEC){
-      /*Make recover sound*/
-      file_shoot->close();
-      file_shoot = new AudioFileSourceSD("/se_maoudamashii_magical25.wav");
-      wav->begin(file_shoot, out);
-      dacWrite(25, 0);
-      lifeCount++;
-      M5.Lcd.fillRect(20, 70+((5-lifeCount) * 25), 60, 20, RED);
-      recoverFlag = 1;
-      delay(500);
     }
     irrecv.resume(); // Receive the next value
   }
@@ -111,14 +101,12 @@ void IR_Transmitter() {
         M5.Lcd.setTextColor(RED);
         M5.Lcd.setCursor(0, 220);
         M5.Lcd.print("SHOOT!!!");
-
         client_M5Stack.println("S");
-
         M5.Lcd.fillRect(130, 195 - (shootCount * 25), 60, 20, BLACK); //Remove a shot
         shootCount = shootCount - 1;
 
         //Delete the SHOOT!!!!
-        delay(100);
+        delay(1000);
         M5.Lcd.setTextColor(BLACK);
         M5.Lcd.setCursor(0, 220);
         M5.Lcd.print("SHOOT!!!");
@@ -133,11 +121,11 @@ void IR_Transmitter() {
 
 void Fsr_charging() {
   wristforce = analogRead(fsrPin);
-  if (wristforce > fsrthreshold) {
+  if (wristforce > fsrthreshold){
     ++squezecounter ;
     M5.Lcd.fillRect(240, 195 - (squezecounter * 25), 60, 20, YELLOW);
     delay(500);
-    if (squezecounter == maxsquezecount) {
+    if(squezecounter == maxsquezecount){
       squezecounter = 0;
       ++shootCount;
       M5.Lcd.fillRect(240,70,60,20,BLACK);
@@ -167,7 +155,7 @@ void watch_functions() {
   /*LCD setup*/
   M5.Lcd.setTextFont(4);
   M5.Lcd.setCursor(0, 0);
-  M5.Lcd.print(lifeCount);
+  M5.Lcd.print("PLAYER2");
   M5.Lcd.setCursor(0, 30);
   M5.Lcd.print("IP :");
   M5.Lcd.setCursor(40, 30);
@@ -237,7 +225,7 @@ void setup() {
   M5.Lcd.print("IP address: ");
   M5.Lcd.setCursor(0, 55);
   M5.Lcd.print(WiFi.localIP());
-  delay(500);
+  //delay(500);
   M5.Lcd.setCursor(0, 70);
   M5.Lcd.print("connecting to ");
   M5.Lcd.setCursor(0, 85);
@@ -263,9 +251,6 @@ void setup() {
   /*Game setup*/
   pinMode(switch_PIN, INPUT);
   pinMode(fsrPin, INPUT); // Reading FSR sensor readings.
-  delay(1000);
-  //M5.Lcd.print("START!!");
-  //delay(2000);
   M5.Lcd.fillScreen(BLACK);
 
   /*IRrecev setup*/
@@ -278,26 +263,8 @@ void setup() {
   M5.Lcd.fillRect(20,145,60,20,RED);
   M5.Lcd.fillRect(20,170,60,20,RED);
 
-  /*Show your bullets*/
-  /*
-  M5.Lcd.fillRect(130,70,60,20,GREEN);
-  M5.Lcd.fillRect(130,95,60,20,GREEN);
-  M5.Lcd.fillRect(130,120,60,20,GREEN);
-  M5.Lcd.fillRect(130,145,60,20,GREEN);
-  M5.Lcd.fillRect(130,170,60,20,GREEN);
-  */
-
-  /*Show your charge*/
-  /*
-  M5.Lcd.fillRect(240,70,60,20,YELLOW);
-  M5.Lcd.fillRect(240,95,60,20,YELLOW);
-  M5.Lcd.fillRect(240,120,60,20,YELLOW);
-  M5.Lcd.fillRect(240,145,60,20,YELLOW);
-  M5.Lcd.fillRect(240,170,60,20,YELLOW);
-  */
-
-  //At the begining, IR turn on. I don't know why. This code turn off the IR.
   irsend.sendSony(0xa90, 12);
+
 }
 
 void loop() {

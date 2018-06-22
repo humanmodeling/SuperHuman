@@ -79,16 +79,6 @@ void IR_Receptor() {
       M5.Lcd.print(lifeCount);
       lifeCount--;
       M5.Lcd.setTextColor(WHITE);
-    } else if (results.decode_type == NEC){
-      /*Make recover sound*/
-      file_shoot->close();
-      file_shoot = new AudioFileSourceSD("/se_maoudamashii_magical25.wav");
-      wav->begin(file_shoot, out);
-      dacWrite(25, 0);
-      lifeCount++;
-      M5.Lcd.fillRect(20, 70+((5-lifeCount) * 25), 60, 20, RED);
-      recoverFlag = 1;
-      delay(500);
     }
     irrecv.resume(); // Receive the next value
   }
@@ -116,7 +106,7 @@ void IR_Transmitter() {
         shootCount = shootCount - 1;
 
         //Delete the SHOOT!!!!
-        delay(100);
+        delay(1000);
         M5.Lcd.setTextColor(BLACK);
         M5.Lcd.setCursor(0, 220);
         M5.Lcd.print("SHOOT!!!");
@@ -261,9 +251,6 @@ void setup() {
   /*Game setup*/
   pinMode(switch_PIN, INPUT);
   pinMode(fsrPin, INPUT); // Reading FSR sensor readings.
-  delay(1000);
-  //M5.Lcd.print("START!!");
-  //delay(2000);
   M5.Lcd.fillScreen(BLACK);
 
   /*IRrecev setup*/
@@ -276,24 +263,6 @@ void setup() {
   M5.Lcd.fillRect(20,145,60,20,RED);
   M5.Lcd.fillRect(20,170,60,20,RED);
 
-  /*Show your bullets*/
-  /*
-  M5.Lcd.fillRect(130,70,60,20,GREEN);
-  M5.Lcd.fillRect(130,95,60,20,GREEN);
-  M5.Lcd.fillRect(130,120,60,20,GREEN);
-  M5.Lcd.fillRect(130,145,60,20,GREEN);
-  M5.Lcd.fillRect(130,170,60,20,GREEN);
-  */
-  /*Show your charge*/
-  /*
-  M5.Lcd.fillRect(240,70,60,20,YELLOW);
-  M5.Lcd.fillRect(240,95,60,20,YELLOW);
-  M5.Lcd.fillRect(240,120,60,20,YELLOW);
-  M5.Lcd.fillRect(240,145,60,20,YELLOW);
-  M5.Lcd.fillRect(240,170,60,20,YELLOW);
-  */
-
-  //At the begining, IR turn on. I don't know why. This code turn off the IR.
   irsend.sendSony(0xa90, 12);
 
 }

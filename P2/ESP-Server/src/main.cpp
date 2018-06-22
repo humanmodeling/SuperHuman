@@ -44,17 +44,14 @@ void watch() {
         // if there's bytes to read from the client
         c = client_M5Stack.read();
         Serial.println(c);
-        if (c == 'H'){
+        if (c == 'H') {
           lifeCount--;
-        } else if (c == 'S'){
-          if(lifeCount < 5){
-            lifeCount++;
-          }
         }
-        // read a byte
-        valves_actuation();
-        // This function connect to the Raspberry
-        server_raspberry();
+      // read a byte
+      valves_actuation();
+      // This function connect to the Raspberry
+      server_raspberry();
+      c = '0';
       }
     }
   }
@@ -101,7 +98,7 @@ void server_raspberry() {
   // This will send the request to the server
   if (c == 'H') {
     client_ESP.print("W");
-  } 
+  }
 }
 
 void setup() {

@@ -44,17 +44,14 @@ void watch() {
         // if there's bytes to read from the client
         c = client_M5Stack.read();
         Serial.println(c);
-        if (c == 'H'){
+        if (c == 'H') {
           lifeCount--;
-        }else if (c == 'S'){
-          if(lifeCount < 5){
-            lifeCount++;
-          }
         }
-        // read a byte
-        valves_actuation();
-        // This function connect to the Raspberry
-        server_raspberry();
+      // read a byte
+      valves_actuation();
+      // This function connect to the Raspberry
+      server_raspberry();
+      c = '0';
       }
     }
   }
@@ -101,17 +98,12 @@ void server_raspberry() {
   // This will send the request to the server
   if (c == 'H') {
     client_ESP.print("Z");
-  } else if (c == 'S') {
-    if(lifeCount < 5){
-    client_ESP.print("Y");
-    }
-    delay(10);
   }
 }
 
 void setup() {
   Serial.begin(115200);
-  delay(10);
+  //delay(10);
   // PIN setup
   pinMode(PGM_valve1,OUTPUT);
   pinMode(PGM_valve2,OUTPUT);
@@ -131,7 +123,7 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  delay(500);
+  //delay(500);
   // This is to start the Server (for the M5Stack)
   server.begin();
 }
@@ -139,5 +131,5 @@ void setup() {
 void loop() {
   // This function connect the watch
   watch();
-  delay(10);
+  //delay(10);
 }

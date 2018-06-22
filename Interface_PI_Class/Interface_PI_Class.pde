@@ -146,7 +146,6 @@ void Serial_Event_PlayerOne() {
   if (value_received == 'H') {
     life_PO = life_PO - 1;
     laser_sound.play();
-    //myKnobA.setValue(life_PO);
     value_received = '0';
   }
 }
