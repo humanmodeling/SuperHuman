@@ -110,13 +110,13 @@ void server_raspberry() {
     if(lifeCount < 5){
     client_ESP.print("X");
     }
-    delay(10);
+    //delay(10);
   }
 }
 
 void setup() {
   Serial.begin(115200);
-  delay(10);
+  //delay(10);
   // PIN setup
   pinMode(PGM_valve1,INPUT);
   pinMode(PGM_valve2,INPUT);
@@ -144,5 +144,5 @@ void setup() {
 void loop() {
   // This function connect the watch
   watch();
-  delay(10);
+  //delay(10);
 }

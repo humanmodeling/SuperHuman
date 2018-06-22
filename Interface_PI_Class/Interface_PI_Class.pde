@@ -148,22 +148,8 @@ void WiFi_Read_Data() {
     incomingMessage = client.readChar();
     value_received = incomingMessage;
     println(value_received);
-    delay(20);
+    //delay(20);
   }
-  //if(activation_one == "No") {
-  //  println(value_received);
-  //  if(value_received == "A") {
-  //    flag_one = "Yes";
-  //    activation_one = "Yes";
-  //  }
-  //}
-  //if(activation_two == "No") {
-  //  println(value_received);
-  //  if(value_received == "B") {
-  //          flag_two = "Yes";
-  //          activation_two = "Yes";
-  //  }
-  //}
 }
 
 void Serial_Event_PlayerOne() {
@@ -185,7 +171,7 @@ void Player_One() {
   textFont(title);
   fill(#FFFFFF);
   text("Player One", 80, 210);
-  lifeC_POne.display();
+  lifeC_POne.display(life_PO);
 }
 
 void Serial_Event_PlayerTwo() {
@@ -207,7 +193,7 @@ void Player_Two() {
   textFont(title);
   fill(#FFFFFF);
   text("Player two", 440, 210);
-  lifeC_PTwo.display();
+  lifeC_PTwo.display(life_PT);
 }
 
 void Serial_Event_PlayerThree() {
@@ -229,7 +215,7 @@ void Player_Three() {
   textFont(title);
   fill(#FFFFFF);
   text("Player three", 770, 210);
-  lifeC_PThree.display();
+  lifeC_PThree.display(life_PThree);
 }
 
 void Serial_Event_PlayerFour() {
@@ -251,7 +237,7 @@ void Player_Four() {
   textFont(title);
   fill(#FFFFFF);
   text("Player four", 80, 670);
-  lifeC_PFour.display();
+  lifeC_PFour.display(life_PFour);
 }
 
 void Serial_Event_PlayerFive() {
@@ -273,7 +259,7 @@ void Player_Five() {
   textFont(title);
   fill(#FFFFFF);
   text("Player five", 430, 670);
-  lifeC_PFive.display();
+  lifeC_PFive.display(life_PFive);
 }
 
 void Serial_Event_PlayerSix() {
@@ -295,7 +281,7 @@ void Player_Six() {
   textFont(title);
   fill(#FFFFFF);
   text("Player six", 790, 670);
-  lifeC_PSix.display();
+  lifeC_PSix.display(life_PSix);
 }
 
 // The serverEvent function is called whenever a new client connects.
@@ -436,12 +422,12 @@ void setup() {
   server = new Server(this, 5204);
   // Constructors for players life
   // life of the user, x and y coordinate for the orbe
-  lifeC_POne = new Life(life_PO, 195, 140);
-  lifeC_PTwo = new Life(life_PT, 550, 140);
-  lifeC_PThree = new Life(life_PThree, 905, 140);
-  lifeC_PFour = new Life(life_PFour, 195, 600);
-  lifeC_PFive = new Life(life_PFive, 550, 600);
-  lifeC_PSix = new Life(life_PSix, 905, 600);
+  lifeC_POne = new Life(195, 140);
+  lifeC_PTwo = new Life(550, 140);
+  lifeC_PThree = new Life(905, 140);
+  lifeC_PFour = new Life(195, 600);
+  lifeC_PFive = new Life(550, 600);
+  lifeC_PSix = new Life(905, 600);
   // Contructos for the laser sound file
   laser_sound = new SoundFile(this, "laser.mp3");
   coin_sound = new SoundFile(this, "coin.mp3");
@@ -460,30 +446,12 @@ void draw() {
     //Show events life for player one
     Player_One();
   }
-  // else {
-  //        textFont(title);
-  //        fill(#FFFFFF);
-  //        text("Disconnected",55,210);
-  //        noStroke();
-  //        fill(255,35,1);
-  //        ellipse(143,150,40,40);
-  //        //ellipse(143, 150, frameCount%20, frameCount%20);
-  //}
   if (flag_two == "Yes") {
     //Check for player two
     Serial_Event_PlayerTwo();
     //Show events life for player two
     Player_Two();
   }
-  // else {
-  //        textFont(title);
-  //        fill(#FFFFFF);
-  //        text("Disconnected",460,210);
-  //        noStroke();
-  //        fill(255,35,1);
-  //        ellipse(553, 150, 40, 40);
-  //        //ellipse(553, 150, frameCount%20, frameCount%20);
-  //}
   if (flag_three == "Yes") {
     //Check for player two
     Serial_Event_PlayerThree();

@@ -1,16 +1,15 @@
 class Life {
-
   int life_player;
   int x;
   int y;
 
-  Life(int life_temporal, int x_temporal, int y_temporal) {
-    life_player = life_temporal;
+  Life(int x_temporal, int y_temporal) {
     x = x_temporal;
     y = y_temporal;
   }
 
-  void display() {
+  void display(int life_temporal) {
+    life_player = life_temporal;
     if(life_player > 3) {
             noStroke();
             fill(69, 252, 131);
