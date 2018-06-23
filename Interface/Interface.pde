@@ -117,14 +117,14 @@ void Game_BackGround() {
   ////Title of the game
   fill(255);
   textFont(title);
-  text("MuscleBlazer", 570, 60);
+  text("MuscleBlazer", 1100, 200);
 }
 
 void Watch() {
   fill(255);
   textFont(title);
-  text("TIMER", 1200, 50);
-  text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 1182, 100);
+  text("TIMER", 1170, 50);
+  text(nf(sw.hour(), 2)+":"+nf(sw.minute(), 2)+":"+nf(sw.second(), 2), 1150, 100);
 }
 
 void WiFi_Read_Data() {
@@ -153,7 +153,7 @@ void Serial_Event_PlayerOne() {
 void Player_One() {
   textFont(title);
   fill(#FFFFFF);
-  text("Player One", 80, 210);
+  text("Player One", 80, 100);
   lifeC_POne.display_one(life_PO);
 }
 
@@ -169,7 +169,7 @@ void Serial_Event_PlayerTwo() {
 void Player_Two() {
   textFont(title);
   fill(#FFFFFF);
-  text("Player two", 440, 210);
+  text("Player two", 440, 100);
   lifeC_PTwo.display_two(life_PT);
 }
 
@@ -185,7 +185,7 @@ void Serial_Event_PlayerThree() {
 void Player_Three() {
  textFont(title);
  fill(#FFFFFF);
- text("Player three", 770, 210);
+ text("Player three", 770, 100);
  lifeC_PThree.display_three(life_PThree);
 }
 
@@ -201,7 +201,7 @@ void Serial_Event_PlayerFour() {
 void Player_Four() {
  textFont(title);
  fill(#FFFFFF);
- text("Player four", 80, 670);
+ text("Player four", 80, 520);
  lifeC_PFour.display_four(life_PFour);
 }
 
@@ -217,7 +217,7 @@ void Serial_Event_PlayerFive() {
 void Player_Five() {
  textFont(title);
  fill(#FFFFFF);
- text("Player five", 430, 670);
+ text("Player five", 430, 520);
  lifeC_PFive.display_five(life_PFive);
 }
 
@@ -233,7 +233,7 @@ void Serial_Event_PlayerSix() {
 void Player_Six() {
  textFont(title);
  fill(#FFFFFF);
- text("Player six", 790, 670);
+ text("Player six", 790, 520);
  lifeC_PSix.display_six(life_PSix);
 }
 
@@ -245,7 +245,7 @@ void serverEvent(Server server, Client client) {
 }
 
 void setup() {
-  size(1440, 1000);
+  size(1440, 850);
   frameRate(120);
   //Setup font
   title = loadFont("Arial-BoldMT-48.vlw");
@@ -270,22 +270,22 @@ void setup() {
 
   // Constructors for players life
   // life of the user, x and y coordinate for the orbe
-  lifeC_POne   = new Life(195, 140, background_death_one);
-  lifeC_PTwo   = new Life_Two(550, 140, background_death_two);
-  lifeC_PThree = new Life_Three(905, 140, background_death_three);
-  lifeC_PFour  = new Life_Four(195, 600, background_death_four);
-  lifeC_PFive  = new Life_Five(550, 600, background_death_five);
-  lifeC_PSix   = new Life_Six(905, 600, background_death_six);
+  lifeC_POne   = new Life(195, 40, background_death_one);
+  lifeC_PTwo   = new Life_Two(550, 40, background_death_two);
+  lifeC_PThree = new Life_Three(905, 40, background_death_three);
+  lifeC_PFour  = new Life_Four(195, 460, background_death_four);
+  lifeC_PFive  = new Life_Five(550, 460, background_death_five);
+  lifeC_PSix   = new Life_Six(905, 460, background_death_six);
   // Contructors for the laser sounds files
   laser_sound = new SoundFile(this, "laser.mp3");
   coin_sound = new SoundFile(this, "coin.mp3");
   //Display life of players knob
-  lifeC_POne.position_one(75, 250);
-  lifeC_PTwo.position_two(430, 250);
-  lifeC_PThree.position_three(785, 250);
-  lifeC_PFour.position_four(75, 710);
-  lifeC_PFive.position_five(430, 710);
-  lifeC_PSix.position_six(785, 710);
+  lifeC_POne.position_one(75, 120);
+  lifeC_PTwo.position_two(430, 120);
+  lifeC_PThree.position_three(785, 120);
+  lifeC_PFour.position_four(75, 550);
+  lifeC_PFive.position_five(430, 550);
+  lifeC_PSix.position_six(785, 550);
   //Color of the background
   background(#B28DFF);
   //Open the port
