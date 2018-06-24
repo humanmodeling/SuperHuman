@@ -12,7 +12,7 @@ int PGM_valve2 = 26;
 int PGM_valve3 = 32;
 int PGM_valve4 = 33;
 
-//WiFi connection
+//WiFi Connection
 int wifiLED = 4;
 
 //Player life
