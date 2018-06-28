@@ -1,10 +1,15 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiMulti.h>
+#include <FastLED.h>
+
+#define NUM_LEDS 16
+#define LED_PIN 27
 
 WiFiMulti WiFiMulti;
 WiFiClient client_M5Stack;
 WiFiClient client_ESP;
+CRGB leds[NUM_LEDS];
 
 //PGM Valve
 int PGM_valve1 = 25;
@@ -73,6 +78,20 @@ void valves_actuation()
     digitalWrite(PGM_valve2, LOW);
     digitalWrite(PGM_valve3, LOW);
     digitalWrite(PGM_valve4, LOW);
+
+    //start this part for first hit
+    leds[0] = CRGB(255, 0, 0);
+    FastLED.show();
+    delay(10);
+    leds[1] = CRGB(255, 0, 0);
+    FastLED.show();
+    delay(10);
+    leds[2] = CRGB(255, 0, 0);
+    FastLED.show();
+    delay(10);
+    leds[3] = CRGB(255, 0, 0);
+    FastLED.show();
+    delay(10);
   }
   else if (lifeCount == 3)
   {
@@ -80,6 +99,19 @@ void valves_actuation()
     digitalWrite(PGM_valve2, HIGH);
     digitalWrite(PGM_valve3, LOW);
     digitalWrite(PGM_valve4, LOW);
+    //start this part for second hit
+    leds[8] = CRGB(0, 0, 255);
+    FastLED.show();
+    delay(10);
+    leds[9] = CRGB(0, 0, 255);
+    FastLED.show();
+    delay(10);
+    leds[10] = CRGB(0, 0, 255);
+    FastLED.show();
+    delay(10);
+    leds[11] = CRGB(0, 0, 255);
+    FastLED.show();
+    delay(10);
   }
   else if (lifeCount == 2)
   {
@@ -87,6 +119,19 @@ void valves_actuation()
     digitalWrite(PGM_valve2, HIGH);
     digitalWrite(PGM_valve3, HIGH);
     digitalWrite(PGM_valve4, LOW);
+    //start this part for third hit
+    leds[4] = CRGB(0, 255, 0);
+    FastLED.show();
+    delay(10);
+    leds[5] = CRGB(0, 255, 0);
+    FastLED.show();
+    delay(10);
+    leds[6] = CRGB(0, 255, 0);
+    FastLED.show();
+    delay(10);
+    leds[7] = CRGB(0, 255, 0);
+    FastLED.show();
+    delay(10);
   }
   else if (lifeCount == 1)
   {
@@ -94,6 +139,19 @@ void valves_actuation()
     digitalWrite(PGM_valve2, HIGH);
     digitalWrite(PGM_valve3, HIGH);
     digitalWrite(PGM_valve4, HIGH);
+    //start this part for forth hit
+    leds[12] = CRGB(255, 200, 20);
+    FastLED.show();
+    delay(10);
+    leds[13] = CRGB(255, 200, 20);
+    FastLED.show();
+    delay(10);
+    leds[14] = CRGB(255, 200, 20);
+    FastLED.show();
+    delay(10);
+    leds[15] = CRGB(255, 200, 20);
+    FastLED.show();
+    delay(10);
   }
 }
 
@@ -124,6 +182,10 @@ void server_raspberry()
 void setup()
 {
   Serial.begin(115200);
+
+  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(40);
+
   //delay(10);
   // PIN setup
   pinMode(PGM_valve1, OUTPUT);
