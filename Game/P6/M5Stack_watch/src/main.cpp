@@ -73,19 +73,17 @@ void IR_Receptor()
   {
     if (results.decode_type == SONY)
     {
-      // send one character H (Hit) every time the players was shooted
-      client_M5Stack.print("H");
-      delay(1000);
+      /*Make hitting sound*/
       file_shoot->close();
       file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
       wav->begin(file_shoot, out);
       dacWrite(25, 0);
-      M5.Lcd.setTextColor(BLACK);
+      // send one character H (Hit) every time the players was shooted
+      client_M5Stack.print("H");
       M5.Lcd.fillRect(20, 70 + ((5 - lifeCount) * 25), 60, 20, BLACK); //Remove a life
       M5.Lcd.setCursor(0, 0);
       M5.Lcd.print(lifeCount);
       lifeCount--;
-      M5.Lcd.setTextColor(WHITE);
     }
     irrecv.resume(); // Receive the next value
   }
@@ -108,20 +106,10 @@ void IR_Transmitter()
         file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
         wav->begin(file_shoot, out);
         dacWrite(25, 0);
-        //Showing the SHOOT!!!!
-        M5.Lcd.setTextColor(RED);
-        M5.Lcd.setCursor(0, 220);
-        M5.Lcd.print("SHOOT!!!");
+
         client_M5Stack.println("S");
         M5.Lcd.fillRect(130, 195 - (shootCount * 25), 60, 20, BLACK); //Remove a shot
         shootCount = shootCount - 1;
-
-        //Delete the SHOOT!!!!
-        delay(1000);
-        M5.Lcd.setTextColor(BLACK);
-        M5.Lcd.setCursor(0, 220);
-        M5.Lcd.print("SHOOT!!!");
-        M5.Lcd.setTextColor(WHITE);
       }
     }
     last_switchOut = switchOut;

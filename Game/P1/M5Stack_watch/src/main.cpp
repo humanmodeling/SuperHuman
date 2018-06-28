@@ -74,14 +74,17 @@ void IR_Receptor()
     if (results.decode_type == SONY)
     {
       // send one character H (Hit) every time the players was shooted
+      /*Make hitting sound*/
+      file_sound->close();
+      file_sound = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
+      wav->begin(file_sound, out);
+      dacWrite(25, 0);
+
       client_M5Stack.print("H");
-      delay(1000);
-      M5.Lcd.setTextColor(BLACK);
       M5.Lcd.fillRect(20, 70 + ((5 - lifeCount) * 25), 60, 20, BLACK); //Remove a life
       M5.Lcd.setCursor(0, 0);
       M5.Lcd.print(lifeCount);
       lifeCount--;
-      M5.Lcd.setTextColor(WHITE);
     }
     irrecv.resume(); // Receive the next value
   }
