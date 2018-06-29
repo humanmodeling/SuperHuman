@@ -40,7 +40,7 @@ int i = 0;
 int j = 10;
 
 AudioGeneratorWAV *wav;
-AudioFileSourceSD *file_shoot;
+AudioFileSourceSD *file_sound;
 AudioOutputI2S *out;
 /*IR*/
 IRsend irsend;                 //Pin number 3 is IR
@@ -74,9 +74,9 @@ void IR_Receptor()
     if (results.decode_type == SONY)
     {
       /*Make hitting sound*/
-      file_shoot->close();
-      file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
-      wav->begin(file_shoot, out);
+      file_sound->close();
+      file_sound = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
+      wav->begin(file_sound, out);
       dacWrite(25, 0);
       // send one character H (Hit) every time the players was shooted
       client_M5Stack.print("H");
@@ -102,9 +102,9 @@ void IR_Transmitter()
       {
         irsend.sendSony(0xa90, 12);
         /*Make shooting sound*/
-        file_shoot->close();
-        file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
-        wav->begin(file_shoot, out);
+        file_sound->close();
+        file_sound = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
+        wav->begin(file_sound, out);
         dacWrite(25, 0);
 
         client_M5Stack.println("S");
@@ -250,7 +250,7 @@ void setup()
   /*Audio setup*/
   /*Please move music file(se_maoudamashii_battle_gun05.wav) into SD.
   This file put on the music folder*/
-  file_shoot = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
+  file_sound = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
   out = new AudioOutputI2S(0, 1); // Output to builtInDAC
   out->SetOutputModeMono(true);
   wav = new AudioGeneratorWAV();
