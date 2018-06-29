@@ -73,12 +73,20 @@ void IR_Receptor()
   {
     if (results.decode_type == SONY)
     {
+<<<<<<< HEAD
       /*Make hitting sound*/
+=======
+		/*Make hitting sound*/
+>>>>>>> Beta
       file_sound->close();
       file_sound = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
       wav->begin(file_sound, out);
       dacWrite(25, 0);
+<<<<<<< HEAD
 
+=======
+	  
+>>>>>>> Beta
       // send one character H (Hit) every time the players was shooted
       client_M5Stack.print("H");
 
