@@ -73,15 +73,13 @@ void IR_Receptor()
   {
     if (results.decode_type == SONY)
     {
-<<<<<<< HEAD
+
       /*Make hitting sound*/
       file_sound->close();
       file_sound = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
       wav->begin(file_sound, out);
       dacWrite(25, 0);
 
-=======
->>>>>>> Beta
       // send one character H (Hit) every time the players was shooted
       /*Make hitting sound*/
       file_sound->close();
@@ -90,10 +88,7 @@ void IR_Receptor()
       dacWrite(25, 0);
 
       client_M5Stack.print("H");
-<<<<<<< HEAD
 
-=======
->>>>>>> Beta
       M5.Lcd.fillRect(20, 70 + ((5 - lifeCount) * 25), 60, 20, BLACK); //Remove a life
       M5.Lcd.setCursor(0, 0);
       lifeCount--;
