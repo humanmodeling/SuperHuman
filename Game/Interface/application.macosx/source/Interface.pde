@@ -29,6 +29,7 @@ Client client;
 // Sound objects
 SoundFile laser_sound;
 SoundFile coin_sound;
+SoundFile background_music;
 
 // Used to indicate a new message has arrived
 float newMessageColor = #ffffff;
@@ -279,6 +280,7 @@ void setup() {
   // Contructors for the laser sounds files
   laser_sound = new SoundFile(this, "laser.mp3");
   coin_sound = new SoundFile(this, "coin.mp3");
+  background_music = new SoundFile(this, "background.mp3");
   //Display life of players knob
   lifeC_POne.position_one(75, 120);
   lifeC_PTwo.position_two(430, 120);
@@ -291,6 +293,9 @@ void setup() {
   //Open the port
   // Create the Server on port 5204
   server = new Server(this, 5204);
+  // Play background sound
+  // background_music.play();
+  background_music.loop();
 }
 
 void draw() {
