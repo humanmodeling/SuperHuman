@@ -1,4 +1,4 @@
-# Blazer Muscle
+# Muscleblazer
 
 [![Build Status](https://travis-ci.org/totovr/SuperHuman.svg?branch=Stable)](https://travis-ci.org/totovr/SuperHuman)
 
