@@ -1,16 +1,12 @@
 #define FIRSTLED_ALLOW_INTERRUPTS 0
+
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiMulti.h>
 #include <FastLED.h>
 
-<<<<<<< HEAD
 #define LED_PIN 27
 #define NUM_LEDS 16
-=======
-#define NUM_LEDS 16
-#define LED_PIN 27
->>>>>>> Beta
 
 WiFiMulti WiFiMulti;
 WiFiClient client_M5Stack;
@@ -88,25 +84,12 @@ void valves_actuation()
     //start this part for first hit
     leds[0] = CRGB(255, 0, 0);
     FastLED.show();
-<<<<<<< HEAD
     leds[1] = CRGB(255, 0, 0);
     FastLED.show();
     leds[2] = CRGB(255, 0, 0);
     FastLED.show();
     leds[3] = CRGB(255, 0, 0);
     FastLED.show();
-=======
-    delay(10);
-    leds[1] = CRGB(255, 0, 0);
-    FastLED.show();
-    delay(10);
-    leds[2] = CRGB(255, 0, 0);
-    FastLED.show();
-    delay(10);
-    leds[3] = CRGB(255, 0, 0);
-    FastLED.show();
-    delay(10);
->>>>>>> Beta
   }
   else if (lifeCount == 3)
   {
@@ -116,7 +99,6 @@ void valves_actuation()
     digitalWrite(PGM_valve4, LOW);
 
     //start this part for second hit
-<<<<<<< HEAD
     leds[4] = CRGB(0, 255, 0);
     FastLED.show();
     leds[5] = CRGB(0, 255, 0);
@@ -125,20 +107,6 @@ void valves_actuation()
     FastLED.show();
     leds[7] = CRGB(0, 255, 0);
     FastLED.show();
-=======
-    leds[8] = CRGB(0, 0, 255);
-    FastLED.show();
-    delay(10);
-    leds[9] = CRGB(0, 0, 255);
-    FastLED.show();
-    delay(10);
-    leds[10] = CRGB(0, 0, 255);
-    FastLED.show();
-    delay(10);
-    leds[11] = CRGB(0, 0, 255);
-    FastLED.show();
-    delay(10);
->>>>>>> Beta
   }
   else if (lifeCount == 2)
   {
@@ -148,7 +116,6 @@ void valves_actuation()
     digitalWrite(PGM_valve4, LOW);
 
     //start this part for third hit
-<<<<<<< HEAD
     leds[8] = CRGB(0, 0, 255);
     FastLED.show();
     leds[9] = CRGB(0, 0, 255);
@@ -157,20 +124,6 @@ void valves_actuation()
     FastLED.show();
     leds[11] = CRGB(0, 0, 255);
     FastLED.show();
-=======
-    leds[4] = CRGB(0, 255, 0);
-    FastLED.show();
-    delay(10);
-    leds[5] = CRGB(0, 255, 0);
-    FastLED.show();
-    delay(10);
-    leds[6] = CRGB(0, 255, 0);
-    FastLED.show();
-    delay(10);
-    leds[7] = CRGB(0, 255, 0);
-    FastLED.show();
-    delay(10);
->>>>>>> Beta
   }
   else if (lifeCount == 1)
   {
@@ -182,25 +135,12 @@ void valves_actuation()
     //start this part for forth hit
     leds[12] = CRGB(255, 200, 20);
     FastLED.show();
-<<<<<<< HEAD
     leds[13] = CRGB(255, 200, 20);
     FastLED.show();
     leds[14] = CRGB(255, 200, 20);
     FastLED.show();
     leds[15] = CRGB(255, 200, 20);
     FastLED.show();
-=======
-    delay(10);
-    leds[13] = CRGB(255, 200, 20);
-    FastLED.show();
-    delay(10);
-    leds[14] = CRGB(255, 200, 20);
-    FastLED.show();
-    delay(10);
-    leds[15] = CRGB(255, 200, 20);
-    FastLED.show();
-    delay(10);
->>>>>>> Beta
   }
 }
 

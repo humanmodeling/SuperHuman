@@ -3,14 +3,11 @@
 
 #define FASTLED_HAS_BLOCKLESS 1
 
-#define PORT_MASK (((1<<USED_LANES)-1) & 0x0000FFFFL)
+#define PORT_MASK (((1<<LANES)-1) & 0x0000FFFFL)
 #define MIN(X,Y) (((X)<(Y)) ? (X):(Y))
-//attempted to use other/more pins for the port
-// #define USED_LANES (MIN(LANES,33))
-#define USED_LANES (MIN(LANES,8))
+#define USED_LANES (MIN(LANES,4))
 #define REAL_FIRST_PIN 12
-// #define LAST_PIN (12 + USED_LANES - 1)
-#define LAST_PIN 35
+#define LAST_PIN (12 + USED_LANES - 1)
 
 FASTLED_NAMESPACE_BEGIN
 
@@ -65,10 +62,6 @@ public:
 	initPin<13>();
 	initPin<14>();
 	initPin<15>();
-	initPin<16>();
-	initPin<17>();
-	initPin<18>();
-	initPin<19>();
 	mPinMask = FastPin<FIRST_PIN>::mask();
 	mPort = FastPin<FIRST_PIN>::port();
 	

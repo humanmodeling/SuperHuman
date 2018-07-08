@@ -75,7 +75,7 @@ void IR_Receptor()
     {
       /*Make hitting sound*/
       file_sound->close();
-      file_sound = new AudioFileSourceSD("/se_maoudamashii_battle_gun05.wav");
+      file_sound = new AudioFileSourceSD("/se_maoudamashii_battle12.wav");
       wav->begin(file_sound, out);
       dacWrite(25, 0);
       // send one character H (Hit) every time the players was shooted
