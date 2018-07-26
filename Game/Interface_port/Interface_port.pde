@@ -216,7 +216,6 @@ void Serial_Event_PlayerOne() {
   if (value_received_one == 'H') {
     life_PO = life_PO - 1;
     laser_sound.play();
-    value_received_one = '0';
   }
 }
 
@@ -225,6 +224,7 @@ void Player_One() {
   fill(#FFFFFF);
   text("Player One", 80, 100);
   lifeC_POne.display_one(life_PO);
+  value_received_one = '0';
 }
 
 void Serial_Event_PlayerTwo() {
@@ -232,7 +232,6 @@ void Serial_Event_PlayerTwo() {
   if (value_received_two == 'W') {
     life_PT = life_PT - 1;
     laser_sound.play();
-    value_received_two = '0';
   }
 }
 
@@ -241,6 +240,7 @@ void Player_Two() {
   fill(#FFFFFF);
   text("Player two", 440, 100);
   lifeC_PTwo.display_two(life_PT);
+  value_received_two = '0';
 }
 
 void Serial_Event_PlayerThree() {
@@ -248,7 +248,6 @@ void Serial_Event_PlayerThree() {
  if (value_received_three == 'Z') {
    life_PThree = life_PThree - 1;
    laser_sound.play();
-   value_received_three = '0';
  }
 }
 
@@ -257,6 +256,7 @@ void Player_Three() {
  fill(#FFFFFF);
  text("Player three", 770, 100);
  lifeC_PThree.display_three(life_PThree);
+ value_received_three = '0';
 }
 
 void Serial_Event_PlayerFour() {
@@ -264,7 +264,6 @@ void Serial_Event_PlayerFour() {
  if (value_received_four == 'P') {
    life_PFour = life_PFour - 1;
    laser_sound.play();
-   value_received_four = '0';
  }
 }
 
@@ -273,6 +272,7 @@ void Player_Four() {
  fill(#FFFFFF);
  text("Player four", 80, 520);
  lifeC_PFour.display_four(life_PFour);
+ value_received_four = '0';
 }
 
 void Serial_Event_PlayerFive() {
@@ -280,7 +280,6 @@ void Serial_Event_PlayerFive() {
  if (value_received_five == 'S') {
    life_PFive = life_PFive - 1;
    laser_sound.play();
-   value_received_five = '0';
  }
 }
 
@@ -289,6 +288,7 @@ void Player_Five() {
  fill(#FFFFFF);
  text("Player five", 430, 520);
  lifeC_PFive.display_five(life_PFive);
+ value_received_five = '0';
 }
 
 void Serial_Event_PlayerSix() {
@@ -296,7 +296,6 @@ void Serial_Event_PlayerSix() {
  if (value_received_six == 'I') {
    life_PSix = life_PSix - 1;
    laser_sound.play();
-   value_received_six = '0';
  }
 }
 
@@ -305,6 +304,7 @@ void Player_Six() {
  fill(#FFFFFF);
  text("Player six", 790, 520);
  lifeC_PSix.display_six(life_PSix);
+ value_received_six = '0';
 }
 
 // The serverEvent function is called whenever a new client connects.
@@ -360,13 +360,13 @@ void setup() {
   background(#B28DFF);
   //Open the port
   // Create the Server on port 5204
-  server_one = new Server(this, 5204);
+  server_one = new Server(this, 3000);
   // Create the Server on port 5205
   server_two = new Server(this, 5205);
   // Create the Server on port 5206
-  server_three = new Server(this, 5206);
+  server_three = new Server(this, 3500);
   // Create the Server on port 5207
-  server_four = new Server(this, 5207);
+  server_four = new Server(this, 3300);
   // Create the Server on port 5200
   server_five = new Server(this, 5208);
   // Create the Server on port 5209
