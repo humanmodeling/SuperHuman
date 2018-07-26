@@ -37,7 +37,7 @@ const char *ssid = "Super_Human_HM";
 const char *password = "1234superhuman";
 char c;
 // Client variables to send to raspberry
-const uint16_t port = 5207;
+const uint16_t port = 3300;
 const char *host = "192.168.0.101"; // ip or dns
 // flag to print just one time the IP of the connected server
 char flag_activated = 'N';
